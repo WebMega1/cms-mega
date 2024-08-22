@@ -65,7 +65,7 @@ body, html
 {
 	width: 250px;
 	float: left;
-	background-color: #17bab8;
+	background-color: #004997;
 }
 
 #sticky-left-controls div
@@ -88,7 +88,7 @@ body, html
 {
 	text-decoration: none;
 	color: white;
-	background-color: #17bab8;
+	background-color: #004997;
 	opacity: 0.8;
 	margin-left: 0.6em;
 }
@@ -181,7 +181,7 @@ body, html
 
 #person-image a:hover
 {
-	color: #17bab8;
+	color: #004997;
 	cursor: pointer;
 }
 
@@ -234,7 +234,7 @@ body, html
 #extra-settings a:hover
 {
 	background-color: #303035;
-	color: #17bab8;
+	color: #004997;
 	cursor: pointer;
 }
 /*List of different items*/
@@ -368,7 +368,7 @@ body, html
 }
 .extra-bar-dropdown:hover
 {
-	color: #17bab8;
+	color: #004997;
 	cursor: pointer;
 }
 
@@ -397,7 +397,7 @@ body, html
 
 #notification-bar h2:hover
 {
-	color: #17bab8;
+	color: #004997;
 	cursor: pointer;
 }
 
@@ -413,7 +413,7 @@ body, html
 
 #notification-bar a:hover
 {
-	color: #17bab8;
+	color: #004997;
 	cursor: pointer;
 }
 
@@ -452,7 +452,7 @@ body, html
 }
 .user-message:hover
 {
-	color: #17bab8;
+	color: #004997;
 	cursor: pointer;
 }
 

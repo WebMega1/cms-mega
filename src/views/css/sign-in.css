@@ -49,7 +49,7 @@
 #login-input span:hover
 {
 	cursor: pointer;
-	color: #1f9595;
+	color: #8eec04;
 }
 
 #sign-up-heading span
@@ -71,7 +71,7 @@
 }
 #sign-up-submit input
 {
-	background-color: #17bab8;
+	background-color: #004997;
 	font-size: 0.9em;
 	padding: 5px;
 	border-radius: 5px;
