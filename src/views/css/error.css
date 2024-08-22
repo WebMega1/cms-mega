@@ -51,7 +51,7 @@ a {
 #error-page h1
 {
 	font-size: 10em;
-	color: #17bab8;
+	color: #004997;
 	margin: 0;
 }
 #error-page h2
@@ -67,7 +67,7 @@ a {
 }
 #error-page a
 {
-	background-color: #17bab8;
+	background-color: #004997;
 	/* font-size: 0.9em; */
 	padding: .75em 1em;
 	border-radius: 2px;
