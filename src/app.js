@@ -1,3 +1,4 @@
+// Npm que necesita el proyecto 
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -15,9 +16,9 @@ app.set('port', process.env.PORT || 4000);
 app.use(express.static(path.join(__dirname, 'views')));
 
 //rutas 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
+const routes = require('./routes/index');
+app.use(routes);
+
 
 
 ///Middlewares
