@@ -205,11 +205,17 @@
                         <div class="col-md-4">
                             <h2>Crear Usuario</h2>
                             <form action="#" method="post" >
-                                <label for="userName"></label>
+                                <label for="userName">Nombre de usuario</label>
                                 <input type="text" name="userName" id="userName" class="form-control">
+<<<<<<< HEAD
                                 <label for="mail"></label>
                                 <input type="text" name="email" id="email" class="form-control">
                                 <label for="password"></label>
+=======
+                                <label for="mail">Correo electronico</label>
+                                <input type="text" name="mail" id="mail" class="form-control">
+                                <label for="password">Contraseña segura</label>
+>>>>>>> c19d7e403b535e2fd37557d2dd1b41b45a034224
                                 <input type="password" name="password" id="password" class="form-control">
                                 <br>
                                     <button type="submit" class="btn btn-info">Crear usuario</button>
@@ -282,63 +288,7 @@
         });
     </script> <!-- apexcharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js" integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script> <!-- ChartJS -->
-    <script>
-        // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
-        // IT'S ALL JUST JUNK FOR DEMO
-        // ++++++++++++++++++++++++++++++++++++++++++
 
-        const sales_chart_options = {
-            series: [{
-                    name: "Digital Goods",
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                },
-                {
-                    name: "Electronics",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                },
-            ],
-            chart: {
-                height: 300,
-                type: "area",
-                toolbar: {
-                    show: false,
-                },
-            },
-            legend: {
-                show: false,
-            },
-            colors: ["#0d6efd", "#20c997"],
-            dataLabels: {
-                enabled: false,
-            },
-            stroke: {
-                curve: "smooth",
-            },
-            xaxis: {
-                type: "datetime",
-                categories: [
-                    "2023-01-01",
-                    "2023-02-01",
-                    "2023-03-01",
-                    "2023-04-01",
-                    "2023-05-01",
-                    "2023-06-01",
-                    "2023-07-01",
-                ],
-            },
-            tooltip: {
-                x: {
-                    format: "MMMM yyyy",
-                },
-            },
-        };
-
-        const sales_chart = new ApexCharts(
-            document.querySelector("#revenue-chart"),
-            sales_chart_options,
-        );
-        sales_chart.render();
-    </script> 
 
       <script>
         // metadata
