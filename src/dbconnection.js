@@ -1,11 +1,14 @@
 const mysql = require('mysql');
 const dbConfig = require('./dbConfig');
+const util = require('util');
 
-const bd = mysql.createConnection(dbConfig);
+const db = mysql.createConnection(dbConfig.database);
 
-bd.connect(err => {
+db.connect(err => {
   if (err) throw err;
   console.log('Connenction Data Base Succces   ');
 });
 
-module.exports = bd;
+db.query = util.promisify(db.query);
+
+module.exports = db; 
