@@ -5,6 +5,38 @@ const db = require('../dbconnection');
 const helpers = require('./helpers');
 const { Result } = require('express-validator');
 
+passport.use('local.login', new LocalStrategy({
+    usernameField:'email',
+    passwordField:'password',
+    passReqToCallback:true
+},async(req, email, password, done) => {
+ 
+  try {
+    // Consulta el usuario en la base de datos usando el email
+    const [user] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+    
+    // Si el usuario existe
+    if (user) {
+      // Compara la contraseña proporcionada con la contraseña almacenada
+      const validPassword = await helpers.matchPassword(password, user.password);
+      
+      if (validPassword) {
+        // Autenticación exitosa, pasa el usuario y un mensaje de éxito
+        done(null, user, req.flash('success', 'Welcome ' + user.username));
+      } else {
+        // Contraseña incorrecta
+        done(null, false, req.flash('message', 'Contraseña incorrecta'));
+      }
+    } else {
+      // Usuario no encontrado
+      return done(null, false, req.flash('message', 'Email no encontrado'));
+    }
+  } catch (error) {
+    // Manejo de errores
+    return done(error);
+  }
+}));
+ 
 passport.use('local.registro', new LocalStrategy({
     usernameField: 'userName',
     passwordField: 'password',
@@ -34,7 +66,6 @@ try {
   return done(error);
 }
 }));
-
 
 passport.serializeUser((user, done) => {
   if (!user.idUser) {

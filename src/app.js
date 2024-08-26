@@ -53,8 +53,12 @@ app.use((req, res, next) => {
 
 
 //rutas 
-const routes = require('./routes/index');
-app.use(routes);
+const routesIndex = require('./routes/index');
+const routesUsers = require('./routes/userLogInOut');
+const routesUbic = require('./routes/ubicaciones');
+app.use(routesIndex);
+app.use(routesUsers);
+app.use(routesUbic);
 
 
 // Iniciamos el servidor 

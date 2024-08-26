@@ -26,13 +26,17 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Inicia sesión</p>
-                <form action="../index3.html" method="post">
-                    <div class="input-group mb-3"> <input type="email" class="form-control" placeholder="Email">
+                <form action="#" method="post">
+                    <div class="input-group mb-3"> <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
                     </div>
-                    <div class="input-group mb-3"> <input type="password" class="form-control" placeholder="Password">
+                    <div class="input-group mb-3"> <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
+                        
                     </div> <!--begin::Row-->
+                    <div>
+                        <button type="submit" class="btn btn-info"> Iniciar Sesion </button>
+                    </div>
                 </form>
 
 
@@ -44,6 +48,39 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
     <script src="../js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     
+<script>
+ // Function to display flash messages
+ function displayFlashMessages() {
+      const successMessage = '<%= success %>';
+      const errorMessage = '<%= message %>';
+
+      if (successMessage) {
+        // Create and show success message
+        const successDiv = document.createElement('div');
+        successDiv.className = 'alert alert-success';
+        successDiv.innerText = successMessage;
+        document.body.prepend(successDiv); // Display at the top of the page
+      }
+
+      if (errorMessage) {
+        // Create and show error message
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'alert alert-danger';
+        errorDiv.innerText = errorMessage;
+        document.body.prepend(errorDiv); // Display at the top of the page
+      }
+    }
+
+    // Call the function to display flash messages on page load
+    document.addEventListener('DOMContentLoaded', displayFlashMessages);
+ 
+</script>
+   
+
+
+
+
+
 </body><!--end::Body-->
 
 </html>
