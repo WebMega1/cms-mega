@@ -21,11 +21,21 @@
 </head> <!--end::Head--> <!--begin::Body-->
 
 <body class="login-page bg-body-secondary">
+
+    
+
+    
     <div class="login-box">
-        <div class="login-logo"> <b>MEGA</b> CPanel </div> <!-- /.login-logo -->
+        
         <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Inicia sesión</p>
+
+            <div class="card-body box-profile">
+                <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle" src="../assets/img/AdminLTELogo.png" width="100px" alt="User profile picture">
+                </div>
+                <h3 class="profile-username text-center">CPANEL - MEGA</h3>
+                <p class="text-muted text-center">Ingresa tus credenciales</p>
+                <hr>
                 <form action="#" method="post">
                     <div class="input-group mb-3"> <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
@@ -34,11 +44,20 @@
                         <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
                         
                     </div> <!--begin::Row-->
-                    <div>
+                    <div class="text-center">
                         <button type="submit" class="btn btn-info"> Iniciar Sesion </button>
                     </div>
                 </form>
+                
 
+                </div>
+        
+
+
+
+            <div class="card-body login-card-body">
+                
+                
 
             </div> <!-- /.login-card-body -->
         </div>
@@ -51,8 +70,8 @@
 <script>
  // Function to display flash messages
  function displayFlashMessages() {
-      const successMessage = '<%= success %>';
-      const errorMessage = '<%= message %>';
+      const successMessage = `Inicio Extitoso`;
+      const errorMessage = 'Error de inicio de sesion';
 
       if (successMessage) {
         // Create and show success message
@@ -60,9 +79,7 @@
         successDiv.className = 'alert alert-success';
         successDiv.innerText = successMessage;
         document.body.prepend(successDiv); // Display at the top of the page
-      }
-
-      if (errorMessage) {
+      }elseif (errorMessage) {
         // Create and show error message
         const errorDiv = document.createElement('div');
         errorDiv.className = 'alert alert-danger';
