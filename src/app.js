@@ -24,6 +24,8 @@ const dbConfig = require('./dbConfig');
 
 //funciones de los npm 
 app.set('port', process.env.PORT || 4000);
+// Configuración de EJS como motor de plantillas
+app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'views')));
 
 

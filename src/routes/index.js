@@ -13,8 +13,6 @@ router.get('/index', (req, res) => {
 
  
   
-router.get('/ubicaciones',(req, res) =>{
-  res.sendFile(path.join(__dirname, '../views/pages/ubicaciones', 'ubicaciones.html'))
-})
+
 
   module.exports = router;

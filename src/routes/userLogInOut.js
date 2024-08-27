@@ -10,7 +10,7 @@ router.get('/logOut', (req, res) => {
 
   router.post('/logOut', passport.authenticate('local.registro',{
     successRedirect:'/index',
-    failureRedirect:'/RegistroUsuarios',
+    failureRedirect:'/logIn',
     failureFlash:true
   }));
 
