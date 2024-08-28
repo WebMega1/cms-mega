@@ -291,9 +291,10 @@
                         <td>${sucursal.status}</td>
 
                         <td>
-                            <a href="/editar/${sucursal.idSucursal}">Editar</a> | 
-                            <a href="/copiar/${sucursal.idSucursal}">Copiar</a> | 
-                            <a href="/borrar/${sucursal.idSucursal}">Borrar</a>
+                            
+                           <a href="/ubicaciones/ver?id=${sucursal.idSucursal}" class="btn btn-primary">Ver</a>   | 
+                            <a href="/ubicaciones/editar?id=${sucursal.idSucursal}" class="btn btn-warning">Editar</a> | 
+                            <button class="btn btn-danger" onclick="borrarSucursal(${sucursal.idSucursal})">Borrar</button> 
                         </td>
                     `;
     
@@ -301,6 +302,20 @@
                 });
             })
             .catch(error => console.error('Error al obtener los datos:', error));
+            
+            function borrarSucursal(id) {
+            if (confirm('¿Estás seguro de que deseas borrar esta sucursal?')) {
+                fetch(`/ubicaciones/borrar/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error al borrar la sucursal:', error));
+            }
+        }
     </script>
   
       <script>
