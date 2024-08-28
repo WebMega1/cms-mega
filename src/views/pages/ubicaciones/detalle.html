@@ -206,11 +206,18 @@
 
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-10"> 
+                        <div class="col-md-5"> 
                             
                             <div id="ubicacion-detalle" class="card">
                                 <!-- Aquí se insertarán los detalles dinámicamente -->
                             </div>
+
+                        </div>
+
+                        <div class="col-md-5"> 
+                            <p>Mapa de muestra* Aun sin token activo</p>
+                            <!-- Aquí se insertarán los detalles dinámicamente -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59732.907050148606!2d-103.36337923557541!3d20.65709804925275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428adf06007c687%3A0x3970d62f1899b668!2sCorporativo%20Megacable!5e0!3m2!1ses!2smx!4v1724886799252!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                         </div>
                         
@@ -269,7 +276,7 @@
                     const card = document.querySelector('#ubicacion-detalle');
                     card.innerHTML = `
                         <div class="card-header">
-                            <h5 class="card-title">Sucursal: ${data.sucursalName}</h5>
+                            <h2 class="card-title">${data.sucursalName}</h2>
                         </div>
                         <div class="card-body">
                             <p class="card-text"><strong>Id:</strong> ${data.idSucursal}</p>
