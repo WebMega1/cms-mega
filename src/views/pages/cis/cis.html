@@ -204,48 +204,32 @@
            
                     </div> <!--end::Row--> <!--begin::Row-->
 
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10"> 
-                            <p>Sucursales</p>
-
+                    <body>
+                        <div class="container">
+                            <h1>CIS</h1>
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>Nombre</th>
                                         <th>Sucursal</th>
-                                        <th>Mascara sucurar</th>
+                                        <th>Ciudad</th>
+                                        <th>Estado</th>
+                                        <th>Dirección</th>
+                                        <th>Colonia</th>
+                                        <th>Horario</th>
+                                        <th>Teléfono</th>
                                         <th>Latitud</th>
                                         <th>Longitud</th>
-                                        <th>Status</th>
-                                        <th>Acciones</th>
+                                        <th>Activo</th>
+                                        <th>Discapacidad</th>
                                     </tr>
                                 </thead>
-                                <tbody id="sucursales-body" class="table-body">
+                                <tbody id="cis-body">
                                     <!-- Aquí se insertarán las filas dinámicamente -->
                                 </tbody>
                             </table>
-
                         </div>
-                        
-    
-
-
-                    </div>
-
-                </div> <!--end::Container-->
-            </div> <!--end::App Content-->
-        </main> <!--end::App Main--> <!--begin::Footer-->
-        <footer class="app-footer"> <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
-                Comunicación Gráfica y Servicios Web Pruebas  &copy; 2024&nbsp; 
-                
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
-        </footer> <!--end::Footer-->      
-
-    </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script> <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
@@ -273,39 +257,44 @@
             }
         });
     </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
-    <script>
+     <script>
         // Obtenemos los datos desde el servidor
-        fetch('/ubicaciones/data')  // Cambia la ruta a /ubicaciones/data
+        fetch('/cis/data')
             .then(response => response.json())
             .then(data => {
-                const tbody = document.getElementById('sucursales-body');
-                data.forEach(sucursal => {
+                const tbody = document.getElementById('cis-body');
+                data.forEach(cis => {
                     const row = document.createElement('tr');
-    
                     row.innerHTML = `
-                        <td>${sucursal.idSucursal}</td>
-                        <td>${sucursal.sucursalName}</td>
-                        <td>${sucursal.skinSucursalName}</td>
-                        <td>${sucursal.latitud}</td>
-                        <td>${sucursal.longitud}</td>
-                        <td>${sucursal.status}</td>
+                        <td>${cis.idSucursal}</td>
+                        <td>${cis.nombre}</td>
+                        <td>${cis.sucursal}</td>
+                        <td>${cis.ciudad}</td>
+                        <td>${cis.estado}</td>
+                        <td>${cis.direccion}</td>
+                        <td>${cis.colonia}</td>
+                        <td>${cis.horario}</td>
+                        <td>${cis.telefono}</td>
+                        <td>${cis.latitud}</td>
+                        <td>${cis.longitud}</td>
+                        <td>${cis.activo}</td>
+                        <td>${cis.discapacidad}</td>
 
-                        <td>
+                         <td>
                             
-                           <a href="/ubicaciones/ver?id=${sucursal.idSucursal}" class="btn btn-primary">Ver</a>        | 
-                            <a href="/ubicaciones/editar?id=${sucursal.idSucursal}" class="btn btn-warning">Editar</a> | 
-                            <button class="btn btn-danger" onclick="borrarSucursal(${sucursal.idSucursal})">Borrar</button> 
+                           <a href="/cis/ver?id=${cis.idSucursal}" class="btn btn-primary">Ver</a>        | 
+                            <a href="/cis/editar?id=${cis.idSucursal}" class="btn btn-warning">Editar</a> | 
+                            <button class="btn btn-danger" onclick="borrarCis(${cis.idSucursal})">Borrar</button> 
                         </td>
                     `;
-    
                     tbody.appendChild(row);
                 });
             })
             .catch(error => console.error('Error al obtener los datos:', error));
-            
-            function borrarSucursal(id) {
-            if (confirm('¿Estás seguro de que deseas borrar esta sucursal?')) {
-                fetch(`/ubicaciones/borrar/${id}`, {
+
+            function borrarCis(id) {
+            if (confirm('¿Estás seguro de que deseas borrar esta Cis?')) {
+                fetch(`/cis/borrar/${id}`, {
                     method: 'DELETE'
                 })
                 .then(response => response.json())
@@ -313,9 +302,10 @@
                     alert(data.message);
                     location.reload();
                 })
-                .catch(error => console.error('Error al borrar la sucursal:', error));
+                .catch(error => console.error('Error al borrar la Cis:', error));
             }
         }
+
     </script>
   
       <script>

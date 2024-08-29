@@ -184,13 +184,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Sucursales</h3>
+                            <h3 class="mb-0">Detalle Sucursal</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Sucursales
+                                    Detalle Sucursal
                                 </li>
                             </ol>
                         </div>
@@ -206,26 +206,19 @@
 
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-10"> 
-                            <p>Sucursales</p>
+                        <div class="col-md-5"> 
+                            
+                            <div id="cis-detalle" class="card">
+                                <!-- Aquí se insertarán los detalles dinámicamente -->
+                            </div>
 
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Sucursal</th>
-                                        <th>Mascara sucurar</th>
-                                        <th>Latitud</th>
-                                        <th>Longitud</th>
-                                        <th>Status</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sucursales-body" class="table-body">
-                                    <!-- Aquí se insertarán las filas dinámicamente -->
-                                </tbody>
-                            </table>
+                        </div>
 
+                        <div class="col-md-5"> 
+                            
+                            <!-- Aquí se insertarán los detalles dinámicamente -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59732.907050148606!2d-103.36337923557541!3d20.65709804925275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428adf06007c687%3A0x3970d62f1899b668!2sCorporativo%20Megacable!5e0!3m2!1ses!2smx!4v1724886799252!5m2!1ses!2smx"  height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <p>Mapa de muestra* Aun sin token activo</p>
                         </div>
                         
     
@@ -274,48 +267,36 @@
         });
     </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
     <script>
-        // Obtenemos los datos desde el servidor
-        fetch('/ubicaciones/data')  // Cambia la ruta a /ubicaciones/data
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('sucursales-body');
-                data.forEach(sucursal => {
-                    const row = document.createElement('tr');
-    
-                    row.innerHTML = `
-                        <td>${sucursal.idSucursal}</td>
-                        <td>${sucursal.sucursalName}</td>
-                        <td>${sucursal.skinSucursalName}</td>
-                        <td>${sucursal.latitud}</td>
-                        <td>${sucursal.longitud}</td>
-                        <td>${sucursal.status}</td>
-
-                        <td>
-                            
-                           <a href="/ubicaciones/ver?id=${sucursal.idSucursal}" class="btn btn-primary">Ver</a>        | 
-                            <a href="/ubicaciones/editar?id=${sucursal.idSucursal}" class="btn btn-warning">Editar</a> | 
-                            <button class="btn btn-danger" onclick="borrarSucursal(${sucursal.idSucursal})">Borrar</button> 
-                        </td>
-                    `;
-    
-                    tbody.appendChild(row);
-                });
-            })
-            .catch(error => console.error('Error al obtener los datos:', error));
-            
-            function borrarSucursal(id) {
-            if (confirm('¿Estás seguro de que deseas borrar esta sucursal?')) {
-                fetch(`/ubicaciones/borrar/${id}`, {
-                    method: 'DELETE'
-                })
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            fetch(`/cis/ver/data?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    alert(data.message);
-                    location.reload();
+                    const card = document.querySelector('#cis-detalle');
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <h2 class="card-title">${data.nombre}</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><strong>Id:</strong> ${data.id}</p>
+                            <p class="card-text"><strong>Nombre:</strong> ${data.nombre}</p>
+                            <p class="card-text"><strong>Sucursal:</strong> ${data.sucursal}</p>
+                            <p class="card-text"><strong>Ciudad:</strong> ${data.ciudad}</p>
+                            <p class="card-text"><strong>Estado:</strong> ${data.estado}</p>
+                            <p class="card-text"><strong>Dirección:</strong> ${data.direccion}</p>
+                            <p class="card-text"><strong>Colonia:</strong> ${data.colonia}</p>
+                            <p class="card-text"><strong>Horario:</strong> ${data.horario}</p>
+                            <p class="card-text"><strong>Teléfono:</strong> ${data.telefono}</p>
+                            <p class="card-text"><strong>Latitud:</strong> ${data.latitud}</p>
+                            <p class="card-text"><strong>Longitud:</strong> ${data.longitud}</p>
+                            <p class="card-text"><strong>Activo:</strong> ${data.activo}</p>
+                            <p class="card-text"><strong>Discapacidad:</strong> ${data.discapacidad}</p>
+                        </div>
+                    `;
                 })
-                .catch(error => console.error('Error al borrar la sucursal:', error));
-            }
-        }
+                .catch(error => console.error('Error al obtener los datos del CIS:', error));
+        });
     </script>
   
       <script>
@@ -332,7 +313,3 @@
 </body><!--end::Body-->
 
 </html>
-
-
-
-

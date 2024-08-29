@@ -184,13 +184,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Sucursales</h3>
+                            <h3 class="mb-0">Edita Cis</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Sucursales
+                                    Edita Cis
                                 </li>
                             </ol>
                         </div>
@@ -200,39 +200,66 @@
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row"> <!--begin::Col-->
-           
-           
                     </div> <!--end::Row--> <!--begin::Row-->
-
+            
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-10"> 
-                            <p>Sucursales</p>
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Sucursal</th>
-                                        <th>Mascara sucurar</th>
-                                        <th>Latitud</th>
-                                        <th>Longitud</th>
-                                        <th>Status</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sucursales-body" class="table-body">
-                                    <!-- Aquí se insertarán las filas dinámicamente -->
-                                </tbody>
-                            </table>
-
+                        <div class="col-md-6"> 
+                            <form id="editar-form">
+                                <input type="hidden" id="id" name="id">
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sucursal" class="form-label">Sucursal</label>
+                                    <input type="text" class="form-control" id="sucursal" name="sucursal" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ciudad" class="form-label">Ciudad</label>
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <input type="text" class="form-control" id="estado" name="estado" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="colonia" class="form-label">Colonia</label>
+                                    <input type="text" class="form-control" id="colonia" name="colonia" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="horario" class="form-label">Horario</label>
+                                    <input type="text" class="form-control" id="horario" name="horario" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="latitud" class="form-label">Latitud</label>
+                                    <input type="text" class="form-control" id="latitud" name="latitud" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="longitud" class="form-label">Longitud</label>
+                                    <input type="text" class="form-control" id="longitud" name="longitud" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activo" class="form-label">Activo</label>
+                                    <input type="text" class="form-control" id="activo" name="activo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="discapacidad" class="form-label">Discapacidad</label>
+                                    <input type="text" class="form-control" id="discapacidad" name="discapacidad" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <a href="/cis" class="btn btn-secondary">Cancelar</a>
+                            </form>
                         </div>
-                        
-    
-
-
                     </div>
-
                 </div> <!--end::Container-->
             </div> <!--end::App Content-->
         </main> <!--end::App Main--> <!--begin::Footer-->
@@ -273,51 +300,49 @@
             }
         });
     </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
-    <script>
-        // Obtenemos los datos desde el servidor
-        fetch('/ubicaciones/data')  // Cambia la ruta a /ubicaciones/data
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        fetch(`/cis/ver/data?id=${id}`)
             .then(response => response.json())
             .then(data => {
-                const tbody = document.getElementById('sucursales-body');
-                data.forEach(sucursal => {
-                    const row = document.createElement('tr');
-    
-                    row.innerHTML = `
-                        <td>${sucursal.idSucursal}</td>
-                        <td>${sucursal.sucursalName}</td>
-                        <td>${sucursal.skinSucursalName}</td>
-                        <td>${sucursal.latitud}</td>
-                        <td>${sucursal.longitud}</td>
-                        <td>${sucursal.status}</td>
-
-                        <td>
-                            
-                           <a href="/ubicaciones/ver?id=${sucursal.idSucursal}" class="btn btn-primary">Ver</a>        | 
-                            <a href="/ubicaciones/editar?id=${sucursal.idSucursal}" class="btn btn-warning">Editar</a> | 
-                            <button class="btn btn-danger" onclick="borrarSucursal(${sucursal.idSucursal})">Borrar</button> 
-                        </td>
-                    `;
-    
-                    tbody.appendChild(row);
-                });
+                document.getElementById('id').value = data.id;
+                document.getElementById('nombre').value = data.nombre;
+                document.getElementById('sucursal').value = data.sucursal;
+                document.getElementById('ciudad').value = data.ciudad;
+                document.getElementById('estado').value = data.estado;
+                document.getElementById('direccion').value = data.direccion;
+                document.getElementById('colonia').value = data.colonia;
+                document.getElementById('horario').value = data.horario;
+                document.getElementById('telefono').value = data.telefono;
+                document.getElementById('latitud').value = data.latitud;
+                document.getElementById('longitud').value = data.longitud;
+                document.getElementById('activo').value = data.activo;
+                document.getElementById('discapacidad').value = data.discapacidad;
             })
-            .catch(error => console.error('Error al obtener los datos:', error));
-            
-            function borrarSucursal(id) {
-            if (confirm('¿Estás seguro de que deseas borrar esta sucursal?')) {
-                fetch(`/ubicaciones/borrar/${id}`, {
-                    method: 'DELETE'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                    location.reload();
-                })
-                .catch(error => console.error('Error al borrar la sucursal:', error));
-            }
-        }
-    </script>
-  
+            .catch(error => console.error('Error al obtener los datos del CIS:', error));
+
+        document.getElementById('editar-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/cis/editar', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                window.location.href = '/cis';
+            })
+            .catch(error => console.error('Error al actualizar el CIS:', error));
+        });
+    });
+</script>
+    
       <script>
         // metadata
         document.getElementById('title').textContent = metadata.title;
@@ -332,7 +357,3 @@
 </body><!--end::Body-->
 
 </html>
-
-
-
-

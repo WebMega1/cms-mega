@@ -62,9 +62,11 @@ app.use((req, res, next) => {
 const routesIndex = require('./routes/index'); // Importa las rutas para la página principal desde un archivo externo.
 const routesUsers = require('./routes/userLogInOut'); // Importa las rutas para el inicio y cierre de sesión de usuarios.
 const routesUbic = require('./routes/ubicaciones');  // Importa las rutas para gestionar ubicaciones.
+const routesCis = require('./routes/cis');  // Importa las rutas para gestionar cis.
 app.use(routesIndex); // Monta las rutas principales en la aplicación.
 app.use(routesUsers); // Monta las rutas de usuarios en la aplicación.
 app.use(routesUbic); // Monta las rutas de ubicaciones en la aplicación.
+app.use(routesCis); // Monta las rutas de cis en la aplicación.
 
 
 // Iniciamos el servidor 
