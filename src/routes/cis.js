@@ -54,6 +54,7 @@ router.post('/cis/editar', (req, res) => {
         [nombre, sucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, idSucursal],
         (err, result) => {
             if (err) {
+                console.error('Error al actualizar el CIS:', err);
                 return res.status(500).json({ error: 'Error al actualizar el CIS' });
             }
             res.json({ message: 'CIS actualizado correctamente' });

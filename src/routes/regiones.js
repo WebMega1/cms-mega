@@ -48,23 +48,23 @@ router.get('/regiones/editar', (req, res) => {
 
 // Ruta POST para actualizar los datos de una sucursal
 router.post('/regiones/editar', (req, res) => {
-  const { idSucursal, sucursalName, skinSucursalName, latitud, longitud, status } = req.body;
-  db.query(
-      'UPDATE regiones SET region = ? WHERE id_region = ?',
-      [sucursalName, skinSucursalName, latitud, longitud, status, idSucursal],
-      (err, result) => {
-          if (err) {
-              return res.status(500).json({ error: 'Error al actualizar la sucursal' });
-          }
-          res.json({ message: 'Sucursal actualizada correctamente' });
-      }
-  );
+    const { id_region, region, status } = req.body;
+    db.query(
+        'UPDATE regiones SET region = ?, status = ? WHERE id_region = ?',
+        [region, status, id_region],
+        (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error al actualizar la región' });
+            }
+            res.json({ message: 'Región actualizada correctamente' });
+        }
+    );
 });
 
 // Ruta DELETE para eliminar una sucursal
 router.delete('/regiones/borrar/:id', (req, res) => {
     const id = req.params.id;
-    db.query('UPDATE regiones SET  status = 0 WHERE idSucursal = ?', [id], (err, result) => {
+    db.query('UPDATE regiones SET  status = 0 WHERE id_region = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al borrar la sucursal' });
         }

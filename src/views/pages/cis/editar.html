@@ -206,7 +206,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-6"> 
                             <form id="editar-form">
-                                <input type="hidden" id="id" name="id">
+                                <input type="hidden" id="idSucursal" name="idSucursal">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -284,63 +284,46 @@
             scrollbarAutoHide: "leave",
             scrollbarClickScroll: true,
         };
-        document.addEventListener("DOMContentLoaded", function() {
-            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-            if (
-                sidebarWrapper &&
-                typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
-            ) {
-                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-                    scrollbars: {
-                        theme: Default.scrollbarTheme,
-                        autoHide: Default.scrollbarAutoHide,
-                        clickScroll: Default.scrollbarClickScroll,
-                    },
-                });
-            }
-        });
-    </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
-        fetch(`/cis/ver/data?id=${id}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('id').value = data.id;
-                document.getElementById('nombre').value = data.nombre;
-                document.getElementById('sucursal').value = data.sucursal;
-                document.getElementById('ciudad').value = data.ciudad;
-                document.getElementById('estado').value = data.estado;
-                document.getElementById('direccion').value = data.direccion;
-                document.getElementById('colonia').value = data.colonia;
-                document.getElementById('horario').value = data.horario;
-                document.getElementById('telefono').value = data.telefono;
-                document.getElementById('latitud').value = data.latitud;
-                document.getElementById('longitud').value = data.longitud;
-                document.getElementById('activo').value = data.activo;
-                document.getElementById('discapacidad').value = data.discapacidad;
-            })
-            .catch(error => console.error('Error al obtener los datos del CIS:', error));
+        document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    fetch(`/cis/ver/data?id=${id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('idSucursal').value = data.idSucursal;
+            document.getElementById('nombre').value = data.nombre;
+            document.getElementById('sucursal').value = data.sucursal;
+            document.getElementById('ciudad').value = data.ciudad;
+            document.getElementById('estado').value = data.estado;
+            document.getElementById('direccion').value = data.direccion;
+            document.getElementById('colonia').value = data.colonia;
+            document.getElementById('horario').value = data.horario;
+            document.getElementById('telefono').value = data.telefono;
+            document.getElementById('latitud').value = data.latitud;
+            document.getElementById('longitud').value = data.longitud;
+            document.getElementById('activo').value = data.activo;
+            document.getElementById('discapacidad').value = data.discapacidad;
+        })
+        .catch(error => console.error('Error al obtener los datos del CIS:', error));
 
-        document.getElementById('editar-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('/cis/editar', {
-                method: 'POST',
-                body: JSON.stringify(Object.fromEntries(formData)),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-                window.location.href = '/cis';
-            })
-            .catch(error => console.error('Error al actualizar el CIS:', error));
-        });
+    document.getElementById('editar-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        fetch('/cis/editar', {
+            method: 'POST',
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            window.location.href = '/cis';
+        })
+        .catch(error => console.error('Error al actualizar el CIS:', error));
     });
+});
 </script>
     
       <script>

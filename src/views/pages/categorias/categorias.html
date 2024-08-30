@@ -179,129 +179,119 @@
                 </nav>
             </div> <!--end::Sidebar Wrapper-->
         </aside> <!--end::Sidebar--> <!--begin::App Main-->
-        <main class="app-main"> <!--begin::App Content Header-->
-            <div class="app-content-header"> <!--begin::Container-->
-                <div class="container-fluid"> <!--begin::Row-->
+        <main class="app-main">
+            <div class="app-content-header">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Edita Región</h3>
+                            <h3 class="mb-0">Categorías</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Edita Región
-                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Categorías</li>
                             </ol>
                         </div>
-                    </div> <!--end::Row-->
-                </div> <!--end::Container-->
-            </div> <!--end::App Content Header--> <!--begin::App Content-->
-            <div class="app-content"> <!--begin::Container-->
-                <div class="container-fluid"> <!--begin::Row-->
-                    <div class="row"> <!--begin::Col-->
-           
-           
-                    </div> <!--end::Row--> <!--begin::Row-->
-
+                    </div>
+                </div>
+            </div>
+            <div class="app-content">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-6"> 
-                            
-                            <form id="editar-form">
-                                <input type="hidden" id="id_region" name="id_region">
-                                <div class="mb-3">
-                                    <label for="region" class="form-label">Nombre de la Región</label>
-                                    <input type="text" class="form-control" id="region" name="region" required>
-                                    <label for="status" class="form-label">Status</label>
-                                    <input type="text" class="form-control" id="status" name="status" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                <a href="/regiones" class="btn btn-secondary">Cancelar</a>
-                            </form>
-
+                        <div class="col-md-10">
+                            <p>Categorías</p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Premier</th>
+                                        <th>Prioridad</th>
+                                        <th>Visible</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="categorias-body" class="table-body">
+                                    <!-- Aquí se insertarán las filas dinámicamente -->
+                                </tbody>
+                            </table>
                         </div>
-
-                        
-                        
-    
-
-
                     </div>
-
-                </div> <!--end::Container-->
-            </div> <!--end::App Content-->
-        </main> <!--end::App Main--> <!--begin::Footer-->
-        <footer class="app-footer"> <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
-                Comunicación Gráfica y Servicios Web Pruebas  &copy; 2024&nbsp; 
-                
-            </strong>
+                </div>
+            </div>
+        </main>
+        <footer class="app-footer">
+            <div class="float-end d-none d-sm-inline">Anything you want</div>
+            <strong>Comunicación Gráfica y Servicios Web Pruebas &copy; 2024&nbsp;</strong>
             All rights reserved.
-            <!--end::Copyright-->
-        </footer> <!--end::Footer-->      
-
-    </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script> <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="../../js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
-    <script>
-        const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
-        const Default = {
-            scrollbarTheme: "os-theme-light",
-            scrollbarAutoHide: "leave",
-            scrollbarClickScroll: true,
-        };
-        document.addEventListener("DOMContentLoaded", function() {
-            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-            if (
-                sidebarWrapper &&
-                typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
-            ) {
-                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-                    scrollbars: {
-                        theme: Default.scrollbarTheme,
-                        autoHide: Default.scrollbarAutoHide,
-                        clickScroll: Default.scrollbarClickScroll,
-                    },
-                });
-            }
-        });
-    </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            fetch(`/regiones/ver/data?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('id_region').value = data.id_region;
-                    document.getElementById('region').value = data.region;
-                    document.getElementById('status').value = data.region;
-                })
-                .catch(error => console.error('Error al obtener la región:', error));
-
-            document.getElementById('editar-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(this);
-                fetch('/regiones/editar', {
-                    method: 'POST',
-                    body: JSON.stringify(Object.fromEntries(formData)),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                    window.location.href = '/regiones';
-                })
-                .catch(error => console.error('Error al actualizar la región:', error));
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
+        <script src="../../js/adminlte.js"></script>
+        <script>
+            const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+            const Default = {
+                scrollbarTheme: "os-theme-light",
+                scrollbarAutoHide: "leave",
+                scrollbarClickScroll: true,
+            };
+            document.addEventListener("DOMContentLoaded", function() {
+                const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+                if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined") {
+                    OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                        scrollbars: {
+                            theme: Default.scrollbarTheme,
+                            autoHide: Default.scrollbarAutoHide,
+                            clickScroll: Default.scrollbarClickScroll,
+                        },
+                    });
+                }
             });
-        });
-    </script>
-    
+        </script>
+        <script>
+            // Obtenemos los datos desde el servidor
+            fetch('/categorias/data')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('categorias-body');
+                    data.forEach(categoria => {
+                        const row = document.createElement('tr');
+        
+                        row.innerHTML = `
+                            <td>${categoria.id_tipocanal}</td>
+                            <td>${categoria.nombre}</td>
+                            <td>${categoria.premier}</td>
+                            <td>${categoria.prioridad}</td>
+                            <td>${categoria.visible}</td>
+                            <td>
+                                <a href="/categorias/ver?id=${categoria.id_tipocanal}" class="btn btn-primary">Ver</a> |
+                                <a href="/categorias/editar?id=${categoria.id_tipocanal}" class="btn btn-warning">Editar</a> |
+                                <button class="btn btn-danger" onclick="borrarCategoria(${categoria.id_tipocanal})">Borrar</button>
+                            </td>
+                        `;
+        
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error al obtener los datos:', error));
+        
+                function borrarCategoria(id) {
+                    if (confirm('¿Estás seguro de que deseas desactivar esta categoría?')) {
+                         fetch(`/categorias/borrar/${id}`, {
+                            method: 'DELETE'
+                         })
+                         .then(response => response.json())
+                         .then(data => {
+                            alert(data.message);
+                             location.reload();
+                        })
+                        .catch(error => console.error('Error al desactivar la categoría:', error));
+        }
+    }
+        </script>
+  
       <script>
         // metadata
         document.getElementById('title').textContent = metadata.title;
@@ -316,3 +306,7 @@
 </body><!--end::Body-->
 
 </html>
+
+
+
+

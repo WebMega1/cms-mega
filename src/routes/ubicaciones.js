@@ -36,6 +36,7 @@ router.get('/ubicaciones/ver/data', (req, res) => {
         res.json(result[0]);
     });
 });
+
 router.get('/ubicaciones/ver', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/ubicaciones', 'detalle.html'));
 });

@@ -222,6 +222,7 @@
                                     <tr>
                                         <th>Id_region</th>
                                         <th>Region</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="regiones-body" class="table-body">
@@ -303,6 +304,7 @@
                         row.innerHTML = `
                             <td>${region.id_region}</td>
                             <td>${region.region}</td>
+                            <td>${region.status}</td>
                             <td>
                                 <a href="/regiones/ver?id=${region.id_region}" class="btn btn-primary">Ver</a> |
                                 <a href="/regiones/editar?id=${region.id_region}" class="btn btn-warning">Editar</a> |
