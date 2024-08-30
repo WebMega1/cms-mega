@@ -223,8 +223,6 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Sucursal</th>
-                                    <th>Latitud</th>
-                                    <th>Longitud</th>
                                     <th>Status</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -236,13 +234,14 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Sucursal</th>
-                                    <th>Latitud</th>
-                                    <th>Longitud</th>
                                     <th>Status</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
                         </table>
+
+
+                        
 
 
                     </div>
@@ -312,20 +311,25 @@
                 const tbody = document.getElementById('sucursales-body');
                 data.forEach(sucursal => {
                     const row = document.createElement('tr');
+
+                    if(sucursal.status == 1){
+                        var status = sucursal.status = "Activo";
+                        var statusButton = `<a onclick="borrarSucursal(${sucursal.idSucursal})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                    }else{
+                        var status = sucursal.status = "Inactivo";
+                        var statusButton = `<a onclick="activarSucursal(${sucursal.idSucursal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                    }
     
                     row.innerHTML = `
                         <td>${sucursal.idSucursal}</td>
                         <td>${sucursal.sucursalName}</td>
-                        <td>${sucursal.latitud}</td>
-                        <td>${sucursal.longitud}</td>
-                        <td>${sucursal.status}</td>
+                        <td>${status}</td>
 
                         <td>
                             
                            <a href="/ubicaciones/ver?id=${sucursal.idSucursal}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                            <a href="/ubicaciones/editar?id=${sucursal.idSucursal}" class="btn btn-outline-warning" title="Editar"><i class="bi bi-feather"></i></a> 
-                            <a onclick="borrarSucursal(${sucursal.idSucursal})" class="btn btn-outline-danger" title="Borrar">Borrar</a> 
-                           
+                            <a href="/ubicaciones/editar?id=${sucursal.idSucursal}" class="btn btn-outline-warning" title="Editar"><i class="bi bi-feather"></i></a>
+                            ${statusButton} 
                         </td>
                     `;
     
