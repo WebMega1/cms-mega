@@ -3,8 +3,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="../js/metadata.js"></script>
-
     <title id="title"></title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
     <meta name="title" id="metaTitle" content="">
@@ -18,6 +16,16 @@
     <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
+
+ <!-- DataTables CSS -->
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      
+ <!-- jQuery -->
+ <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+ <!-- DataTables JS -->
+ <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
 </head> <!--end::Head--> <!--begin::Body-->
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
@@ -199,6 +207,58 @@
             </div> <!--end::App Content Header--> <!--begin::App Content-->
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid"> <!--begin::Row-->
+                    <section class="content">
+
+                        <!-- Default box -->
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">CIS</h3>
+                
+                            <div class="card-tools">
+                           
+                            </div>
+                        </div>
+                        <div class="card-body">
+                           
+                            <table id="cis" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>cis</th>
+                                        <th>Sucursal</th>
+                                        <th>Status</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cis-body" class="table-body">
+                                    <!-- Aquí se insertarán las filas dinámicamente -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>cis</th>
+                                        <th>Sucursal</th>
+                                        <th>Status</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+    
+    
+                    
+    
+    
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            
+                        </div>
+                        <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                
+                    </section>
+
                     <div class="row"> <!--begin::Col-->
            
            
@@ -211,7 +271,7 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nombre</th>
+                                        <th>CIS</th>
                                         <th>Sucursal</th>
                                         <th>Ciudad</th>
                                         <th>Estado</th>
@@ -225,7 +285,7 @@
                                         <th>Discapacidad</th>
                                     </tr>
                                 </thead>
-                                <tbody id="cis-body">
+                                <tbody id="cis-body2">
                                     <!-- Aquí se insertarán las filas dinámicamente -->
                                 </tbody>
                             </table>
@@ -257,42 +317,47 @@
             }
         });
     </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
-     <script>
-        // Obtenemos los datos desde el servidor
-        fetch('/cis/data')
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('cis-body');
-                data.forEach(cis => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${cis.idSucursal}</td>
-                        <td>${cis.nombre}</td>
-                        <td>${cis.sucursal}</td>
-                        <td>${cis.ciudad}</td>
-                        <td>${cis.estado}</td>
-                        <td>${cis.direccion}</td>
-                        <td>${cis.colonia}</td>
-                        <td>${cis.horario}</td>
-                        <td>${cis.telefono}</td>
-                        <td>${cis.latitud}</td>
-                        <td>${cis.longitud}</td>
-                        <td>${cis.activo}</td>
-                        <td>${cis.discapacidad}</td>
+     
+    <script>
+        $(document).ready(function() {
+            // Cargar datos dinámicamente
+            fetch('/cis/data')  // Cambia la ruta a la correcta para obtener los datos
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('cis-body');
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
 
-                         <td>
-                            
-                           <a href="/cis/ver?id=${cis.idSucursal}" class="btn btn-primary">Ver</a>        | 
-                            <a href="/cis/editar?id=${cis.idSucursal}" class="btn btn-warning">Editar</a> | 
-                            <button class="btn btn-danger" onclick="borrarCis(${cis.idSucursal})">Borrar</button> 
-                        </td>
-                    `;
-                    tbody.appendChild(row);
+                        if(item.status == 1){
+                        var status = item.status = "Activo";
+                        var statusButton = `<a onclick="borrarCis(${item.idCis})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                        }else{
+                            var status = item.status = "Inactivo";
+                            var statusButton = `<a onclick="activarCis(${item.idCis})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                        }
+
+                        row.innerHTML = `
+                            <td>${item.idCis}</td>
+                            <td>${item.cisName}</td>
+                            <td>${item.sucursal}</td>
+                            <td>${status}</td>
+                            <td>
+                                <a href="/cis/ver?id=${item.idCis}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                                <a href="/cis/editar?id=${item.idCis}" class="btn btn-outline-dark" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                                ${statusButton}
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                    // Inicializar DataTables después de cargar los datos
+                    $('#cis').DataTable();
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos:', error);
                 });
-            })
-            .catch(error => console.error('Error al obtener los datos:', error));
+        });
 
-            function borrarCis(id) {
+        function borrarCis(id) {
             if (confirm('¿Estás seguro de que deseas borrar esta Cis?')) {
                 fetch(`/cis/borrar/${id}`, {
                     method: 'DELETE'
@@ -305,18 +370,10 @@
                 .catch(error => console.error('Error al borrar la Cis:', error));
             }
         }
-
     </script>
   
-      <script>
-        // metadata
-        document.getElementById('title').textContent = metadata.title;
-        document.getElementById('metaTitle').content = metadata.title;
-        document.getElementById('metaViewport').content = metadata.viewport;
-        document.getElementById('metaAuthor').content = metadata.author;
-        document.getElementById('metaDescription').content = metadata.description;
-        document.getElementById('metaKeywords').content = metadata.keywords;
-    </script>
+  
+     
 
 
 </body><!--end::Body-->

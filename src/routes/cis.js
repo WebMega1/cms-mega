@@ -25,7 +25,7 @@ router.get('/cis', (req, res) => {
 // Ruta GET para obtener datos de una sucursal específica en formato JSON
 router.get('/cis/ver/data', (req, res) => {
     const id = req.query.id;
-    db.query('SELECT * FROM cis WHERE idSucursal = ?', [id], (err, result) => {
+    db.query('SELECT * FROM cis WHERE idCis = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener la sucursal' });
         }
@@ -48,10 +48,10 @@ router.get('/cis/editar', (req, res) => {
 
 // Ruta POST para actualizar los datos de una sucursal
 router.post('/cis/editar', (req, res) => {
-    const { idSucursal, nombre, sucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad } = req.body;
+    const { idCis, nombre, sucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad } = req.body;
     db.query(
-        'UPDATE cis SET nombre = ?, sucursal = ?, ciudad = ?, estado = ?, direccion = ?, colonia = ?, horario = ?, telefono = ?, latitud = ?, longitud = ?, activo = ?, discapacidad = ? WHERE idSucursal = ?',
-        [nombre, sucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, idSucursal],
+        'UPDATE cis SET nombre = ?, sucursal = ?, ciudad = ?, estado = ?, direccion = ?, colonia = ?, horario = ?, telefono = ?, latitud = ?, longitud = ?, activo = ?, discapacidad = ? WHERE idCis = ?',
+        [nombre, sucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, idCis],
         (err, result) => {
             if (err) {
                 console.error('Error al actualizar el CIS:', err);
@@ -65,7 +65,7 @@ router.post('/cis/editar', (req, res) => {
 // Ruta DELETE para eliminar una sucursal
 router.delete('/cis/borrar/:id', (req, res) => {
     const id = req.params.id;
-    db.query('UPDATE cis SET  activo = 0 WHERE idSucursal = ?', [id], (err, result) => {
+    db.query('UPDATE cis SET  activo = 0 WHERE idCis = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al borrar la sucursal' });
         }

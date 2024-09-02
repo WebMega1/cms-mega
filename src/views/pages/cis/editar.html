@@ -206,7 +206,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-6"> 
                             <form id="editar-form">
-                                <input type="hidden" id="idSucursal" name="idSucursal">
+                                <input type="hidden" id="idCis" name="idCis">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -290,7 +290,7 @@
     fetch(`/cis/ver/data?id=${id}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById('idSucursal').value = data.idSucursal;
+            document.getElementById('idCis').value = data.idCis;
             document.getElementById('nombre').value = data.nombre;
             document.getElementById('sucursal').value = data.sucursal;
             document.getElementById('ciudad').value = data.ciudad;
