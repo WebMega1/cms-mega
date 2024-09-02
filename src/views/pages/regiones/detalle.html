@@ -59,20 +59,23 @@
 
                         </li>
                         <li class="nav-header">FUNCIONES DEL SITIO</li>
-                        <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-geo-alt-fill"></i>
-                                <p>
-                                    Ubicaciones
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="./ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Ubicaciones</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="./cis/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>CIS</p>
-                                    </a> </li>
-                            </ul>
+                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-journal-album"></i>
+                            <p>
+                                Sucursales
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
+                                    <p>Sucursales</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
+                                    <p>Regiones</p>
+                                </a> </li>
+                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
+                                    <p>CIS</p>
+                                </a> </li>
+                        </ul>
                         </li>
 
                         <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-tv"></i>
@@ -184,13 +187,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Detalle Sucursal</h3>
+                            <h3 class="mb-0">Detalle Región</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Detalle Sucursal
+                                    Detalle Región
                                 </li>
                             </ol>
                         </div>
@@ -200,10 +203,46 @@
             <div class="app-content">
                 <!--begin::Container-->
                 <div class="container-fluid">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <!--begin::Col-->
-                    </div>
+                   
+                    <section class="content">
+
+                        <!-- Default box -->
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Region: </h3>
+                
+                            <div class="card-tools">
+                           
+                            </div>
+                        </div>
+                        <div class="card-body">
+                           
+                            <table id="detalleRegion" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Region</th>
+                                        <th>Status</th>
+                                        <th>Ultima actualización</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="regiones-body" class="table-body">
+                                    <!-- Aquí se insertarán las filas dinámicamente -->
+                                </tbody>
+                                
+                            </table>
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            
+                        </div>
+                        <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                
+                    </section>
                     <!--end::Row-->
                     <!--begin::Row-->
                     <div class="row">
@@ -214,9 +253,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <!-- Aquí se insertarán los detalles dinámicamente -->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59732.907050148606!2d-103.36337923557541!3d20.65709804925275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428adf06007c687%3A0x3970d62f1899b668!2sCorporativo%20Megacable!5e0!3m2!1ses!2smx!4v1724886799252!5m2!1ses!2smx" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            <p>Mapa de muestra* Aun sin token activo</p>
+           
                         </div>
                     </div>
                 </div>
@@ -293,7 +330,7 @@
                                     <h2 class="card-title">${data.region}</h2>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text"><strong>Id:</strong> ${data.id_region}</p>
+                                    <p class="card-text"><strong>Id:</strong> ${data.idRegion}</p>
                                     <p class="card-text"><strong>Region:</strong> ${data.region}</p>
                                 </div>
                             `;
@@ -301,18 +338,65 @@
                         .catch(error => console.error('Error al obtener la región:', error));
                 });
             </script>
-  
-      <script>
-        // metadata
-        document.getElementById('title').textContent = metadata.title;
-        document.getElementById('metaTitle').content = metadata.title;
-        document.getElementById('metaViewport').content = metadata.viewport;
-        document.getElementById('metaAuthor').content = metadata.author;
-        document.getElementById('metaDescription').content = metadata.description;
-        document.getElementById('metaKeywords').content = metadata.keywords;
+
+<script>
+    $(document).ready(function() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        // Cargar datos dinámicamente
+        fetch(`/regiones/ver/data?id=${id}`)  // Cambia la ruta a la correcta para obtener los datos
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('regiones-body');
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    if(item.status == 1){
+                    var status = item.status = "Activo";
+                    var statusButton = `<a onclick="borrarRegion(${item.idRegion})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                    }else{
+                        var status = item.status = "Inactivo";
+                        var statusButton = `<a onclick="activarRegion(${item.idSucursal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                    }
+
+                    row.innerHTML = `
+                        <td>${item.idRegion}</td>
+                        <td>${item.region}</td>
+                        <td>${status}</td>
+                        <td>${create_at}</td>
+                        <td>
+                            <a href="/regiones/ver?id=${item.idRegion}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                            <a href="/regiones/editar?id=${item.idRegion}" class="btn btn-outline-dark" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                            ${statusButton}
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                // Inicializar DataTables después de cargar los datos
+                $('#prueba').DataTable();
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos:', error);
+            });
+        });
+
+        function borrarRegion(id) {
+                if (confirm('¿Estás seguro de que deseas borrar esta región?')) {
+                    fetch(`/regiones/borrar/${id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => console.error('Error al borrar la región:', error));
+                }
+            }
     </script>
 
-
+  
+      
 </body><!--end::Body-->
 
 </html>

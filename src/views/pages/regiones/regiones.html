@@ -3,8 +3,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="../../js/metadata.js"></script>
-
     <title id="title"></title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
     <meta name="title" id="metaTitle" content="">
@@ -18,6 +16,17 @@
     <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
+
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    
+
 </head> <!--end::Head--> <!--begin::Body-->
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
@@ -59,21 +68,24 @@
 
                         </li>
                         <li class="nav-header">FUNCIONES DEL SITIO</li>
-                        <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-geo-alt-fill"></i>
-                                <p>
-                                    Ubicaciones
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="./ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Ubicaciones</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="./cis/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>CIS</p>
-                                    </a> </li>
-                            </ul>
-                        </li>
+                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-journal-album"></i>
+                            <p>
+                                Sucursales
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
+                                    <p>Sucursales</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
+                                    <p>Regiones</p>
+                                </a> </li>
+                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
+                                    <p>CIS</p>
+                                </a> </li>
+                        </ul>
+                        </li> 
 
                         <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-tv"></i>
                                 <p>
@@ -207,30 +219,58 @@
             <div class="app-content">
                 <!--begin::Container-->
                 <div class="container-fluid">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <!--begin::Col-->
-                    </div>
-                    <!--end::Row-->
-                    <!--begin::Row-->
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                            <p>Regiones</p>
-                            <table class="table">
+                    <section class="content">
+
+                        <!-- Default box -->
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Regiones</h3>
+                
+                            <div class="card-tools">
+                           
+                            </div>
+                        </div>
+                        <div class="card-body">
+                           
+                            <table id="regiones" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Id_region</th>
+                                        <th>Id</th>
                                         <th>Region</th>
                                         <th>Status</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody id="regiones-body" class="table-body">
                                     <!-- Aquí se insertarán las filas dinámicamente -->
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Region</th>
+                                        <th>Status</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </tfoot>
                             </table>
+
                         </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            
+                        </div>
+                        <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                
+                    </section>
+    
+                    <!--begin::Row-->
+                    <div class="row">
+                        <!--begin::Col-->
                     </div>
+                    <!--end::Row-->
+                   
                 </div>
                 <!--end::Container-->
             </div>
@@ -292,32 +332,47 @@
         <!--end::OverlayScrollbars Configure-->
         <!-- OPTIONAL SCRIPTS -->
         <!-- sortablejs -->
-        <script>
-            // Obtenemos los datos desde el servidor
-            fetch('/regiones/data')  // Cambia la ruta a /regiones/data
-                .then(response => response.json())
-                .then(data => {
-                    const tbody = document.getElementById('regiones-body');
-                    data.forEach(region => {
-                        const row = document.createElement('tr');
-        
-                        row.innerHTML = `
-                            <td>${region.id_region}</td>
-                            <td>${region.region}</td>
-                            <td>${region.status}</td>
-                            <td>
-                                <a href="/regiones/ver?id=${region.id_region}" class="btn btn-primary">Ver</a> |
-                                <a href="/regiones/editar?id=${region.id_region}" class="btn btn-warning">Editar</a> |
-                                <button class="btn btn-danger" onclick="borrarRegion(${region.id_region})">Borrar</button>
-                            </td>
-                        `;
-        
-                        tbody.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Error al obtener los datos:', error));
-        
-            function borrarRegion(id) {
+
+  
+  <script>
+    $(document).ready(function() {
+        // Cargar datos dinámicamente
+        fetch('/regiones/data')  // Cambia la ruta a la correcta para obtener los datos
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('regiones-body');
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    if(item.status == 1){
+                    var status = item.status = "Activo";
+                    var statusButton = `<a onclick="borrarRegion(${item.idRegion})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                    }else{
+                        var status = item.status = "Inactivo";
+                        var statusButton = `<a onclick="activarRegion(${item.idSucursal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                    }
+
+                    row.innerHTML = `
+                        <td>${item.idRegion}</td>
+                        <td>${item.region}</td>
+                        <td>${status}</td>
+                        <td>
+                            <a href="/regiones/ver?id=${item.idRegion}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                            <a href="/regiones/editar?id=${item.idRegion}" class="btn btn-outline-dark" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                            ${statusButton}
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                // Inicializar DataTables después de cargar los datos
+                $('#prueba').DataTable();
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos:', error);
+            });
+        });
+
+        function borrarRegion(id) {
                 if (confirm('¿Estás seguro de que deseas borrar esta región?')) {
                     fetch(`/regiones/borrar/${id}`, {
                         method: 'DELETE'
@@ -330,17 +385,8 @@
                     .catch(error => console.error('Error al borrar la región:', error));
                 }
             }
-        </script>
-  
-      <script>
-        // metadata
-        document.getElementById('title').textContent = metadata.title;
-        document.getElementById('metaTitle').content = metadata.title;
-        document.getElementById('metaViewport').content = metadata.viewport;
-        document.getElementById('metaAuthor').content = metadata.author;
-        document.getElementById('metaDescription').content = metadata.description;
-        document.getElementById('metaKeywords').content = metadata.keywords;
     </script>
+
 
 
 </body><!--end::Body-->

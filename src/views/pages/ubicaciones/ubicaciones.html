@@ -78,13 +78,13 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item"> <a href="./ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
+                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
                                     <p>Sucursales</p>
                                 </a> </li>
-                            <li class="nav-item"> <a href="./regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
+                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
                                     <p>Regiones</p>
                                 </a> </li>
-                                <li class="nav-item"> <a href="./cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
+                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
                                     <p>CIS</p>
                                 </a> </li>
                         </ul>
@@ -228,7 +228,7 @@
                     </div>
                     <div class="card-body">
                        
-                        <table id="prueba" class="table table-striped" style="width:100%">
+                        <table id="sucursales" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -333,14 +333,14 @@
                             <td>${status}</td>
                             <td>
                                 <a href="/ubicaciones/ver?id=${item.idSucursal}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                <a href="/ubicaciones/editar?id=${item.idSucursal}" class="btn btn-outline-dark" title="Editar"><i class="bi bi-feather"></i></a>
+                                <a href="/ubicaciones/editar?id=${item.idSucursal}" class="btn btn-outline-dark" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
                                 ${statusButton}
                             </td>
                         `;
                         tbody.appendChild(row);
                     });
                     // Inicializar DataTables después de cargar los datos
-                    $('#prueba').DataTable();
+                    $('#sucursales').DataTable();
                 })
                 .catch(error => {
                     console.error('Error al cargar los datos:', error);

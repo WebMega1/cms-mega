@@ -3,7 +3,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="../../js/metadata.js"></script>
 
     <title id="title"></title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
@@ -59,20 +58,23 @@
 
                         </li>
                         <li class="nav-header">FUNCIONES DEL SITIO</li>
-                        <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-geo-alt-fill"></i>
-                                <p>
-                                    Ubicaciones
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="./ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Ubicaciones</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="./cis/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>CIS</p>
-                                    </a> </li>
-                            </ul>
+                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-journal-album"></i>
+                            <p>
+                                Sucursales
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
+                                    <p>Sucursales</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
+                                    <p>Regiones</p>
+                                </a> </li>
+                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
+                                    <p>CIS</p>
+                                </a> </li>
+                        </ul>
                         </li>
 
                         <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-tv"></i>
@@ -209,7 +211,7 @@
                         <div class="col-md-6"> 
                             
                             <form id="editar-form">
-                                <input type="hidden" id="id_region" name="id_region">
+                                <input type="hidden" id="idRegion" name="idRegion">
                                 <div class="mb-3">
                                     <label for="region" class="form-label">Nombre de la Región</label>
                                     <input type="text" class="form-control" id="region" name="region" required>
@@ -276,7 +278,7 @@
             fetch(`/regiones/ver/data?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('id_region').value = data.id_region;
+                    document.getElementById('idRegion').value = data.idRegion;
                     document.getElementById('region').value = data.region;
                     document.getElementById('status').value = data.region;
                 })
@@ -302,17 +304,6 @@
         });
     </script>
     
-      <script>
-        // metadata
-        document.getElementById('title').textContent = metadata.title;
-        document.getElementById('metaTitle').content = metadata.title;
-        document.getElementById('metaViewport').content = metadata.viewport;
-        document.getElementById('metaAuthor').content = metadata.author;
-        document.getElementById('metaDescription').content = metadata.description;
-        document.getElementById('metaKeywords').content = metadata.keywords;
-    </script>
-
-
 </body><!--end::Body-->
 
 </html>
