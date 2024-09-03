@@ -62,14 +62,26 @@ router.post('/cis/editar', (req, res) => {
     );
 });
 
-// Ruta DELETE para eliminar una sucursal
-router.delete('/cis/borrar/:id', (req, res) => {
+// Ruta DELETE para eliminar una cis
+router.put('/cis/borrar/:id', (req, res) => {
     const id = req.params.id;
-    db.query('UPDATE cis SET  activo = 0 WHERE idCis = ?', [id], (err, result) => {
+    db.query('UPDATE cis SET  status = 0 WHERE idCis = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al borrar la sucursal' });
         }
         res.json({ message: 'Sucursal borrada correctamente' });
     });
 });
+
+// Ruta PUT para restaurar una cis
+router.put('/cis/restaurar/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('UPDATE cis SET status= 1 WHERE idCis = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al restaurar la cis' });
+        }
+        res.json({ message: 'Cis restaurada correctamente' });
+    });
+});
+
 module.exports = router;

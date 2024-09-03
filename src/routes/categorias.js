@@ -60,13 +60,24 @@ router.post('/categorias/editar', (req, res) => {
 });
 
 // Ruta para cambiar el campo visible de una categoría
-router.delete('/categorias/borrar/:id', (req, res) => {
+router.put('/categorias/borrar/:id', (req, res) => {
     const id = req.params.id;
     db.query('UPDATE mega_tipocanales SET visible = 0 WHERE id_tipocanal = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al actualizar el campo visible de la categoría' });
         }
         res.json({ message: 'Campo visible de la categoría actualizado correctamente' });
+    });
+});
+
+// Ruta PUT para restaurar una regiones
+router.put('/categorias/restaurar/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('UPDATE mega_tipocanales SET status= 1 WHERE id_tipocanal = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al restaurar la categoria' });
+        }
+        res.json({ message: 'Categoria restaurada correctamente' });
     });
 });
 

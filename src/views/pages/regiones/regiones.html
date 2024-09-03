@@ -349,7 +349,7 @@
                     var statusButton = `<a onclick="borrarRegion(${item.idRegion})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
                     }else{
                         var status = item.status = "Inactivo";
-                        var statusButton = `<a onclick="activarRegion(${item.idSucursal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                        var statusButton = `<a onclick="activarRegion(${item.idRegion})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
                     }
 
                     row.innerHTML = `
@@ -375,7 +375,7 @@
         function borrarRegion(id) {
                 if (confirm('¿Estás seguro de que deseas borrar esta región?')) {
                     fetch(`/regiones/borrar/${id}`, {
-                        method: 'DELETE'
+                        method: 'PUT'
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -385,6 +385,20 @@
                     .catch(error => console.error('Error al borrar la región:', error));
                 }
             }
+
+            function activarRegion(id) {
+            if (confirm('¿Estás seguro de que deseas activar esta Regiones?')) {
+                fetch(`/regiones/restaurar/${id}`, {
+                    method: 'PUT'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error al activar la Regiones:', error));
+            }
+        }
     </script>
 
 

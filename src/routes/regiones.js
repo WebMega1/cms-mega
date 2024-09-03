@@ -42,12 +42,12 @@ router.get('/regiones/ver', (req, res) => {
 });
 
 
-// Ruta GET para servir la página HTML de edición de ubicación
+// Ruta GET para servir la página HTML de edición de regiones
 router.get('/regiones/editar', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/regiones', 'editar.html'));
 });
 
-// Ruta POST para actualizar los datos de una sucursal
+// Ruta POST para actualizar los datos de una regiones
 router.post('/regiones/editar', (req, res) => {
     const { id_region, region, status } = req.body;
     db.query(
@@ -62,14 +62,25 @@ router.post('/regiones/editar', (req, res) => {
     );
 });
 
-// Ruta DELETE para eliminar una sucursal
-router.delete('/regiones/borrar/:id', (req, res) => {
+// Ruta DELETE para eliminar una regiones
+router.put('/regiones/borrar/:id', (req, res) => {
     const id = req.params.id;
     db.query('UPDATE regiones SET  status = 0 WHERE idRegion = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al borrar la Región' });
         }
         res.json({ message: 'Región borrada correctamente' });
+    });
+});
+
+// Ruta PUT para restaurar una regiones
+router.put('/regiones/restaurar/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('UPDATE regiones SET status= 1 WHERE idRegion = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al restaurar la regiones' });
+        }
+        res.json({ message: 'Region restaurada correctamente' });
     });
 });
 
