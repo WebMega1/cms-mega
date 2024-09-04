@@ -304,24 +304,25 @@
         });
     </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
      
-    <script>
+     <script>
         $(document).ready(function() {
             // Cargar datos dinámicamente
             fetch('/cis/data')  // Cambia la ruta a la correcta para obtener los datos
                 .then(response => response.json())
                 .then(data => {
                     const tbody = document.getElementById('cis-body');
+                    tbody.innerHTML = ''; // Limpiar el contenido existente
                     data.forEach(item => {
                         const row = document.createElement('tr');
-
-                        if(item.status == 1){
-                        var status = item.status = "Activo";
-                        var statusButton = `<a onclick="borrarCis(${item.idCis})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
-                        }else{
-                            var status = item.status = "Inactivo";
+    
+                        if (item.status == 1) {
+                            var status = "Activo";
+                            var statusButton = `<a onclick="borrarCis(${item.idCis})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                        } else {
+                            var status = "Inactivo";
                             var statusButton = `<a onclick="activarCis(${item.idCis})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
                         }
-
+    
                         row.innerHTML = `
                             <td>${item.idCis}</td>
                             <td>${item.cisName}</td>
@@ -342,11 +343,11 @@
                     console.error('Error al cargar los datos:', error);
                 });
         });
-
+    
         function borrarCis(id) {
             if (confirm('¿Estás seguro de que deseas borrar esta Cis?')) {
                 fetch(`/cis/borrar/${id}`, {
-                    method: 'DELETE'
+                    method: 'PUT'
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -356,12 +357,22 @@
                 .catch(error => console.error('Error al borrar la Cis:', error));
             }
         }
+    
+        function activarCis(id) {
+            if (confirm('¿Estás seguro de que deseas activar esta Cis?')) {
+                fetch(`/cis/restaurar/${id}`, {
+                    method: 'PUT'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error al activar la Cis:', error));
+            }
+        }
     </script>
   
-  
-     
-
-
 </body><!--end::Body-->
 
 </html>

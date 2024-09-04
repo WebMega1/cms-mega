@@ -280,7 +280,7 @@
                 function borrarCategoria(id) {
                     if (confirm('¿Estás seguro de que deseas desactivar esta categoría?')) {
                          fetch(`/categorias/borrar/${id}`, {
-                            method: 'DELETE'
+                            method: 'PUT'
                          })
                          .then(response => response.json())
                          .then(data => {
@@ -290,6 +290,21 @@
                         .catch(error => console.error('Error al desactivar la categoría:', error));
         }
     }
+
+                function activarCategoria(id) {
+                        if (confirm('¿Estás seguro de que deseas activar esta Categoria?')) {
+                            fetch(`/categorias/restaurar/${id}`, {
+                                method: 'PUT'
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert(data.message);
+                                location.reload();
+                            })
+                            .catch(error => console.error('Error al activar la Categoria:', error));
+                        }
+                    }
+
         </script>
   
       <script>
