@@ -26,7 +26,7 @@ router.get('/ubicaciones', (req, res) => {
 // Ruta GET para obtener datos de una sucursal específica en formato JSON
 router.get('/ubicaciones/ver/data', (req, res) => {
     const id = req.query.id;
-    db.query('SELECT * FROM sucursal WHERE idSucursal = ?', [id], (err, result) => {
+    db.query('SELECT t1.*, t2.regionName FROM sucursal as t1 LEFT JOIN regiones as t2 on t1.idRegion = t2.idRegion WHERE idSucursal = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener la sucursal' });
         }
