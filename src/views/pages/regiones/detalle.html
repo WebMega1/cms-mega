@@ -3,7 +3,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="../../js/metadata.js"></script>
 
     <title id="title"></title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
@@ -31,7 +30,7 @@
                    
                     <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                            <li class="user-header text-bg-primary"> <img src="../assets/img/AdminLTELogo.png" class="rounded-circle shadow" alt="User Image">
+                            <li class="user-header text-bg-primary"> <img src="../assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
                                 <p>
                                     Administrador - Web Developer
                                     
@@ -46,7 +45,7 @@
         </nav> <!--end::Header--> <!--begin::Sidebar-->
 
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="./index.html" class="brand-link"> <!--begin::Brand Image--> <img src="../../dist/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index" class="brand-link"> <!--begin::Brand Image--> <img src="../assets/img/logoMega.png" alt="Logo Mega" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
             <div class="sidebar-wrapper">
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
@@ -187,13 +186,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Detalle Región</h3>
+                            <h3 class="mb-0">Región</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Detalle Región
+                                    Región
                                 </li>
                             </ol>
                         </div>
@@ -209,30 +208,22 @@
                         <!-- Default box -->
                         <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Region: </h3>
+                            <h3 class="card-title">Detalles de región</h3>
                 
                             <div class="card-tools">
                            
                             </div>
                         </div>
                         <div class="card-body">
-                           
-                            <table id="detalleRegion" class="table table-striped" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Region</th>
-                                        <th>Status</th>
-                                        <th>Ultima actualización</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="regiones-body" class="table-body">
-                                    <!-- Aquí se insertarán las filas dinámicamente -->
-                                </tbody>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 card-body-left">
+                                    <p class="card-text"><strong>Id:</strong> 1</p>
+                                    <p class="card-text"><strong>Región:</strong> Mega</p>
+                                    <p class="card-text"><strong>Status:</strong> Activo</p>
+                                </div> 
                                 
-                            </table>
-
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -245,17 +236,7 @@
                     </section>
                     <!--end::Row-->
                     <!--begin::Row-->
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-5">
-                            <div id="regiones-detalle" class="card">
-                                <!-- Aquí se insertarán los detalles dinámicamente -->
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-           
-                        </div>
-                    </div>
+
                 </div>
                 <!--end::Container-->
             </div>
@@ -314,9 +295,6 @@
                     }
                 });
             </script>
-            <!--end::OverlayScrollbars Configure-->
-            <!-- OPTIONAL SCRIPTS -->
-            <!-- sortablejs -->
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     const params = new URLSearchParams(window.location.search);
@@ -324,79 +302,63 @@
                     fetch(`/regiones/ver/data?id=${id}`)
                         .then(response => response.json())
                         .then(data => {
-                            const card = document.querySelector('#regiones-detalle');
-                            card.innerHTML = `
-                                <div class="card-header">
-                                    <h2 class="card-title">${data.region}</h2>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text"><strong>Id:</strong> ${data.idRegion}</p>
-                                    <p class="card-text"><strong>Region:</strong> ${data.region}</p>
-                                </div>
-                            `;
+                            if(data.status == 1){
+                                var status = data.status = "Activo";
+                                var statusButton = `<a onclick="borrarRegion(${data.idRegion})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x">Desactivar</i></a>`;
+                                }else{
+                                    var status = data.status = "Inactivo";
+                                    var statusButton = `<a onclick="activarRegion(${data.idRegion})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check">Activar</i></a>`;
+                                }
+        
+                            const cardTitle = document.querySelector('.card-title');
+                            cardTitle.textContent = data.regionName;
+                            const cardTools = document.querySelector('.card-tools');
+                            cardTools.innerHTML = `<a href="/regiones/editar?id=${data.idRegion}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+        
+                            //const cardBodyRight = document.querySelector('.card-body-rigth');
+                            // cardBodyRight.innerHTML = ``;
+                                    
+                            const cardBodyLeft = document.querySelector('.card-body-left');
+                            cardBodyLeft.innerHTML = `<h2>${data.regionName}</h2>  
+                                                        <br />
+                                                        <p class="card-text"><strong>Región:</strong> ${data.regionName}</p>
+                                                        <p class="card-text"><strong>Id:</strong> ${data.idRegion}</p>
+                                                        <p class="card-text"><strong>Status:</strong> ${data.status}</p>
+                                                        `;
+                                                        
                         })
                         .catch(error => console.error('Error al obtener la región:', error));
                 });
+                
+                function borrarRegion(id) {
+                    if (confirm('¿Estás seguro de que deseas borrar esta región?')) {
+                        fetch(`/regiones/borrar/${id}`, {
+                            method: 'PUT'
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(data.message);
+                            location.reload();
+                        })
+                        .catch(error => console.error('Error al borrar la región:', error));
+                    }
+                }
+
+                function activarRegion(id) {
+                if (confirm('¿Estás seguro de que deseas activar esta Regiones?')) {
+                            fetch(`/regiones/restaurar/${id}`, {
+                                method: 'PUT'
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert(data.message);
+                                location.reload();
+                            })
+                            .catch(error => console.error('Error al activar la Regiones:', error));
+                        }
+                    }
             </script>
 
-<script>
-    $(document).ready(function() {
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
-        // Cargar datos dinámicamente
-        fetch(`/regiones/ver/data?id=${id}`)  // Cambia la ruta a la correcta para obtener los datos
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('regiones-body');
-                data.forEach(item => {
-                    const row = document.createElement('tr');
-
-                    if(item.status == 1){
-                    var status = item.status = "Activo";
-                    var statusButton = `<a onclick="borrarRegion(${item.idRegion})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
-                    }else{
-                        var status = item.status = "Inactivo";
-                        var statusButton = `<a onclick="activarRegion(${item.idSucursal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
-                    }
-
-                    row.innerHTML = `
-                        <td>${item.idRegion}</td>
-                        <td>${item.region}</td>
-                        <td>${status}</td>
-                        <td>${create_at}</td>
-                        <td>
-                            <a href="/regiones/ver?id=${item.idRegion}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                            <a href="/regiones/editar?id=${item.idRegion}" class="btn btn-outline-dark" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
-                            ${statusButton}
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-                });
-                // Inicializar DataTables después de cargar los datos
-                $('#prueba').DataTable();
-            })
-            .catch(error => {
-                console.error('Error al cargar los datos:', error);
-            });
-        });
-
-        function borrarRegion(id) {
-                if (confirm('¿Estás seguro de que deseas borrar esta región?')) {
-                    fetch(`/regiones/borrar/${id}`, {
-                        method: 'DELETE'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.message);
-                        location.reload();
-                    })
-                    .catch(error => console.error('Error al borrar la región:', error));
-                }
-            }
-    </script>
-
-  
-      
 </body><!--end::Body-->
 
 </html>

@@ -49,10 +49,10 @@ router.get('/regiones/editar', (req, res) => {
 
 // Ruta POST para actualizar los datos de una regiones
 router.post('/regiones/editar', (req, res) => {
-    const { id_region, region, status } = req.body;
+    const { idRegion, regionName, status } = req.body;
     db.query(
-        'UPDATE regiones SET region = ?, status = ?, create_at = CURRENT_TIMESTAMP  WHERE idRegion = ?',
-        [region, status, id_region],
+        'UPDATE regiones SET regionName = ?, status = ?, create_at = CURRENT_TIMESTAMP  WHERE idRegion = ?',
+        [regionName, status, idRegion],
         (err, result) => {
             if (err) {
                 return res.status(500).json({ error: 'Error al actualizar la región' });
@@ -65,22 +65,22 @@ router.post('/regiones/editar', (req, res) => {
 // Ruta DELETE para eliminar una regiones
 router.put('/regiones/borrar/:id', (req, res) => {
     const id = req.params.id;
-    db.query('UPDATE regiones SET  status = 0 WHERE idRegion = ?', [id], (err, result) => {
+    db.query('UPDATE regiones SET  status = 0 , create_at = CURRENT_TIMESTAMP WHERE idRegion = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al borrar la Región' });
         }
-        res.json({ message: 'Región borrada correctamente' });
+        res.json({ message: 'Región Inactiva' });
     });
 });
 
 // Ruta PUT para restaurar una regiones
 router.put('/regiones/restaurar/:id', (req, res) => {
     const id = req.params.id;
-    db.query('UPDATE regiones SET status= 1 WHERE idRegion = ?', [id], (err, result) => {
+    db.query('UPDATE regiones SET status= 1 , create_at = CURRENT_TIMESTAMP WHERE idRegion = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al restaurar la regiones' });
         }
-        res.json({ message: 'Region restaurada correctamente' });
+        res.json({ message: 'Region activa' });
     });
 });
 

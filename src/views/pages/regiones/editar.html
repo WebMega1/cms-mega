@@ -30,7 +30,7 @@
                    
                     <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                            <li class="user-header text-bg-primary"> <img src="../assets/img/AdminLTELogo.png" class="rounded-circle shadow" alt="User Image">
+                            <li class="user-header text-bg-primary"> <img src="../assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
                                 <p>
                                     Administrador - Web Developer
                                     
@@ -45,7 +45,7 @@
         </nav> <!--end::Header--> <!--begin::Sidebar-->
 
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="./index.html" class="brand-link"> <!--begin::Brand Image--> <img src="../../dist/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index" class="brand-link"> <!--begin::Brand Image--> <img src="../assets/img/logoMega.png" alt="Logo Mega" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
             <div class="sidebar-wrapper">
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
@@ -186,13 +186,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Edita Región</h3>
+                            <h3 class="mb-0">Editar Región</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Edita Región
+                                    Editar Región
                                 </li>
                             </ol>
                         </div>
@@ -213,13 +213,16 @@
                             <form id="editar-form">
                                 <input type="hidden" id="idRegion" name="idRegion">
                                 <div class="mb-3">
-                                    <label for="region" class="form-label">Nombre de la Región</label>
-                                    <input type="text" class="form-control" id="region" name="region" required>
+                                    <label for="regionName" class="form-label">Nombre de la Región</label>
+                                    <input type="text" class="form-control" id="regionName" name="regionName" required>
                                     <label for="status" class="form-label">Status</label>
-                                    <input type="text" class="form-control" id="status" name="status" required>
+                                    <select  id="status" name="status" class="form-select" >
+                                        <option value="1" selected>Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                <a href="/regiones" class="btn btn-secondary">Cancelar</a>
+                                <button type="submit" class="btn btn-outline-primary">Guardar Cambios</button>
+                                <a href="/regiones" class="btn  btn-outline-secondary">Cancelar</a>
                             </form>
 
                         </div>
@@ -278,9 +281,11 @@
             fetch(`/regiones/ver/data?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
+
+                    
                     document.getElementById('idRegion').value = data.idRegion;
-                    document.getElementById('region').value = data.region;
-                    document.getElementById('status').value = data.region;
+                    document.getElementById('regionName').value = data.regionName;
+                    document.getElementById('status').value = data.status;
                 })
                 .catch(error => console.error('Error al obtener la región:', error));
 
