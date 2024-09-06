@@ -3,10 +3,23 @@ const router = express.Router(); // Crea una instancia de Router, que permite de
 const path = require('path'); // Importa el módulo Path, que proporciona utilidades para trabajar con rutas de archivos y directorios.
 const db = require('../dbconnection'); // Importa el archivo de conexión a la base de datos MySQL.
 
-// Ruta GET para obtener datos de todas las sucursales en formato JSON
+// Ruta GET para obtener datos de todas las cis en formato JSON
 router.get('/cis/data', (req, res) => {
     // Realiza una consulta SQL para obtener todos los registros de la tabla 'cis'
-    db.query('SELECT * FROM cis', (err, result) => {
+    db.query('SELECT t1.*, t2.sucursalName FROM `cis` as t1 LEFT JOIN sucursal as t2 on t1.idSucursal = t2.idSucursal;', (err, result) => {
+        if (err) {
+            // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
+            return res.status(500).json({ error: 'Error al obtener las sucursales' });
+        }
+        // Si la consulta es exitosa, envía los resultados como un JSON
+        res.json(result); // Envía los datos como JSON
+    });
+});
+
+// Ruta GET para obtener datos de todas las cis en formato JSON
+router.get('/cis/sucursales', (req, res) => {
+    // Realiza una consulta SQL para obtener todos los registros de la tabla 'cis'
+    db.query('SELECT idSucursal, sucursalName FROM `sucursal` WHERE status = 1 ORDER BY sucursalName ASC;', (err, result) => {
         if (err) {
             // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
             return res.status(500).json({ error: 'Error al obtener las sucursales' });
@@ -25,7 +38,7 @@ router.get('/cis', (req, res) => {
 // Ruta GET para obtener datos de una sucursal específica en formato JSON
 router.get('/cis/ver/data', (req, res) => {
     const id = req.query.id;
-    db.query('SELECT * FROM cis WHERE idCis = ?', [id], (err, result) => {
+    db.query('SELECT t1.*, t2.sucursalName FROM `cis` as t1 LEFT JOIN sucursal as t2 on t1.idSucursal = t2.idSucursal WHERE idCis = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener la sucursal' });
         }
@@ -48,10 +61,10 @@ router.get('/cis/editar', (req, res) => {
 
 // Ruta POST para actualizar los datos de una sucursal
 router.post('/cis/editar', (req, res) => {
-    const { idCis, nombre, sucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad } = req.body;
+    const { idCis, cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad } = req.body;
     db.query(
         'UPDATE cis SET nombre = ?, sucursal = ?, ciudad = ?, estado = ?, direccion = ?, colonia = ?, horario = ?, telefono = ?, latitud = ?, longitud = ?, activo = ?, discapacidad = ? WHERE idCis = ?',
-        [nombre, sucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, idCis],
+        [cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, idCis],
         (err, result) => {
             if (err) {
                 console.error('Error al actualizar el CIS:', err);

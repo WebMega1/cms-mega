@@ -3,7 +3,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="../js/metadata.js"></script>
 
     <title id="title"></title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
@@ -18,6 +17,7 @@
     <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik" async defer></script>
 </head> <!--end::Head--> <!--begin::Body-->
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
@@ -31,7 +31,7 @@
                    
                     <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                            <li class="user-header text-bg-primary"> <img src="../assets/img/AdminLTELogo.png" class="rounded-circle shadow" alt="User Image">
+                            <li class="user-header text-bg-primary"> <img src="../assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
                                 <p>
                                     Administrador - Web Developer
                                     
@@ -46,7 +46,7 @@
         </nav> <!--end::Header--> <!--begin::Sidebar-->
 
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="./index.html" class="brand-link"> <!--begin::Brand Image--> <img src="../../dist/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index" class="brand-link"> <!--begin::Brand Image--> <img src="../assets/img/logoMega.png" alt="Logo Mega" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
             <div class="sidebar-wrapper">
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
@@ -59,21 +59,25 @@
 
                         </li>
                         <li class="nav-header">FUNCIONES DEL SITIO</li>
-                        <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-geo-alt-fill"></i>
-                                <p>
-                                    Ubicaciones
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="./ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Ubicaciones</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="./cis/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>CIS</p>
-                                    </a> </li>
-                            </ul>
-                        </li>
+                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-journal-album"></i>
+                            <p>
+                                Sucursales
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
+                                    <p>Sucursales</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
+                                    <p>Regiones</p>
+                                </a> </li>
+                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
+                                    <p>CIS</p>
+                                </a> </li>
+                        </ul>
+                        </li> 
+
 
                         <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-tv"></i>
                                 <p>
@@ -184,13 +188,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Detalle Sucursal</h3>
+                            <h3 class="mb-0">Detalle CIS</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Detalle Sucursal
+                                    Detalle CIS
                                 </li>
                             </ol>
                         </div>
@@ -199,10 +203,50 @@
             </div> <!--end::App Content Header--> <!--begin::App Content-->
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid"> <!--begin::Row-->
-                    <div class="row"> <!--begin::Col-->
-           
-           
-                    </div> <!--end::Row--> <!--begin::Row-->
+                    <section class="content">
+
+                        <!-- Default box -->
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Detalles CIS</h3>
+                
+                            <div class="card-tools">
+                           
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 card-body-left">
+                                    <p class="card-text"><strong>CIS:</strong> Cis</p>
+                                    <p class="card-text"><strong>Id:</strong> 1</p>
+                                    <p class="card-text"><strong>Sucursal:</strong> Mega</p>
+                                    <p class="card-text"><strong>Ciudad:</strong> Mega</p>
+                                    <p class="card-text"><strong>Estado:</strong> Mega</p>
+                                    <p class="card-text"><strong>Direccion:</strong> Mega</p>
+                                    <p class="card-text"><strong>Colonia:</strong> Mega</p>
+                                    <p class="card-text"><strong>Horario:</strong> Mega</p>
+                                    <p class="card-text"><strong>Telefono:</strong> Mega</p>
+                                    <p class="card-text"><strong>Latitud:</strong> 20.65709804925275</p>
+                                    <p class="card-text"><strong>Longitud:</strong> -103.36337923557541</p>
+                                    <p class="card-text"><strong>Discapacidad:</strong> -103.36337923557541</p>
+                                    <p class="card-text"><strong>Status:</strong> Activo</p>
+                                </div> 
+                                <div class="col-md-5 card-body-rigth">
+                                    <div id="map" style="height: 300px; width: 100%;"></div>                                    
+                                </div>   
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            
+                        </div>
+                        <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                
+                    </section>
+
 
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -216,9 +260,7 @@
 
                         <div class="col-md-5"> 
                             
-                            <!-- Aquí se insertarán los detalles dinámicamente -->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59732.907050148606!2d-103.36337923557541!3d20.65709804925275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428adf06007c687%3A0x3970d62f1899b668!2sCorporativo%20Megacable!5e0!3m2!1ses!2smx!4v1724886799252!5m2!1ses!2smx"  height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            <p>Mapa de muestra* Aun sin token activo</p>
+                           
                         </div>
                         
     
@@ -266,50 +308,101 @@
             }
         });
     </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
+    
     <script>
+        
         document.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
             fetch(`/cis/ver/data?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    const card = document.querySelector('#cis-detalle');
-                    card.innerHTML = `
-                        <div class="card-header">
-                            <h2 class="card-title">${data.nombre}</h2>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text"><strong>Id:</strong> ${data.id}</p>
-                            <p class="card-text"><strong>Nombre:</strong> ${data.nombre}</p>
-                            <p class="card-text"><strong>Sucursal:</strong> ${data.sucursal}</p>
-                            <p class="card-text"><strong>Ciudad:</strong> ${data.ciudad}</p>
-                            <p class="card-text"><strong>Estado:</strong> ${data.estado}</p>
-                            <p class="card-text"><strong>Dirección:</strong> ${data.direccion}</p>
-                            <p class="card-text"><strong>Colonia:</strong> ${data.colonia}</p>
-                            <p class="card-text"><strong>Horario:</strong> ${data.horario}</p>
-                            <p class="card-text"><strong>Teléfono:</strong> ${data.telefono}</p>
-                            <p class="card-text"><strong>Latitud:</strong> ${data.latitud}</p>
-                            <p class="card-text"><strong>Longitud:</strong> ${data.longitud}</p>
-                            <p class="card-text"><strong>Activo:</strong> ${data.activo}</p>
-                            <p class="card-text"><strong>Discapacidad:</strong> ${data.discapacidad}</p>
-                        </div>
+                    if(data.status == 1){
+                        var status = data.status = "Activo";
+                        var statusButton = `<a onclick="borrarCis(${data.idCis})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x">Desactivar</i></a>`;
+                        }else{
+                            var status = data.status = "Inactivo";
+                            var statusButton = `<a onclick="activarCis(${data.idCis})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check">Activar</i></a>`;
+                        }
+
+                    const cardTitle = document.querySelector('.card-title');
+                    cardTitle.textContent = data.cisName;
+                    const cardTools = document.querySelector('.card-tools');
+                    cardTools.innerHTML = `<a href="/cis/editar?id=${data.idCis}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+
+                    const cardBodyRight = document.querySelector('.card-body-rigth');
+                   // cardBodyRight.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59732.907050148606!2d-103.36337923557541!3d20.65709804925275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428adf06007c687%3A0x3970d62f1899b668!2sCorporativo%20Megacable!5e0!3m2!1ses!2smx!4v1724886799252!5m2!1ses!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+                    
+
+                    const cardBodyLeft = document.querySelector('.card-body-left');
+                    cardBodyLeft.innerHTML = `  <p class="card-text"><strong>CIS:</strong> ${data.cisName}</p>
+                                                <p class="card-text"><strong>Id:</strong> ${data.idCis}</p>
+                                                <p class="card-text"><strong>Sucursal:</strong> ${data.sucursalName}</p>
+                                                <p class="card-text"><strong>Ciudad:</strong> ${data.ciudad}</p>
+                                                <p class="card-text"><strong>Estado:</strong> ${data.estado}</p>
+                                                <p class="card-text"><strong>Direccion:</strong> ${data.direccion}</p>
+                                                <p class="card-text"><strong>Colonia:</strong> ${data.colonia}</p>
+                                                <p class="card-text"><strong>Horario:</strong> ${data.horario}</p>
+                                                <p class="card-text"><strong>Telefono:</strong> ${data.telefono}</p>
+                                                <p class="card-text"><strong>Latitud:</strong> ${data.latitud}</p>
+                                                <p class="card-text"><strong>Longitud:</strong> ${data.longitud}</p>
+                                                <p class="card-text"><strong>Discapacidad:</strong> ${data.discapacidad}</p>
+                                                <p class="card-text"><strong>Status:</strong> ${status}</p>
                     `;
+                    //pasamos a numero la variable, para que la lea maps
+                    const latitud = parseFloat(data.latitud);
+                    const longitud = parseFloat(data.longitud);
+
+                    //inicializamos el mapa
+                    iniciarMap(latitud, longitud);
+                    
                 })
-                .catch(error => console.error('Error al obtener los datos del CIS:', error));
+                .catch(error => console.error('Error al obtener la sucursal:', error));
         });
+
+        function iniciarMap(latitud, longitud) {
+            var coord = {lat: latitud, lng: longitud};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: coord
+            });
+            var marker = new google.maps.Marker({
+                position: coord,
+                map: map
+            });
+        }
+
+        function borrarCis(id) {
+            if (confirm('¿Estás seguro de que deseas borrar esta Cis?')) {
+                fetch(`/cis/borrar/${id}`, {
+                    method: 'PUT'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error al borrar la Cis:', error));
+            }
+        }
+    
+        function activarCis(id) {
+            if (confirm('¿Estás seguro de que deseas activar esta Cis?')) {
+                fetch(`/cis/restaurar/${id}`, {
+                    method: 'PUT'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error al activar la Cis:', error));
+            }
+        }
+               
     </script>
   
-      <script>
-        // metadata
-        document.getElementById('title').textContent = metadata.title;
-        document.getElementById('metaTitle').content = metadata.title;
-        document.getElementById('metaViewport').content = metadata.viewport;
-        document.getElementById('metaAuthor').content = metadata.author;
-        document.getElementById('metaDescription').content = metadata.description;
-        document.getElementById('metaKeywords').content = metadata.keywords;
-    </script>
-
-
+      
 </body><!--end::Body-->
 
 </html>
