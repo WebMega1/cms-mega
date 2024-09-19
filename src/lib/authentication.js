@@ -14,7 +14,7 @@ passport.use('local.login', new LocalStrategy({
    
   try {
     // Consulta el usuario en la base de datos usando el email
-    const [user] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+    const [user] = await db.query('SELECT * FROM vwpermissions WHERE email = ?', [email]);
     
     // Si el usuario existe
     if (user) {
