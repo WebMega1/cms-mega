@@ -55,6 +55,28 @@ router.get('/cis/ver', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/cis', 'detalle.html'));
 });
 
+// Ruta GET para servir la página HTML de creación de ubicación
+router.get('/cis/crear', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/cis', 'crear.html'));
+});
+
+// Ruta POST para insertar una nueva sucursal en la base de datos
+router.post('/cis/crear', (req, res) => {
+    const { cisName,idSucursal, ciudad, estado, direccion, colonia, horario, telefono,
+    latitud, longitud, activo, discapacidad, status, create_at, create_user
+} = req.body;   
+        db.query(
+        'INSERT INTO cis (cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, status, create_at, create_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, status, create_at, create_user],
+        (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error al crear el CIS' });
+            }
+            res.json({ message: 'CIS creado correctamente' });
+        }
+    );
+});
+
 // Ruta GET para servir la página HTML de edición de ubicación
 router.get('/cis/editar', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/cis', 'editar.html'));

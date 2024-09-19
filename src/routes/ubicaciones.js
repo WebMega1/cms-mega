@@ -41,6 +41,26 @@ router.get('/ubicaciones/ver', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/ubicaciones', 'detalle.html'));
 });
 
+// Ruta GET para crear una nueva sucursal
+router.get('/ubicaciones/crear', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/ubicaciones', 'crear.html'));
+});
+
+// Ruta POST para insertar una nueva sucursal
+router.post('/ubicaciones/crear', (req, res) => {
+    const { sucursalName, latitud, longitud, status, create_at, create_user, idRegion } = req.body;
+    db.query(
+        'INSERT INTO sucursal (sucursalName, latitud, longitud, status, create_at, create_user, idRegion) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [sucursalName, latitud, longitud, status, create_at, create_user, idRegion],
+        (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error al crear la sucursal' });
+            }
+            res.json({ message: 'Sucursal creada correctamente' });
+        }
+    );
+});
+
 // Ruta GET para servir la página HTML de edición de ubicación
 router.get('/ubicaciones/editar', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/ubicaciones', 'editar.html'));

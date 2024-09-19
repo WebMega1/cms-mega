@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es-MX"> <!--begin::Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="../../js/metadata.js"></script>
+
+    <title id="title">CPanel - Mega</title><!--begin::Primary Meta Tags-->
+    <meta name="viewport" id="metaViewport" content="">
+    <meta name="title" id="metaTitle" content="">
+    <meta name="author" id="metaAuthor" content="">
+    <meta name="description" id="metaDescription" content="">
+    <meta name="keywords" id="metaKeywords" content=""><!--end::Primary Meta Tags--><!--begin::Fonts-->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
+    
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    
+</head> <!--end::Head--> <!--begin::Body-->
+
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
+    <div class="app-wrapper"> <!--begin::Header-->
+        <nav class="app-header navbar navbar-expand bg-body"> <!--begin::Container-->
+            <div class="container-fluid"> <!--begin::Start Navbar Links-->
+                <ul class="navbar-nav">
+                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="bi bi-list"></i> </a> </li>
+                </ul> <!--end::Start Navbar Links--> <!--begin::End Navbar Links-->
+                <ul class="navbar-nav ms-auto"> <!--begin::Navbar Search-->
+                   
+                    <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
+                            <li class="user-header text-bg-primary"> <img src="../assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
+                                <p>
+                                    Administrador - Web Developer
+                                    
+                                </p>
+                            </li> <!--end::User Image--> <!--begin::Menu Body-->
+                           
+                            <li class="user-footer"> <a href="#" class="btn btn-default btn-flat">Settings</a> <a href="#" class="btn btn-default btn-flat float-end">Sign out</a> </li> <!--end::Menu Footer-->
+                        </ul>
+                    </li> <!--end::User Menu Dropdown-->
+                </ul> <!--end::End Navbar Links-->
+            </div> <!--end::Container-->
+        </nav> <!--end::Header--> <!--begin::Sidebar-->
+
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
+            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index" class="brand-link"> <!--begin::Brand Image--> <img src="../assets/img/logoMega.png" alt="Logo Mega" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-wrapper">
+                <nav class="mt-2"> <!--begin::Sidebar Menu-->
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item menu-open"> <a href="#" class="nav-link active"> <i class="nav-icon bi bi-speedometer"></i>
+                                <p>
+                                    Dashboard
+                                   
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-header">FUNCIONES DEL SITIO</li>
+                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-journal-album"></i>
+                            <p>
+                                Sucursales
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
+                                    <p>Sucursales</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
+                                    <p>Regiones</p>
+                                </a> </li>
+                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
+                                    <p>CIS</p>
+                                </a> </li>
+                        </ul>
+                        </li>
+
+                        <li class="nav-item"> 
+                            <a href="#" class="nav-link">  
+                                <i class="bi bi-tv"></i>
+                                <p>
+                                    Canales
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> 
+                                    <a href="/tiposcanales" class="nav-link"> 
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>Tipos de Canales</p>
+                                    </a> 
+                                </li>
+                                <li class="nav-item"> 
+                                    <a href="/canales" class="nav-link"> 
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>Canales</p>
+                                    </a> 
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-camera-video"></i>
+                                <p>
+                                    Streaming
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
+                                <p>
+                                    Paquetes
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="./widgets/small-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Importar Paquetes</p>
+                                    </a> </li>
+                                <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Streaming | Promociones</p>
+                                    </a> </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-gift"></i>
+                                <p>
+                                    Promociones
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-percent"></i>
+                                <p>
+                                    Ofertas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-question-diamond"></i>
+                                <p>
+                                    Trivias
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-file-text"></i>
+                                <p>
+                                    Terminos y condiciones
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-file-break"></i>
+                                <p>
+                                    Admin
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="./widgets/small-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Preguntas</p>
+                                    </a> </li>
+                                <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Respuestas</p>
+                                    </a> </li>
+                            </ul>
+                        </li>
+                        <li class="nav-header">CONFIGURACIÓN</li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-person-gear"></i>
+                            <p>
+                                Accesos
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"> <a href="./widgets/small-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                    <p>Usuarios</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                    <p>Roles</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                    <p>Permisos</p>
+                                </a> </li>    
+                                
+                        </ul>
+                    </li>
+
+                    
+
+                    </ul> <!--end::Sidebar Menu-->
+                </nav>
+            </div> <!--end::Sidebar Wrapper-->
+        </aside> <!--end::Sidebar--> <!--begin::App Main-->
+        <main class="app-main">
+            <!--begin::App Content Header-->
+            <div class="app-content-header">
+                <!--begin::Container-->
+                <div class="container-fluid">
+                    <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="mb-0">Detalle Tipo de Canal</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end">
+                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Detalle Tipo de Canal
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::App Content Header-->
+            <!--begin::App Content-->
+            <div class="app-content">
+                <!--begin::Container-->
+                <div class="container-fluid">
+                    <!--begin::Row-->
+                    <section class="content">
+                        <!-- Default box -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Detalles del Tipo de Canal</h3>
+                                <div class="card-tools">
+                                    <!-- Aquí se insertarán los botones dinámicamente -->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10 card-body-left">
+                                        <!-- Aquí se insertarán los detalles dinámicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <!-- Aquí se puede agregar contenido adicional si es necesario -->
+                            </div>
+                            <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                    </section>
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::App Content-->
+        </main>
+        <!--end::App Main-->
+        <!--begin::Footer-->
+        <footer class="app-footer">
+            <!--begin::To the end-->
+            <div class="float-end d-none d-sm-inline">Anything you want</div>
+            <!--end::To the end-->
+            <!--begin::Copyright-->
+            <strong>
+                Comunicación Gráfica y Servicios Web Pruebas &copy; 2024&nbsp;
+            </strong>
+            All rights reserved.
+            <!--end::Copyright-->
+        </footer>
+        <!--end::Footer-->
+        </div>
+        <!--end::App Wrapper-->
+        <!--begin::Script-->
+        <!--begin::Third Party Plugin(OverlayScrollbars)-->
+        <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
+        <!--end::Third Party Plugin(OverlayScrollbars)-->
+        <!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
+        <!--end::Required Plugin(popperjs for Bootstrap 5)-->
+        <!--begin::Required Plugin(Bootstrap 5)-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
+        <!--end::Required Plugin(Bootstrap 5)-->
+        <!--begin::Required Plugin(AdminLTE)-->
+        <script src="../../js/adminlte.js"></script>
+        <!--end::Required Plugin(AdminLTE)-->
+        <!--begin::OverlayScrollbars Configure-->
+        <script>
+            const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+            const Default = {
+                scrollbarTheme: "os-theme-light",
+                scrollbarAutoHide: "leave",
+                scrollbarClickScroll: true,
+            };
+            document.addEventListener("DOMContentLoaded", function() {
+                const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+                if (
+                    sidebarWrapper &&
+                    typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
+                ) {
+                    OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                        scrollbars: {
+                            theme: Default.scrollbarTheme,
+                            autoHide: Default.scrollbarAutoHide,
+                            clickScroll: Default.clickScroll,
+                        },
+                    });
+                }
+            });
+        </script>
+        <!--end::OverlayScrollbars Configure-->
+        <!-- OPTIONAL SCRIPTS -->
+        <!-- sortablejs -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const params = new URLSearchParams(window.location.search);
+                const id = params.get('id');
+                fetch(`/tiposcanales/ver/data?id=${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const status = data.visible ? "Sí" : "No";
+                        const statusButton = data.visible ? 
+                            `<a onclick="desactivarCanal(${data.id_tipocanal})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
+                            `<a onclick="activarCanal(${data.id_tipocanal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
+        
+                        const cardTitle = document.querySelector('.card-title');
+                        cardTitle.textContent = data.nombre;
+                        const cardTools = document.querySelector('.card-tools');
+                        cardTools.innerHTML = `<a href="/tiposcanales/editar?id=${data.id_tipocanal}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+        
+                        const cardBodyLeft = document.querySelector('.card-body-left');
+                        cardBodyLeft.innerHTML = `<h2>${data.nombre}</h2>  
+                                                    <br />
+                                                    <p class="card-text"><strong>Id:</strong> ${data.id_tipocanal}</p>
+                                                    <p class="card-text"><strong>Premier:</strong> ${data.premier ? "Sí" : "No"}</p>
+                                                    <p class="card-text"><strong>Prioridad:</strong> ${data.prioridad}</p>
+                                                    <p class="card-text"><strong>Visible:</strong> ${status}</p>
+                        `;
+                    })
+                    .catch(error => console.error('Error al obtener el tipo de canal:', error));
+            });
+        
+            function activarCanal(id) {
+                fetch(`/tiposcanales/activar/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); // Recargar la página para reflejar los cambios
+                    } else {
+                        console.error('Error al activar el canal:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al activar el canal:', error);
+                });
+            }
+        
+            function desactivarCanal(id) {
+                fetch(`/tiposcanales/desactivar/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); // Recargar la página para reflejar los cambios
+                    } else {
+                        console.error('Error al desactivar el canal:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al desactivar el canal:', error);
+                });
+            }
+        </script>
+        <!--end::OverlayScrollbars Configure-->
+
+
+</body><!--end::Body-->
+
+</html>
+
+
+
+

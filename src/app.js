@@ -31,7 +31,7 @@ app.set('port', process.env.PORT || 4000);
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'views'))); // Establece la carpeta 'views' como la carpeta de archivos estáticos, permitiendo que los archivos en esta carpeta se sirvan directamente.
-
+app.use('/uploads', express.static(path.join(__dirname, 'views/uploads'))); // Configurar la carpeta 'uploads' como estática es la carpeta de imagenes
 
 ///Middlewares
 app.use(morgan('dev')); // Usa Morgan en modo 'dev' para registrar las solicitudes HTTP entrantes en la consola con información detallada.
@@ -64,6 +64,8 @@ const routesUsers = require('./routes/userLogInOut'); // Importa las rutas para 
 const routesUbic = require('./routes/ubicaciones');  // Importa las rutas para gestionar ubicaciones.
 const routesCis = require('./routes/cis');  // Importa las rutas para gestionar cis.
 const routesRegi = require('./routes/regiones'); // Importa las rutas para gestionar Regiones.
+const routestipoCana = require('./routes/tipocanales');  // Importa las rutas para gestionar Categorias.
+const routesCana = require('./routes/canales');  // Importa las rutas para gestionar Canales.
 const routesCateg = require('./routes/categorias');  // Importa las rutas para gestionar Categorias.
 const routesMega = require('./routes/mega');  // Importa las rutas para gestionar Categorias.
 
@@ -74,6 +76,8 @@ app.use(routesUsers); // Monta las rutas de usuarios en la aplicación.
 app.use(routesUbic); // Monta las rutas de ubicaciones en la aplicación.
 app.use(routesCis); // Monta las rutas de cis en la aplicación.
 app.use(routesRegi);// Monta las rutas de Regiones en la aplicación.
+app.use(routestipoCana);// Monta las rutas de Tipos De Canales en la aplicación.
+app.use(routesCana);// Monta las rutas de Tipos De Canales en la aplicación.
 app.use(routesCateg);// Monta las rutas de Regiones en la aplicación.
 app.use(routesMega);// Monta las rutas de Mega en la aplicación.
 

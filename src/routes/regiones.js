@@ -41,6 +41,25 @@ router.get('/regiones/ver', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/regiones', 'detalle.html'));
 });
 
+// Ruta Get para insertar una nueva regiones
+router.get('/regiones/crear', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/regiones', 'crear.html'));
+});
+
+// Ruta POST para insertar una nueva regiones
+router.post('/regiones/crear', (req, res) => {
+    const { regionName } = req.body;
+    db.query(
+        'INSERT INTO regiones (regionName, status, create_at) VALUES (?, 1, CURRENT_TIMESTAMP)',
+        [regionName],
+        (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error al crear la region' });
+            }
+            res.json({ message: 'Region creada correctamente' });
+        }
+    );
+});
 
 // Ruta GET para servir la página HTML de edición de regiones
 router.get('/regiones/editar', (req, res) => {
