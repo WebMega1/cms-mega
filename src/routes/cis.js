@@ -6,7 +6,9 @@ const db = require('../dbconnection'); // Importa el archivo de conexión a la b
 // Ruta GET para obtener datos de todas las cis en formato JSON
 router.get('/cis/data', (req, res) => {
     // Realiza una consulta SQL para obtener todos los registros de la tabla 'cis'
-    db.query('SELECT t1.*, t2.sucursalName FROM `cis` as t1 LEFT JOIN sucursal as t2 on t1.idSucursal = t2.idSucursal;', (err, result) => {
+    db.query(`SELECT t1.*, t2.sucursalName 
+                FROM cis as t1 
+                LEFT JOIN sucursal as t2 on t1.idSucursal = t2.idSucursal;`, (err, result) => {
         if (err) {
             // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
             return res.status(500).json({ error: 'Error al obtener las sucursales' });

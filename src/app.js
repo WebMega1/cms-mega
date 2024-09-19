@@ -65,6 +65,8 @@ const routesUbic = require('./routes/ubicaciones');  // Importa las rutas para g
 const routesCis = require('./routes/cis');  // Importa las rutas para gestionar cis.
 const routesRegi = require('./routes/regiones'); // Importa las rutas para gestionar Regiones.
 const routesCateg = require('./routes/categorias');  // Importa las rutas para gestionar Categorias.
+const routesMega = require('./routes/mega');  // Importa las rutas para gestionar Categorias.
+
 
 // Monta las rutas en la aplicación
 app.use(routesIndex); // Monta las rutas principales en la aplicación.
@@ -73,6 +75,8 @@ app.use(routesUbic); // Monta las rutas de ubicaciones en la aplicación.
 app.use(routesCis); // Monta las rutas de cis en la aplicación.
 app.use(routesRegi);// Monta las rutas de Regiones en la aplicación.
 app.use(routesCateg);// Monta las rutas de Regiones en la aplicación.
+app.use(routesMega);// Monta las rutas de Mega en la aplicación.
+
 
 // Iniciamos el servidor 
 app.listen(app.get('port'), () => {
