@@ -5,8 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diseño Mejorado</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link rel="stylesheet" href="../../css/mega.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
 </head>
 <body>
     <div class="top-bar">
@@ -26,8 +25,8 @@
 <div class="popup" id="location-popup">
     <div class="popup-content">
         <span class="close-popup">X</span>
-        <h3>Si deseas cambiar tu ubicación, selecciona una opción de esta lista</h3>
-        <select id="location-select">
+        <h3>Selecciona tu ubicación de esta lista</h3>
+        <select id="location-select" name="location-select">
             <option value="Abasolo">Abasolo</option>
             <option value="Guadalajara">Guadalajara</option>
             <option value="Zapopan">Zapopan</option>
@@ -41,7 +40,7 @@
     <!-- menu-->
     <header>
         <div class="logo">
-            <img src="assets/img/mega-logo.png" alt="Logo">
+            <img src="../../assets/img/mega/mega-logo.png" alt="Logo">
         </div>
         <nav class="menu">
             <ul>
@@ -62,7 +61,7 @@
 
     <!-- banner -->
     <section class="banner">
-        <img src="assets/img/banner-01.webp" alt="Imagen de banner">
+        <img src="../../assets/img/mega/baner-01.jpg" alt="Imagen de banner">
     </section>
 
     <!-- menu movil -->
@@ -80,6 +79,22 @@
         </ul>
     </div>
 
-    <script src="assets/main.js"></script>
+    <script src="../../js/mega-main.js"></script>
+    <script>
+        // Fetch para obtener las sucursales
+        fetch('/mega/data')
+            .then(response => response.json())
+            .then(data => {
+                const slcOptions = document.getElementById('location-select');
+                slcOptions.innerHTML = ''; // Limpiar el contenido existente
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.idSucursal;
+                    option.textContent = item.sucursalName;
+                    slcOptions.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar los datos de las sucursales:', error));
+    </script>
 </body>
 </html>
