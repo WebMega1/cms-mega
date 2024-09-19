@@ -1,13 +1,20 @@
+const fs = require('fs');
 const express = require('express'); // Importa el módulo Express, que es un framework para crear aplicaciones web en Node.js.
 const router = express.Router(); // Crea una instancia de Router, que permite definir rutas en un módulo separado.
 const path = require('path'); // Importa el módulo Path, que proporciona utilidades para trabajar con rutas de archivos y directorios.
 const db = require('../dbconnection'); // Importa el archivo de conexión a la base de datos MySQL.
 const multer = require('multer');
 
+/// Crear la carpeta 'uploads' si no existe
+const uploadDir = path.join(__dirname, '../views/uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
 // Configuración de multer para guardar las imágenes en la carpeta 'uploads'
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, uploadDir);
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname)); // Añadir una marca de tiempo al nombre del archivo
