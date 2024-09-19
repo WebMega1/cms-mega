@@ -8,7 +8,7 @@ const db = require('../dbconnection'); // Importa el archivo de conexión a la b
 // Ruta GET para obtener datos de todas las Regiones en formato JSON
 router.get('/mega/data', (req, res) => {
     // Realiza una consulta SQL para obtener todos los registros de la tabla 'sucursal'
-   db.query('SELECT * FROM sucursal WHERE status = 1; ', (err, result) => {
+   db.query('SELECT * FROM `selectsucursal` ', (err, result) => {
        if (err) {
              // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
            return res.status(500).json({ error: 'Error al obtener las sucursales' });
