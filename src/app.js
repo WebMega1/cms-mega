@@ -67,6 +67,7 @@ const routesRegi = require('./routes/regiones'); // Importa las rutas para gesti
 const routesTipoCanales = require('./routes/tipocanales');  // Importa las rutas para gestionar Categorias.
 const routesCanales = require('./routes/canales');  // Importa las rutas para gestionar Canales.
 const routesMega = require('./routes/mega');  // Importa las rutas para gestionar Categorias.
+const routesCargarTarifario = require('./routes/cargartarifario');  // Importa para cargar tarifario
 
 
 // Monta las rutas en la aplicación
@@ -78,7 +79,7 @@ app.use(routesRegi);// Monta las rutas de Regiones en la aplicación.
 app.use(routesTipoCanales);// Monta las rutas de Tipos De Canales en la aplicación.
 app.use(routesCanales);// Monta las rutas de Tipos De Canales en la aplicación.
 app.use(routesMega);// Monta las rutas de Mega en la aplicación.
-app.use(routesCarTar);// Monta las rutas para cargar archivo csv.
+app.use(routesCargarTarifario);// Monta las rutas para cargar archivo csv.
 
 
 // Iniciamos el servidor 
@@ -86,4 +87,4 @@ app.listen(app.get('port'), () => {
     console.log('Server is in port', app.get('port')); // Muestra en la consola el puerto en el que el servidor está escuchando.
   });
 
-  module.exports = app; // Exporta la aplicación para que pueda ser utilizada en otros archivos.
+  module.exports = app; // Exporta la aplicación para que pueda ser utilizada en otros archivos.git 
