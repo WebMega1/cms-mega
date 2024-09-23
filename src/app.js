@@ -68,6 +68,7 @@ const routesTipoCanales = require('./routes/tipocanales');  // Importa las rutas
 const routesCanales = require('./routes/canales');  // Importa las rutas para gestionar Canales.
 const routesMega = require('./routes/mega');  // Importa las rutas para gestionar Categorias.
 const routesCargarTarifario = require('./routes/cargartarifario');  // Importa para cargar tarifario
+const routesTipoPaquetes = require('./routes/tiposdepaquetes');  // Importa para cargar tarifario
 
 
 // Monta las rutas en la aplicación
@@ -80,6 +81,7 @@ app.use(routesTipoCanales);// Monta las rutas de Tipos De Canales en la aplicaci
 app.use(routesCanales);// Monta las rutas de Tipos De Canales en la aplicación.
 app.use(routesMega);// Monta las rutas de Mega en la aplicación.
 app.use(routesCargarTarifario);// Monta las rutas para cargar archivo csv.
+app.use(routesTipoPaquetes);// Monta las rutas para cargar archivo csv.
 
 
 // Iniciamos el servidor 
