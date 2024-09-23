@@ -47,7 +47,7 @@
             </div> <!--end::Container-->
         </nav> <!--end::Header--> <!--begin::Sidebar-->
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="./index.html" class="brand-link"> <!--begin::Brand Image--> <img src="../assets/img/logoMega.png"  class="brand-image opacity-90 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index" class="brand-link"> <!--begin::Brand Image--> <img src="../assets/img/logoMega.png" alt="Logo Mega" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
             <div class="sidebar-wrapper">
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
@@ -57,89 +57,72 @@
                                    
                                 </p>
                             </a>
-        
+
                         </li>
                         <li class="nav-header">FUNCIONES DEL SITIO</li>
                         <li class="nav-item"> <a class="nav-link">  <i class="bi bi-journal-album"></i>
-                                <p>
-                                    Sucursales
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="./ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
-                                        <p>Sucursales</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="./regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
-                                        <p>Regiones</p>
-                                    </a> </li>
-                                    <li class="nav-item"> <a href="./cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
-                                        <p>CIS</p>
-                                    </a> </li>
-                            </ul>
+                            <p>
+                                Sucursales
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
+                                    <p>Sucursales</p>
+                                </a> </li>
+                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
+                                    <p>Regiones</p>
+                                </a> </li>
+                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
+                                    <p>CIS</p>
+                                </a> </li>
+                        </ul>
                         </li>
-        
-                        <li class="nav-item"> 
-                            <a href="#" class="nav-link">  
-                                <i class="bi bi-tv"></i>
+                        
+                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-tv"></i>
                                 <p>
                                     Canales
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item"> 
-                                    <a href="/tiposcanales" class="nav-link"> 
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Tipos de Canales</p>
-                                    </a> 
-                                </li>
-                                <li class="nav-item"> 
-                                    <a href="/canales" class="nav-link"> 
-                                        <i class="nav-icon bi bi-circle"></i>
+                                <li class="nav-item"> <a href="../tiposcanales/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Categorias</p>
+                                    </a> </li>
+                                <li class="nav-item"> <a href="../canales/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
                                         <p>Canales</p>
-                                    </a> 
-                                </li>
+                                    </a> </li>
                             </ul>
                         </li>
-        
-                        <li class="nav-item"> <a href="#" class="nav-link">  <i class="bi bi-camera-video"></i>
+
+                        <li class="nav-item"> <a class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
                                 <p>
-                                    Streaming
-                                </p>
-                            </a>
-                        </li>
-        
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
-                                <p>
-                                    Paquetes
+                                    Tarifario
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="/cargartarifario" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Cargar csv</p>
+                                <li class="nav-item"> <a href="../importar-tarifario" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Importar Tarifario</p>
                                     </a> </li>
-                                <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Streaming | Promociones</p>
+                                <li class="nav-item"> <a href="../tipo-paquete" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Paquetes tarifarios</p>
                                     </a> </li>
+                                <li class="nav-item"> <a href="../servicios-cable" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Servicios Cable</p>
+                                    </a> </li> 
+                                <li class="nav-item"> <a href="../banner-servicios-cable" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Banner servicios cable</p>
+                                    </a> </li>  
+                                <li class="nav-item"> <a href="../banner-tipo-paquete" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Banner tipo paquete</p>
+                                    </a> </li>          
+                                    
                             </ul>
                         </li>
                         <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-gift"></i>
                                 <p>
                                     Promociones
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-percent"></i>
-                                <p>
-                                    Ofertas
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-question-diamond"></i>
-                                <p>
-                                    Trivias
                                 </p>
                             </a>
                         </li>
@@ -149,44 +132,30 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-file-break"></i>
-                                <p>
-                                    Admin
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="./widgets/small-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Preguntas</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Respuestas</p>
-                                    </a> </li>
-                            </ul>
-                        </li>
+                        
                         <li class="nav-header">CONFIGURACIÓN</li>
                         <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-person-gear"></i>
                             <p>
-                                Accesos
+                                Configurar Usuarios
                                 <i class="nav-arrow bi bi-chevron-right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item"> <a href="./widgets/small-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                            <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
                                     <p>Usuarios</p>
                                 </a> </li>
-                            <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                            <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
                                     <p>Roles</p>
                                 </a> </li>
-                            <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                            <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
                                     <p>Permisos</p>
                                 </a> </li>    
                                 
                         </ul>
                     </li>
-        
+
                     
-        
+
                     </ul> <!--end::Sidebar Menu-->
                 </nav>
             </div> <!--end::Sidebar Wrapper-->
