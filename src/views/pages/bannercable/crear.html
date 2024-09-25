@@ -179,13 +179,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Tipos de Paquetes</h3>
+                            <h3 class="mb-0">Crear Banner de Servicio de Cable</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="../index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Tipos de Paquetes
+                                    Crear Banner de Servicio de Cable
                                 </li>
                             </ol>
                         </div>
@@ -200,50 +200,30 @@
                 <!--begin::Container-->
                 <div class="container-fluid">
                     <!--begin::Row-->
-                    <!-- Main content -->
-                    <section class="content">
-                        <!-- Default box -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Tipos de Paquetes</h3>
-                                <div class="card-tools">
-                                    <a href="/tipodepaquete/crear" class="btn btn-outline-success" title="Crear Nuevo Tipo de Paquete">
-                                        <i class="bi bi-plus-circle"></i> Crear Nuevo Tipo de Paquete
-                                    </a>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-6">
+                            <form id="crear-banner-cable-form" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="ruta" class="form-label">Ruta</label>
+                                    <input type="text" class="form-control" id="ruta" name="ruta" required>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <table id="tipodepaquete" class="table table-striped" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Nombre</th>
-                                            <th>Status</th>
-                                            <th>Fecha de Creación</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tipodepaquete-body" class="table-body">
-                                        <!-- Aquí se insertarán las filas dinámicamente -->
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Nombre</th>
-                                            <th>Status</th>
-                                            <th>Fecha de Creación</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
-                            </div>
-                            <!-- /.card-footer-->
+                                <div class="mb-3">
+                                    <label for="archivo" class="form-label">Archivo</label>
+                                    <input type="file" class="form-control" id="archivo" name="archivo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-control" id="status" name="status" required>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Crear Banner de Servicio de Cable</button>
+                                <a href="/bannercable" class="btn btn-secondary">Cancelar</a>
+                            </form>
                         </div>
-                        <!-- /.card -->
-                    </section>
+                    </div>
                 </div>
                 <!--end::Container-->
             </div>
@@ -295,92 +275,46 @@
                     OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
                         scrollbars: {
                             theme: Default.scrollbarTheme,
-                            autoHide: Default.scrollbarAutoHide,
+                            autoHide: Default.autoHide,
                             clickScroll: Default.clickScroll,
                         },
                     });
                 }
-            });
-        </script>
-        <!--end::OverlayScrollbars Configure-->
-        <!-- OPTIONAL SCRIPTS -->
-        <!-- sortablejs -->
-        <script>
-            $(document).ready(function() {
-                // Cargar datos dinámicamente
-                fetch('/tipodepaquete/data')  // Asegúrate de que esta ruta sea correcta
+        
+                // Convertir todas las letras a mayúsculas mientras se escribe
+                document.getElementById('ruta').addEventListener('input', function() {
+                    this.value = this.value.toUpperCase();
+                });
+        
+                // Obtener el usuario logueado y la fecha actual
+                const createUser = 'usuario_logueado'; // Reaza con la lógica para obtener el usuario logueado
+                const createAs = new Date().toISOString().split('T')[0];
+        
+                // Establecer los valores de create_user y create_as
+                document.getElementById('crear-banner-cable-form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(this);
+                    formData.append('create_user', createUser);
+                    formData.append('create_as', createAs);
+        
+                    fetch('/bannercable/crear', {
+                        method: 'POST',
+                        body: formData
+                    })
                     .then(response => response.json())
                     .then(data => {
-                        const tbody = document.getElementById('tipodepaquete-body'); // Asegúrate de que el ID coincida
-                        data.forEach(item => {
-                            const row = document.createElement('tr');
-        
-                            const status = item.status ? "Activo" : "Inactivo";
-                            const statusButton = item.status ? 
-                                `<a onclick="desactivarPaquete(${item.idtipodepaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
-                                `<a onclick="activarPaquete(${item.idtipodepaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
-        
-                            row.innerHTML = `
-                                <td>${item.idtipodepaquete}</td>
-                                <td>${item.nombretipodepaquete}</td>
-                                <td>${status}</td>
-                                <td>${item.created_at}</td>
-                                <td>
-                                    <a href="/tipodepaquete/ver?id=${item.idtipodepaquete}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                    <a href="/tipodepaquete/editar?id=${item.idtipodepaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
-                                    ${statusButton}
-                                </td>
-                            `;
-                            tbody.appendChild(row);
-                        });
-                        // Inicializar DataTables después de cargar los datos
-                        $('#tipodepaquete').DataTable();
+                        if (data.error) {
+                            alert('Error: ' + data.error);
+                        } else {
+                            alert(data.message);
+                            window.location.href = '/bannercable';
+                        }
                     })
-                    .catch(error => {
-                        console.error('Error al cargar los datos:', error);
-                    });
+                    .catch(error => console.error('Error al crear el banner de servicio de cable:', error));
+                });
             });
-        
-            function activarPaquete(id) {
-                fetch(`/tipodepaquete/activar/${id}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload(); // Recargar la página para reflejar los cambios
-                    } else {
-                        console.error('Error al activar el tipo de paquete:', data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al activar el tipo de paquete:', error);
-                });
-            }
-        
-            function desactivarPaquete(id) {
-                fetch(`/tipodepaquete/desactivar/${id}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload(); // Recargar la página para reflejar los cambios
-                    } else {
-                        console.error('Error al desactivar el tipo de paquete:', data.error);
-          }
-                })
-                .catch(error => {
-                    console.error('Error al desactivar el tipo de paquete:', error);
-                });
-            }
         </script>
+      
 
 </body><!--end::Body-->
 

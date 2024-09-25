@@ -6,7 +6,7 @@ const db = require('../dbconnection'); // Importa el archivo de conexión a la b
 const multer = require('multer');
 
 /// Crear la carpeta 'uploads' si no existe
-const uploadDir = path.join(__dirname, '../views/uploads');
+const uploadDir = path.join(__dirname, '../views/uploads/canales');
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }

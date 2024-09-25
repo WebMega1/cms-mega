@@ -179,13 +179,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Tipos de Paquetes</h3>
+                            <h3 class="mb-0">Banners de Paquetes</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="../index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Tipos de Paquetes
+                                    Banners de Paquetes
                                 </li>
                             </ol>
                         </div>
@@ -205,31 +205,33 @@
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Tipos de Paquetes</h3>
+                                <h3 class="card-title">Banners de Paquetes</h3>
                                 <div class="card-tools">
-                                    <a href="/tipodepaquete/crear" class="btn btn-outline-success" title="Crear Nuevo Tipo de Paquete">
-                                        <i class="bi bi-plus-circle"></i> Crear Nuevo Tipo de Paquete
+                                    <a href="/bannerpaquetes/crear" class="btn btn-outline-success" title="Crear Nuevo Banner de Paquete">
+                                        <i class="bi bi-plus-circle"></i> Crear Nuevo Banner de Paquete
                                     </a>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="tipodepaquete" class="table table-striped" style="width:100%">
+                                <table id="bannerpaquetes" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nombre</th>
+                                            <th>Ruta</th>
+                                            <th>Archivo</th>
                                             <th>Status</th>
                                             <th>Fecha de Creación</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tipodepaquete-body" class="table-body">
+                                    <tbody id="bannerpaquetes-body" class="table-body">
                                         <!-- Aquí se insertarán las filas dinámicamente -->
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nombre</th>
+                                            <th>Ruta</th>
+                                            <th>Archivo</th>
                                             <th>Status</th>
                                             <th>Fecha de Creación</th>
                                             <th>Acciones</th>
@@ -295,54 +297,51 @@
                     OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
                         scrollbars: {
                             theme: Default.scrollbarTheme,
-                            autoHide: Default.scrollbarAutoHide,
+                            autoHide: Default.autoHide,
                             clickScroll: Default.clickScroll,
                         },
                     });
                 }
             });
-        </script>
-        <!--end::OverlayScrollbars Configure-->
-        <!-- OPTIONAL SCRIPTS -->
-        <!-- sortablejs -->
-        <script>
+        
             $(document).ready(function() {
                 // Cargar datos dinámicamente
-                fetch('/tipodepaquete/data')  // Asegúrate de que esta ruta sea correcta
+                fetch('/bannerpaquetes/data')  // Asegúrate de que esta ruta sea correcta
                     .then(response => response.json())
                     .then(data => {
-                        const tbody = document.getElementById('tipodepaquete-body'); // Asegúrate de que el ID coincida
+                        const tbody = document.getElementById('bannerpaquetes-body'); // Asegúrate de que el ID coincida
                         data.forEach(item => {
                             const row = document.createElement('tr');
         
                             const status = item.status ? "Activo" : "Inactivo";
                             const statusButton = item.status ? 
-                                `<a onclick="desactivarPaquete(${item.idtipodepaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
-                                `<a onclick="activarPaquete(${item.idtipodepaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                                `<a onclick="desactivarBanner(${item.idBannerTipoPaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
+                                `<a onclick="activarBanner(${item.idBannerTipoPaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
         
                             row.innerHTML = `
-                                <td>${item.idtipodepaquete}</td>
-                                <td>${item.nombretipodepaquete}</td>
+                                <td>${item.idBannerTipoPaquete}</td>
+                                <td>${item.ruta}</td>
+                                <td><a href="/bannerpaquetes/ver?id=${item.idBannerTipoPaquete}"><img src="/uploads/bannerpaquetes/${encodeURIComponent(item.archivos)}" alt="${item.ruta}" style="width: 50px; height: auto;"></a></td>
                                 <td>${status}</td>
-                                <td>${item.created_at}</td>
+                                <td>${item.create_at}</td>
                                 <td>
-                                    <a href="/tipodepaquete/ver?id=${item.idtipodepaquete}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                    <a href="/tipodepaquete/editar?id=${item.idtipodepaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                                    <a href="/bannerpaquetes/ver?id=${item.idBannerTipoPaquete}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                                    <a href="/bannerpaquetes/editar?id=${item.idBannerTipoPaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
                                     ${statusButton}
                                 </td>
                             `;
                             tbody.appendChild(row);
                         });
                         // Inicializar DataTables después de cargar los datos
-                        $('#tipodepaquete').DataTable();
+                        $('#bannerpaquetes').DataTable();
                     })
                     .catch(error => {
                         console.error('Error al cargar los datos:', error);
                     });
             });
         
-            function activarPaquete(id) {
-                fetch(`/tipodepaquete/activar/${id}`, {
+            function activarBanner(id) {
+                fetch(`/bannerpaquetes/activar/${id}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -353,16 +352,16 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al activar el tipo de paquete:', data.error);
+                        console.error('Error al activar el banner:', data.error);
                     }
                 })
                 .catch(error => {
-                    console.error('Error al activar el tipo de paquete:', error);
+                    console.error('Error al activar el banner:', error);
                 });
             }
         
-            function desactivarPaquete(id) {
-                fetch(`/tipodepaquete/desactivar/${id}`, {
+            function desactivarBanner(id) {
+                fetch(`/bannerpaquetes/desactivar/${id}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -373,18 +372,18 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al desactivar el tipo de paquete:', data.error);
-          }
+                        console.error('Error al desactivar el banner:', data.error);
+                    }
                 })
                 .catch(error => {
-                    console.error('Error al desactivar el tipo de paquete:', error);
+                    console.error('Error al desactivar el banner:', error);
                 });
             }
         </script>
-
 </body><!--end::Body-->
 
 </html>
+
 
 
 

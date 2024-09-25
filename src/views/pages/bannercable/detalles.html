@@ -179,13 +179,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Tipos de Paquetes</h3>
+                            <h3 class="mb-0">Detalle del Banner de Servicio de Cable</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="../index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Tipos de Paquetes
+                                    Detalle del Banner de Servicio de Cable
                                 </li>
                             </ol>
                         </div>
@@ -200,45 +200,26 @@
                 <!--begin::Container-->
                 <div class="container-fluid">
                     <!--begin::Row-->
-                    <!-- Main content -->
                     <section class="content">
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Tipos de Paquetes</h3>
+                                <h3 class="card-title">Detalles del Banner de Servicio de Cable</h3>
                                 <div class="card-tools">
-                                    <a href="/tipodepaquete/crear" class="btn btn-outline-success" title="Crear Nuevo Tipo de Paquete">
-                                        <i class="bi bi-plus-circle"></i> Crear Nuevo Tipo de Paquete
-                                    </a>
+                                    <!-- Aquí se insertarán los botones dinámicamente -->
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="tipodepaquete" class="table table-striped" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Nombre</th>
-                                            <th>Status</th>
-                                            <th>Fecha de Creación</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tipodepaquete-body" class="table-body">
-                                        <!-- Aquí se insertarán las filas dinámicamente -->
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Nombre</th>
-                                            <th>Status</th>
-                                            <th>Fecha de Creación</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10 card-body-left">
+                                        <!-- Aquí se insertarán los detalles dinámicamente -->
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
+                                <!-- Aquí se puede agregar contenido adicional si es necesario -->
                             </div>
                             <!-- /.card-footer-->
                         </div>
@@ -295,7 +276,7 @@
                     OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
                         scrollbars: {
                             theme: Default.scrollbarTheme,
-                            autoHide: Default.scrollbarAutoHide,
+                            autoHide: Default.autoHide,
                             clickScroll: Default.clickScroll,
                         },
                     });
@@ -306,43 +287,38 @@
         <!-- OPTIONAL SCRIPTS -->
         <!-- sortablejs -->
         <script>
-            $(document).ready(function() {
-                // Cargar datos dinámicamente
-                fetch('/tipodepaquete/data')  // Asegúrate de que esta ruta sea correcta
+            document.addEventListener('DOMContentLoaded', function() {
+                const params = new URLSearchParams(window.location.search);
+                const id = params.get('id');
+                fetch(`/bannercable/ver/data?id=${id}`)
                     .then(response => response.json())
                     .then(data => {
-                        const tbody = document.getElementById('tipodepaquete-body'); // Asegúrate de que el ID coincida
-                        data.forEach(item => {
-                            const row = document.createElement('tr');
+                        const status = data.status ? "Activo" : "Inactivo";
+                        const statusButton = data.status ? 
+                            `<a onclick="desactivarBanner(${data.idBannerServicioCable})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
+                            `<a onclick="activarBanner(${data.idBannerServicioCable})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
         
-                            const status = item.status ? "Activo" : "Inactivo";
-                            const statusButton = item.status ? 
-                                `<a onclick="desactivarPaquete(${item.idtipodepaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
-                                `<a onclick="activarPaquete(${item.idtipodepaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                        const cardTitle = document.querySelector('.card-title');
+                        cardTitle.textContent = data.ruta;
+                        const cardTools = document.querySelector('.card-tools');
+                        cardTools.innerHTML = `<a href="/bannercable/editar?id=${data.idBannerServicioCable}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
         
-                            row.innerHTML = `
-                                <td>${item.idtipodepaquete}</td>
-                                <td>${item.nombretipodepaquete}</td>
-                                <td>${status}</td>
-                                <td>${item.created_at}</td>
-                                <td>
-                                    <a href="/tipodepaquete/ver?id=${item.idtipodepaquete}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                    <a href="/tipodepaquete/editar?id=${item.idtipodepaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
-                                    ${statusButton}
-                                </td>
-                            `;
-                            tbody.appendChild(row);
-                        });
-                        // Inicializar DataTables después de cargar los datos
-                        $('#tipodepaquete').DataTable();
+                        const cardBodyLeft = document.querySelector('.card-body-left');
+                        cardBodyLeft.innerHTML = `
+                            <h2>${data.ruta}</h2>  
+                            <br />
+                            <p class="card-text"><strong>Id:</strong> ${data.idBannerServicioCable}</p>
+                            <p class="card-text"><strong>Archivo:</strong> <img src="/uploads/bannercable/${encodeURIComponent(data.archivo)}" alt="${data.ruta}" style="width: 50px; height: auto;"></p>
+                            <p class="card-text"><strong>Status:</strong> ${status}</p>
+                            <p class="card-text"><strong>Fecha de Creación:</strong> ${data.create_as}</p>
+                            <p class="card-text"><strong>Usuario Creador:</strong> ${data.create_user}</p>
+                        `;
                     })
-                    .catch(error => {
-                        console.error('Error al cargar los datos:', error);
-                    });
+                    .catch(error => console.error('Error al obtener el banner:', error));
             });
         
-            function activarPaquete(id) {
-                fetch(`/tipodepaquete/activar/${id}`, {
+            function activarBanner(id) {
+                fetch(`/bannercable/activar/${id}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -353,16 +329,16 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al activar el tipo de paquete:', data.error);
+                        console.error('Error al activar el banner:', data.error);
                     }
                 })
                 .catch(error => {
-                    console.error('Error al activar el tipo de paquete:', error);
+                    console.error('Error al activar el banner:', error);
                 });
             }
         
-            function desactivarPaquete(id) {
-                fetch(`/tipodepaquete/desactivar/${id}`, {
+            function desactivarBanner(id) {
+                fetch(`/bannercable/desactivar/${id}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -373,11 +349,11 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al desactivar el tipo de paquete:', data.error);
-          }
+                        console.error('Error al desactivar el banner:', data.error);
+                    }
                 })
                 .catch(error => {
-                    console.error('Error al desactivar el tipo de paquete:', error);
+                    console.error('Error al desactivar el banner:', error);
                 });
             }
         </script>
