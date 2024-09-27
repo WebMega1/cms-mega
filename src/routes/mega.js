@@ -7,37 +7,32 @@ const db = require('../dbconnection'); // Importa el archivo de conexión a la b
 
 // Ruta GET para obtener datos de todas las Regiones en formato JSON
 router.get('/mega/data', (req, res) => {
-    // Realiza una consulta SQL para obtener todos los registros de la tabla 'sucursal'
-   db.query('SELECT * FROM `selectsucursal` ', (err, result) => {
-       if (err) {
-             // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
-           return res.status(500).json({ error: 'Error al obtener las sucursales' });
-       }
-       // Si la consulta es exitosa, envía los resultados como un JSON
-       res.json(result); // Envía los datos como JSON
-   });
+  db.query('SELECT * FROM `selectsucursal`', (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener las sucursales' });
+      }
+      res.json(result);
+  });
 });
 
-
-// Ruta GET para servir una página HTML con información de las categorias
+// Ruta GET para servir la página HTML principal
 router.get('/mega', (req, res) => {
-    // Envía el archivo HTML 'ubicaciones.html' ubicado en la carpeta 'views/pages/categorias'
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'index.html'));
 });
 
-// Ruta GET para obtener datos de una sucursal específica en formato JSON
-router.get('/mega/tarifario/data', (req, res) => {
-  const id = req.query.id;
-  db.query('SELECT * FROM `vistatarifario` WHERE idSucursal = ?', [id], (err, result) => {
+// Ruta GET para obtener los datos de la vista tarifario
+router.get('/api/tarifario/:idSucursal', (req, res) => {
+  const { idSucursal } = req.params;
+  const query = 'SELECT * FROM vistatarifario WHERE idSucursal = ?';
+
+  db.query(query, [idSucursal], (err, results) => {
       if (err) {
-          return res.status(500).json({ error: 'Error al obtener tarifario' });
+          return res.status(500).json({ error: 'Error al obtener los datos del tarifario' });
       }
-      if (result.length === 0) {
-          return res.status(404).json({ error: 'Tarifario no encontrada' });
-      }
-      res.json(result[0]);
+      res.json(results);
   });
 });
+
 /*router.get('/mega/tarifario', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
 });*/

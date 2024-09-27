@@ -44,7 +44,6 @@
         </div>
     </div>
 
-
     <!-- menu-->
     <header>
         <div class="logo">
@@ -92,97 +91,9 @@
     <!-- ********** Paquetes ********** -->
     <section class="container">
         <div class="owl-carousel owl-theme" id="carousel-packages">
-            <!-- Card-->
-            <div class="item card_pack">
-                <div class="promo_megas">
-                    <h4>Internet Ilimitado</h4>
-                    <h4>100 MBPS</h4>
-                </div>
-                <div class="xview-container">
-                    <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
-                </div>
-                <div class="beneficios-pack">
-                    <ul>
-                        <li>Más de 120 canales</li>
-                        <li>Más de 40 en HD</li>
-                        <li>Mas de 20.000 horas en películas y series</li>
-                        <li>Telefonía fija</li>
-                    </ul>
-                </div>
-
-                <div class="promo_partners">
-                    <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
-                </div>
-
-                <div class="package_price">
-                    <p class="price-pack">$500</p>
-                    <p class="payment-time"> / AL MES</p>
-                </div>
-            </div>
-
-            <!-- / Card-->
-              <!-- Card2-->
-            <div class="item card_pack">
-                <div class="promo_megas">
-                    <h4>Internet Ilimitado</h4>
-                    <h4>200 MBPS</h4>
-                </div>
-                <div class="xview-container">
-                    <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
-                </div>
-                <div class="beneficios-pack">
-                    <ul>
-                        <li>Más de 80 canales</li>
-                        <li>Más de 40 en HD</li>
-                        <li>Mas de 20.000 horas en películas y series</li>
-                        <li>Telefonía fija</li>
-                    </ul>
-                </div>
-
-                <div class="promo_partners">
-                    <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
-                </div>
-
-                <div class="package_price">
-                    <p class="price-pack">$600</p>
-                    <p class="payment-time"> / AL MES</p>
-                </div>
-            </div>
-
-            <!-- / Card-->
-              <!-- Card-->
-            <div class="item card_pack">
-                <div class="promo_megas">
-                    <h4>Internet Ilimitado</h4>
-                    <h4>300 MBPS</h4>
-                </div>
-                <div class="xview-container">
-                    <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
-                </div>
-                <div class="beneficios-pack">
-                    <ul>
-                        <li>Más de 200 canales</li>
-                        <li>Más de 40 en HD</li>
-                        <li>Mas de 20.000 horas en películas y series</li>
-                        <li>Telefonía fija</li>
-                    </ul>
-                </div>
-
-                <div class="promo_partners">
-                    <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
-                </div>
-
-                <div class="package_price">
-                    <p class="price-pack">$700</p>
-                    <p class="payment-time"> / AL MES</p>
-                </div>
-            </div>
-
-            <!-- / Card-->
+            <div id="card-container"></div> <!-- Contenedor para las tarjetas -->
         </div>
-
     </section>
-
 
     <!-- ********** Scripts ********** -->
 
@@ -195,78 +106,101 @@
     <!-- Owl Carousel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="../../assets/mega/assets/main.js"></script>
-
     <script>
-        // Fetch para obtener las sucursales
-        fetch('/mega/data')
-            .then(response => response.json())
-            .then(data => {
-                const slcOptions = document.getElementById('location-select');
-                slcOptions.innerHTML = ''; // Limpiar el contenido existente
-                data.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item.idSucursal;
-                    option.textContent = item.sucursalName;
-                    slcOptions.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error al cargar los datos de las sucursales:', error));
-
-            //Fuction cards location
-            function cardTarifario(id) {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch para obtener las sucursales
+            fetch('/mega/data')
+                .then(response => response.json())
+                .then(data => {
+                    const slcOptions = document.getElementById('location-select');
+                    slcOptions.innerHTML = ''; // Limpiar el contenido existente
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.idSucursal;
+                        option.textContent = item.sucursalName;
+                        slcOptions.appendChild(option);
+                    });
+    
+                    // Cargar las tarjetas para la primera sucursal en la lista
+                    if (data.length > 0) {
+                        cardTarifario(data[0].idSucursal);
+                    }
+                })
+                .catch(error => console.error('Error al cargar los datos de las sucursales:', error));
+    
+            // Función para cargar las tarjetas del tarifario
+            function cardTarifario(idSucursal) {
+                console.log(`Cargando tarifario para la sucursal: ${idSucursal}`);
                 // Fetch para obtener los datos de la API
-        fetch(`/api/tarifario/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('card-container'); // Contenedor donde se agregarán las tarjetas
-                container.innerHTML = ''; // Limpiar el contenido existente
-
-                data.forEach(item => {
-                    // Crear la estructura de la tarjeta
-                    const card = document.createElement('div');
-                    card.className = 'item card_pack';
-
-                    card.innerHTML = `
-                        <div class="promo_megas">
-                            <h4>${item.internetType}</h4>
-                            <h4>${item.speed}</h4>
-                        </div>
-                        <div class="xview-container">
-                            <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
-                        </div>
-                        <div class="beneficios-pack">
-                            <ul>
-                                <li>${item.channels}</li>
-                                <li>${item.hdChannels}</li>
-                                <li>${item.moviesAndSeries}</li>
-                                <li>${item.telephony}</li>
-                            </ul>
-                        </div>
-                        <div class="promo_partners">
-                            <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
-                        </div>
-                        <div class="package_price">
-                            <p class="price-pack">${item.price}</p>
-                            <p class="payment-time"> / ${item.paymentTime}</p>
-                        </div>
-                    `;
-
-                    // Agregar la tarjeta al contenedor
-                    container.appendChild(card);
-                });
-            })
-            .catch(error => console.error('Error al cargar los datos del tarifario:', error));
-           
-
-                
+                fetch(`/api/tarifario/${idSucursal}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Datos del tarifario:', data);
+                        const container = document.getElementById('card-container'); // Contenedor donde se agregarán las tarjetas
+                        container.innerHTML = ''; // Limpiar el contenido existente
+    
+                        data.forEach(item => {
+                            // Crear la estructura de la tarjeta
+                            const card = document.createElement('div');
+                            card.className = 'item card_pack';
+    
+                            card.innerHTML = `
+                                <div class="promo_megas">
+                                    <h4>${item.fibraOptica ? 'Fibra Óptica' : 'Cable'}</h4>
+                                    <h4>${item.velocidadInternet} MBPS</h4>
+                                </div>
+                                <div class="xview-container">
+                                    <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
+                                </div>
+                                <div class="beneficios-pack">
+                                    <ul>
+                                        <li>${item.telefonia}</li>
+                                        <li>${item.precioPromoPaquete}</li>
+                                        <li>${item.precioNormalPaquete}</li>
+                                        <li>${item.simetria}</li>
+                                    </ul>
+                                </div>
+                                <div class="promo_partners">
+                                    <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
+                                </div>
+                                <div class="package_price">
+                                    <p class="price-pack">${item.tarifaPromocional}</p>
+                                    <p class="payment-time"> / AL MES</p>
+                                </div>
+                            `;
+    
+                            // Agregar la tarjeta al contenedor
+                            container.appendChild(card);
+                        });
+    
+                        // Inicializar el carrusel de Owl Carousel después de agregar las tarjetas
+                        $('#carousel-packages').owlCarousel({
+                            loop: true,
+                            margin: 10,
+                            nav: true,
+                            responsive: {
+                                0: {
+                                    items: 1
+                                },
+                                600: {
+                                    items: 2
+                                },
+                                1000: {
+                                    items: 3
+                                }
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar los datos del tarifario:', error));
             }
-
-    // Fetch para obtener las sucursales
     
-    
+            // Evento para cambiar la sucursal y cargar las tarjetas correspondientes
+            document.getElementById('location-select').addEventListener('change', function() {
+                const idSucursal = this.value;
+                cardTarifario(idSucursal);
+            });
+        });
     </script>
-
 </body>
 
 </html>
-
