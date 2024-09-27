@@ -1,4 +1,4 @@
-/* Menu responsive */
+/* ********* Menu responsive ********** */
 const hamburgerMenu = document.querySelector('.hamburger-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const closeBtn = document.querySelector('.close-btn');
@@ -11,7 +11,7 @@ closeBtn.addEventListener('click', () => {
     mobileMenu.classList.remove('show');
 });
 
-/* popup */
+/* ********** Popup ********** */
 const locationButton = document.querySelector('.location span');
 const locationPopup = document.getElementById('location-popup');
 const closePopup = document.querySelector('.close-popup');
@@ -34,4 +34,34 @@ confirmLocationBtn.addEventListener('click', () => {
     
     locationButton.textContent = `📍 ${selectedLocation}`;
     locationPopup.style.display = 'none'; // Cerrar el popup
+    cardTarifario(locationSelect.value);
+    console.log(locationSelect.value);
+});
+
+/* ********** CARROUSEL PAQUETES ********** */
+/* Carrousel  peliculas*/
+$(document).ready(function(){
+    $("#carousel-packages").owlCarousel({
+        loop: true,
+        margin: 30,
+        nav: true,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive:{
+            0:{
+                items: 2
+            },
+            576:{
+                items: 2
+            },
+            768:{
+                items: 3
+            },
+            1200:{
+                items: 4
+            }
+        }
+    });
 });

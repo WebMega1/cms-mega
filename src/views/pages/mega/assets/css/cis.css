@@ -1,0 +1,24 @@
+
+
+.option-location{
+    margin: 50px 0px;
+    background-color:#ffffff;
+    border: 1px solid #3193ff;
+    border-radius: 5px;
+    padding:10px 250px 10px 5px;
+} 
+
+.table-title{
+    background-color: #f5f6f6;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 0px;
+}
+
+.text-cis{
+    font-size: 14px;
+    font-weight: 300;
+    
+}

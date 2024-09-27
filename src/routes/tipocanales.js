@@ -5,7 +5,7 @@ const db = require('../dbconnection');
 
 // Ruta GET para obtener datos de todas las tipo de canales en formato JSON
 router.get('/tiposcanales/data', (req, res) => {
-    db.query('SELECT * FROM mega_tipocanales', (err, result) => {
+    db.query('SELECT * FROM tipocanales', (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener los tipos de canales' });
         }
@@ -21,7 +21,7 @@ router.get('/tiposcanales', (req, res) => {
 // Ruta GET para obtener datos de un tipo de canal específico en formato JSON
 router.get('/tiposcanales/ver/data', (req, res) => {
     const { id } = req.query;
-    db.query('SELECT * FROM mega_tipocanales WHERE id_tipocanal = ?', [id], (err, result) => {
+    db.query('SELECT * FROM tipocanales WHERE idTipoCanal = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener el tipo de canal' });
         }
@@ -45,7 +45,7 @@ router.get('/tiposcanales/crear', (req, res) => {
 // Ruta POST para guardar un nuevo tipo de canal
 router.post('/tiposcanales/crear', (req, res) => {
     const { nombre, premier, prioridad, visible, create_user, create_at } = req.body;
-    const query = 'INSERT INTO mega_tipocanales (nombre, premier, prioridad, visible, create_user, create_at) VALUES (?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO tipocanales (tipoCanal, premier, prioridad, status, create_user, create_at) VALUES (?, ?, ?, ?, ?, ?)';
     const values = [nombre, premier, prioridad, visible, create_user, create_at];
 
     db.query(query, values, (err, result) => {
@@ -65,7 +65,7 @@ router.get('/tiposcanales/editar', (req, res) => {
 router.post('/tiposcanales/editar', (req, res) => {
     const { id_tipocanal, nombre, premier, prioridad, visible } = req.body;
     db.query(
-        'UPDATE mega_tipocanales SET nombre = ?, premier = ?, prioridad = ?, visible = ? WHERE id_tipocanal = ?',
+        'UPDATE tipocanales SET tipoCanal = ?, premier = ?, prioridad = ?, status = ? WHERE idTipoCanal = ?',
         [nombre, premier, prioridad, visible, id_tipocanal],
         (err, result) => {
             if (err) {
@@ -79,7 +79,7 @@ router.post('/tiposcanales/editar', (req, res) => {
 // Ruta POST para activar un tipo de canal
 router.post('/tiposcanales/activar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE mega_tipocanales SET visible = 1 WHERE id_tipocanal = ?', [id], (err, result) => {
+    db.query('UPDATE tipocanales SET status = 1 WHERE idTipoCanal = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al activar el tipo de canal' });
         }
@@ -90,7 +90,7 @@ router.post('/tiposcanales/activar/:id', (req, res) => {
 // Ruta POST para desactivar un tipo de canal
 router.post('/tiposcanales/desactivar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE mega_tipocanales SET visible = 0 WHERE id_tipocanal = ?', [id], (err, result) => {
+    db.query('UPDATE tipocanales SET status = 0 WHERE idTipoCanal = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al activar el tipo de canal' });
         }

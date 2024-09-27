@@ -18,10 +18,27 @@ router.get('/mega/data', (req, res) => {
    });
 });
 
+
 // Ruta GET para servir una página HTML con información de las categorias
 router.get('/mega', (req, res) => {
     // Envía el archivo HTML 'ubicaciones.html' ubicado en la carpeta 'views/pages/categorias'
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'index.html'));
 });
 
+// Ruta GET para obtener datos de una sucursal específica en formato JSON
+router.get('/mega/tarifario/data', (req, res) => {
+  const id = req.query.id;
+  db.query('SELECT * FROM `vistatarifario` WHERE idSucursal = ?', [id], (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener tarifario' });
+      }
+      if (result.length === 0) {
+          return res.status(404).json({ error: 'Tarifario no encontrada' });
+      }
+      res.json(result[0]);
+  });
+});
+/*router.get('/mega/tarifario', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
+});*/
 module.exports = router;

@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="es-MX">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diseño Mejorado</title>
-    <link rel="stylesheet" href="../../css/mega.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link rel="stylesheet" href="../../assets/mega/assets/css/style.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 </head>
+
 <body>
     <div class="top-bar">
         <div class="location">
@@ -22,30 +30,32 @@
     </div>
 
     <!-- popup -->
-<div class="popup" id="location-popup">
-    <div class="popup-content">
-        <span class="close-popup">X</span>
-        <h3>Selecciona tu ubicación de esta lista</h3>
-        <select id="location-select" name="location-select">
-            <option value="Abasolo">Abasolo</option>
-            <option value="Guadalajara">Guadalajara</option>
-            <option value="Zapopan">Zapopan</option>
-            <option value="Tlaquepaque">Tlaquepaque</option>
-        </select>
-        <button id="confirm-location">Cambiar</button>
+    <div class="popup" id="location-popup">
+        <div class="popup-content">
+            <span class="close-popup">X</span>
+            <h3>Si deseas cambiar tu ubicación, selecciona una opción de esta lista</h3>
+            <select id="location-select">
+                <option value="Abasolo">Abasolo</option>
+                <option value="Guadalajara">Guadalajara</option>
+                <option value="Zapopan">Zapopan</option>
+                <option value="Tlaquepaque">Tlaquepaque</option>
+            </select>
+            <button id="confirm-location">Cambiar</button>
+        </div>
     </div>
-</div>
 
 
     <!-- menu-->
     <header>
         <div class="logo">
-            <img src="../../assets/img/mega/mega-logo.png" alt="Logo">
+            <a href="index.html">
+                <img src="../../assets/mega/assets/img/mega-logo.png" alt="Logo">
+            </a>
         </div>
         <nav class="menu">
             <ul>
-                <li><a href="#">Paquetes</a></li>
-                <li><a href="#">Servicios</a></li>
+                <li><a href="canales.html">Canales</a></li>
+                <li><a href="cis.html">CIS</a></li>
                 <li><span><a href="#">Xview+</a></span></li>
                 <li><a href="#">Streaming</a></li>
                 <li><a href="#">Premier</a></li>
@@ -61,15 +71,15 @@
 
     <!-- banner -->
     <section class="banner">
-        <img src="../../assets/img/mega/baner-01.jpg" alt="Imagen de banner">
+        <img src="../../assets/mega/assets/img/banner-01.webp" alt="Imagen de banner">
     </section>
 
     <!-- menu movil -->
     <div class="mobile-menu">
         <span class="close-btn">X</span>
         <ul>
-            <li><a href="#">Paquetes</a></li>
-            <li><a href="#">Servicios</a></li>
+            <li><a href="canales.html">Canales</a></li>
+            <li><a href="cis.html">CIS</a></li>
             <li><a href="#">Xview+</a></li>
             <li><a href="#">Streaming</a></li>
             <li><a href="#">Premier</a></li>
@@ -79,7 +89,113 @@
         </ul>
     </div>
 
-    <script src="../../js/mega-main.js"></script>
+    <!-- ********** Paquetes ********** -->
+    <section class="container">
+        <div class="owl-carousel owl-theme" id="carousel-packages">
+            <!-- Card-->
+            <div class="item card_pack">
+                <div class="promo_megas">
+                    <h4>Internet Ilimitado</h4>
+                    <h4>100 MBPS</h4>
+                </div>
+                <div class="xview-container">
+                    <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
+                </div>
+                <div class="beneficios-pack">
+                    <ul>
+                        <li>Más de 120 canales</li>
+                        <li>Más de 40 en HD</li>
+                        <li>Mas de 20.000 horas en películas y series</li>
+                        <li>Telefonía fija</li>
+                    </ul>
+                </div>
+
+                <div class="promo_partners">
+                    <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
+                </div>
+
+                <div class="package_price">
+                    <p class="price-pack">$500</p>
+                    <p class="payment-time"> / AL MES</p>
+                </div>
+            </div>
+
+            <!-- / Card-->
+              <!-- Card2-->
+            <div class="item card_pack">
+                <div class="promo_megas">
+                    <h4>Internet Ilimitado</h4>
+                    <h4>200 MBPS</h4>
+                </div>
+                <div class="xview-container">
+                    <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
+                </div>
+                <div class="beneficios-pack">
+                    <ul>
+                        <li>Más de 80 canales</li>
+                        <li>Más de 40 en HD</li>
+                        <li>Mas de 20.000 horas en películas y series</li>
+                        <li>Telefonía fija</li>
+                    </ul>
+                </div>
+
+                <div class="promo_partners">
+                    <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
+                </div>
+
+                <div class="package_price">
+                    <p class="price-pack">$600</p>
+                    <p class="payment-time"> / AL MES</p>
+                </div>
+            </div>
+
+            <!-- / Card-->
+              <!-- Card-->
+            <div class="item card_pack">
+                <div class="promo_megas">
+                    <h4>Internet Ilimitado</h4>
+                    <h4>300 MBPS</h4>
+                </div>
+                <div class="xview-container">
+                    <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
+                </div>
+                <div class="beneficios-pack">
+                    <ul>
+                        <li>Más de 200 canales</li>
+                        <li>Más de 40 en HD</li>
+                        <li>Mas de 20.000 horas en películas y series</li>
+                        <li>Telefonía fija</li>
+                    </ul>
+                </div>
+
+                <div class="promo_partners">
+                    <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
+                </div>
+
+                <div class="package_price">
+                    <p class="price-pack">$700</p>
+                    <p class="payment-time"> / AL MES</p>
+                </div>
+            </div>
+
+            <!-- / Card-->
+        </div>
+
+    </section>
+
+
+    <!-- ********** Scripts ********** -->
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="../../assets/mega/assets/main.js"></script>
+
     <script>
         // Fetch para obtener las sucursales
         fetch('/mega/data')
@@ -95,6 +211,62 @@
                 });
             })
             .catch(error => console.error('Error al cargar los datos de las sucursales:', error));
+
+            //Fuction cards location
+            function cardTarifario(id) {
+                // Fetch para obtener los datos de la API
+        fetch(`/api/tarifario/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('card-container'); // Contenedor donde se agregarán las tarjetas
+                container.innerHTML = ''; // Limpiar el contenido existente
+
+                data.forEach(item => {
+                    // Crear la estructura de la tarjeta
+                    const card = document.createElement('div');
+                    card.className = 'item card_pack';
+
+                    card.innerHTML = `
+                        <div class="promo_megas">
+                            <h4>${item.internetType}</h4>
+                            <h4>${item.speed}</h4>
+                        </div>
+                        <div class="xview-container">
+                            <img src="../../assets/mega/assets/img/xview-logo.png" alt="">
+                        </div>
+                        <div class="beneficios-pack">
+                            <ul>
+                                <li>${item.channels}</li>
+                                <li>${item.hdChannels}</li>
+                                <li>${item.moviesAndSeries}</li>
+                                <li>${item.telephony}</li>
+                            </ul>
+                        </div>
+                        <div class="promo_partners">
+                            <img src="../../assets/mega/assets/img/promo-partner.png" alt="">
+                        </div>
+                        <div class="package_price">
+                            <p class="price-pack">${item.price}</p>
+                            <p class="payment-time"> / ${item.paymentTime}</p>
+                        </div>
+                    `;
+
+                    // Agregar la tarjeta al contenedor
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error al cargar los datos del tarifario:', error));
+           
+
+                
+            }
+
+    // Fetch para obtener las sucursales
+    
+    
     </script>
+
 </body>
+
 </html>
+

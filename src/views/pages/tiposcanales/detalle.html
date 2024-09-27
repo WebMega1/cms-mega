@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="../../js/metadata.js"></script>
+    <script src="/js/metadata.js"></script>
 
     <title id="title">CPanel - Mega</title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link rel="stylesheet" href="/css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
 
    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
@@ -293,20 +293,20 @@
                 fetch(`/tiposcanales/ver/data?id=${id}`)
                     .then(response => response.json())
                     .then(data => {
-                        const status = data.visible ? "Sí" : "No";
-                        const statusButton = data.visible ? 
-                            `<a onclick="desactivarCanal(${data.id_tipocanal})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
-                            `<a onclick="activarCanal(${data.id_tipocanal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
+                        const status = data.status ? "Activo" : "Inactivo";
+                        const statusButton = data.status ? 
+                            `<a onclick="desactivarCanal(${data.idTipoCanal})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
+                            `<a onclick="activarCanal(${data.idTipoCanal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
         
                         const cardTitle = document.querySelector('.card-title');
-                        cardTitle.textContent = data.nombre;
+                        cardTitle.textContent = data.tipoCanal;
                         const cardTools = document.querySelector('.card-tools');
-                        cardTools.innerHTML = `<a href="/tiposcanales/editar?id=${data.id_tipocanal}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+                        cardTools.innerHTML = `<a href="/tiposcanales/editar?id=${data.idTipoCanal}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
         
                         const cardBodyLeft = document.querySelector('.card-body-left');
-                        cardBodyLeft.innerHTML = `<h2>${data.nombre}</h2>  
+                        cardBodyLeft.innerHTML = `<h2>${data.tipoCanal}</h2>  
                                                     <br />
-                                                    <p class="card-text"><strong>Id:</strong> ${data.id_tipocanal}</p>
+                                                    <p class="card-text"><strong>Id:</strong> ${data.idTipoCanal}</p>
                                                     <p class="card-text"><strong>Premier:</strong> ${data.premier ? "Sí" : "No"}</p>
                                                     <p class="card-text"><strong>Prioridad:</strong> ${data.prioridad}</p>
                                                     <p class="card-text"><strong>Visible:</strong> ${status}</p>
