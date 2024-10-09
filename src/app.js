@@ -75,6 +75,7 @@ const routesServicioCable = require('./routes/tiposdeservicocable');  // Importa
 const routesBannerCable = require('./routes/bannercable');  // Importa para cargar Banner de cable
 const routesBannerPaquetes = require('./routes/bannerpaquetes');  // Importa para cargar Banner de tipo de paquetes
 const routesTrivias = require('./routes/trivias');  // Importa para cargar Banner de tipo de paquetes
+const routesTriviasRespuestas = require('./routes/triviasrespuesta');  // Importa para cargar Banner de tipo de paquetes
 
 
 // Monta las rutas en la aplicación
@@ -92,6 +93,7 @@ app.use(routesServicioCable);// Monta las rutas para tipos de servicios de cable
 app.use(routesBannerCable);// Monta las rutas para tipos de Banner de cable.
 app.use(routesBannerPaquetes);// Monta las rutas para tipos de Banner de cable.
 app.use(routesTrivias);// Monta las rutas para tipos de Banner de cable.
+app.use(routesTriviasRespuestas);// Monta las rutas para tipos de Banner de cable.
 
 
 // Iniciamos el servidor 

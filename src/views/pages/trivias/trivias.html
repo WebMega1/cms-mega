@@ -215,6 +215,7 @@
                                             <th>Url</th>
                                             <th>Fecha de inicio</th>
                                             <th>Fecha de fin</th>
+                                            <th>Status</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -227,6 +228,7 @@
                                             <th>Url</th>
                                             <th>Fecha de inicio</th>
                                             <th>Fecha de fin</th>
+                                            <th>Status</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </tfoot>
@@ -289,7 +291,7 @@
                         scrollbars: {
                             theme: Default.scrollbarTheme,
                             autoHide: Default.scrollbarAutoHide,
-                            clickScroll: Default.scrollbarClickScroll,
+                            clickScroll: Default.clickScroll,
                         },
                     });
                 }
@@ -310,22 +312,23 @@
                         data.forEach(item => {
                             const row = document.createElement('tr');
         
-                            if (item.hidden == 1) {
+                            if (item.status == 1) {
                                 var status = "Activo";
-                                var statusButton = `<a onclick="borrarTrivia(${item.id_quiz})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                                var statusButton = `<a onclick="borrarTrivia(${item.id})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
                             } else {
                                 var status = "Inactivo";
-                                var statusButton = `<a onclick="activarTrivia(${item.id_quiz})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                                var statusButton = `<a onclick="activarTrivia(${item.id})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
                             }
         
                             row.innerHTML = `
-                                <td>${item.id_quiz}</td>
+                                <td>${item.id}</td>
                                 <td>${item.url}</td>
-                                <td>${item.date_start}</td>
-                                <td>${item.date_end}</td>
+                                <td>${item.fechaInicio}</td>
+                                <td>${item.fechaFin}</td>
+                                <td>${status}</td>
                                 <td>
-                                    <a href="/trivias/ver?id=${item.id_quiz}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                    <a href="/trivias/editar?id=${item.id_quiz}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                                    <a href="/trivias/ver?id=${item.id}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                                    <a href="/trivias/editar?id=${item.id}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
                                     ${statusButton}
                                 </td>
                             `;
@@ -370,6 +373,7 @@
         </body><!--end::Body-->
         
         </html>
+        
 
 
 
