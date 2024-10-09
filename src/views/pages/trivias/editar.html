@@ -196,57 +196,50 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-6">
                             <form id="editar-form">
-                                <input type="hidden" id="id_quiz" name="id_quiz">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Título</label>
-                                    <input type="text" class="form-control" id="title" name="title" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="detail" class="form-label">Detalle</label>
-                                    <input type="text" class="form-control" id="detail" name="detail" required>
-                                </div>
+                                <input type="hidden" id="trivia_id" name="trivia_id">
                                 <div class="mb-3">
                                     <label for="url" class="form-label">URL</label>
                                     <input type="text" class="form-control" id="url" name="url" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagen" class="form-label">Imagen</label>
-                                    <input type="text" class="form-control" id="imagen" name="imagen" required>
+                                    <label for="cuerpo" class="form-label">Cuerpo</label>
+                                    <input type="text" class="form-control" id="cuerpo" name="cuerpo" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagen_m" class="form-label">Imagen M</label>
-                                    <input type="text" class="form-control" id="imagen_m" name="imagen_m" required>
+                                    <label for="bannerCabecera" class="form-label">Banner Cabecera</label>
+                                    <input type="text" class="form-control" id="bannerCabecera" name="bannerCabecera" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagen2" class="form-label">Imagen 2</label>
-                                    <input type="text" class="form-control" id="imagen2" name="imagen2" required>
+                                    <label for="bannerMovil" class="form-label">Banner Móvil</label>
+                                    <input type="text" class="form-control" id="bannerMovil" name="bannerMovil" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="terms" class="form-label">Términos</label>
-                                    <input type="text" class="form-control" id="terms" name="terms" required>
+                                    <label for="bannerLogoMarca" class="form-label">Banner Logo Marca</label>
+                                    <input type="text" class="form-control" id="bannerLogoMarca" name="bannerLogoMarca" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bg_color" class="form-label">Color de Fondo</label>
-                                    <input type="text" class="form-control" id="bg_color" name="bg_color" required>
+                                    <label for="colorFooter" class="form-label">Color de Footer</label>
+                                    <input type="text" class="form-control" id="colorFooter" name="colorFooter" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bg_color2" class="form-label">Color de Fondo 2</label>
-                                    <input type="text" class="form-control" id="bg_color2" name="bg_color2" required>
+                                    <label for="colorHeader" class="form-label">Color de Header</label>
+                                    <input type="text" class="form-control" id="colorHeader" name="colorHeader" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="date_start" class="form-label">Fecha de Inicio</label>
-                                    <input type="date" class="form-control" id="date_start" name="date_start" required>
+                                    <label for="terminosycondiciones" class="form-label">Términos y Condiciones</label>
+                                    <input type="text" class="form-control" id="terminosycondiciones" name="terminosycondiciones" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="date_end" class="form-label">Fecha de Fin</label>
-                                    <input type="date" class="form-control" id="date_end" name="date_end" required>
+                                    <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="hidden" class="form-label">Oculto</label>
-                                    <select id="hidden" name="hidden" class="form-select">
-                                        <option value="1">Sí</option>
-                                        <option value="0">No</option>
-                                    </select>
+                                    <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="visa" class="form-label">Visa</label>
@@ -256,12 +249,14 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ciudad_array" class="form-label">Array de Ciudad</label>
-                                    <input type="text" class="form-control" id="ciudad_array" name="ciudad_array" required>
+                                    <label for="trivia_status" class="form-label">Estado de la Trivia</label>
+                                    <select id="trivia_status" name="trivia_status" class="form-select">
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="bol_email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="bol_email" name="bol_email" required>
+                                <div id="preguntas-container">
+                                    <!-- Aquí se insertarán las preguntas dinámicamente -->
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary">Guardar Cambios</button>
                                 <a href="/trivias" class="btn btn-outline-secondary">Cancelar</a>
@@ -331,26 +326,30 @@
                 const id = params.get('id');
         
                 // Fetch para obtener los datos de la trivia
-                fetch(`/trivias/ver/data?id=${id}`)
+                fetch(`/trivias/editar/data?id=${id}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
-                        document.getElementById('id_quiz').value = data.id_quiz;
-                        document.getElementById('title').value = data.title;
-                        document.getElementById('detail').value = data.detail;
+                        document.getElementById('trivia_id').value = data.trivia_id;
                         document.getElementById('url').value = data.url;
-                        document.getElementById('imagen').value = data.imagen;
-                        document.getElementById('imagen_m').value = data.imagen_m;
-                        document.getElementById('imagen2').value = data.imagen2;
-                        document.getElementById('terms').value = data.terms;
-                        document.getElementById('bg_color').value = data.bg_color;
-                        document.getElementById('bg_color2').value = data.bg_color2;
-                        document.getElementById('date_start').value = data.date_start;
-                        document.getElementById('date_end').value = data.date_end;
-                        document.getElementById('hidden').value = data.hidden;
+                        document.getElementById('cuerpo').value = data.cuerpo;
+                        document.getElementById('bannerCabecera').value = data.bannerCabecera;
+                        document.getElementById('bannerMovil').value = data.bannerMovil;
+                        document.getElementById('bannerLogoMarca').value = data.bannerLogoMarca;
+                        document.getElementById('colorFooter').value = data.colorFooter;
+                        document.getElementById('colorHeader').value = data.colorHeader;
+                        document.getElementById('terminosycondiciones').value = data.terminosycondiciones;
+                        document.getElementById('fechaInicio').value = data.fechaInicio;
+                        document.getElementById('fechaFin').value = data.fechaFin;
+                        document.getElementById('email').value = data.email;
                         document.getElementById('visa').value = data.visa;
-                        document.getElementById('ciudad_array').value = data.ciudad_array;
-                        document.getElementById('bol_email').value = data.bol_email;
+                        document.getElementById('trivia_status').value = data.trivia_status;
+        
+                        // Cargar preguntas existentes
+                        const preguntasContainer = document.getElementById('preguntas-container');
+                        data.preguntas.forEach((pregunta, index) => {
+                            agregarPregunta(pregunta, index);
+                        });
                     })
                     .catch(error => console.error('Error al obtener los datos de la trivia:', error));
         
@@ -358,9 +357,29 @@
                 document.getElementById('editar-form').addEventListener('submit', function(event) {
                     event.preventDefault();
                     const formData = new FormData(this);
+                    const formDataObj = Object.fromEntries(formData);
+                    formDataObj.preguntas = Array.from(document.querySelectorAll('.pregunta')).map(preguntaElement => {
+                        const index = preguntaElement.dataset.index;
+                        return {
+                            id: preguntaElement.querySelector(`#id_${index}`).value,
+                            pregunta: preguntaElement.querySelector(`#pregunta_${index}`).value,
+                            tipopregunta: preguntaElement.querySelector(`#tipopregunta_${index}`).value,
+                            opcionA: preguntaElement.querySelector(`#opcionA_${index}`).value,
+                            opcionB: preguntaElement.querySelector(`#opcionB_${index}`).value,
+                            opcionC: preguntaElement.querySelector(`#opcionC_${index}`).value,
+                            opcionD: preguntaElement.querySelector(`#opcionD_${index}`).value,
+                            respuestaCorrecta: preguntaElement.querySelector(`#respuestaCorrecta_${index}`).value,
+                            pistasDeRespuesta: preguntaElement.querySelector(`#pistasDeRespuesta_${index}`).value,
+                            requerido: preguntaElement.querySelector(`#requerido_${index}`).value,
+                            especial: preguntaElement.querySelector(`#especial_${index}`).value,
+                            status: preguntaElement.querySelector(`#status_${index}`).value,
+                            prioridad: preguntaElement.querySelector(`#prioridad_${index}`).value
+                        };
+                    });
+        
                     fetch('/trivias/editar', {
                         method: 'POST',
-                        body: JSON.stringify(Object.fromEntries(formData)),
+                        body: JSON.stringify(formDataObj),
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -372,9 +391,78 @@
                     })
                     .catch(error => console.error('Error al actualizar la trivia:', error));
                 });
+        
+                function agregarPregunta(pregunta, index) {
+                    const preguntasContainer = document.getElementById('preguntas-container');
+                    const preguntaElement = document.createElement('div');
+                    preguntaElement.classList.add('pregunta');
+                    preguntaElement.dataset.index = index;
+                    preguntaElement.innerHTML = `
+                        <hr>
+                        <h5>Pregunta</h5>
+                        <input type="hidden" id="id_${index}" name="preguntas[${index}][id]" value="${pregunta.id}">
+                        <div class="mb-3">
+                            <label for="pregunta_${index}" class="form-label">Pregunta</label>
+                            <input type="text" class="form-control" id="pregunta_${index}" name="preguntas[${index}][pregunta]" value="${pregunta.pregunta}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipopregunta_${index}" class="form-label">Tipo de Pregunta</label>
+                            <input type="text" class="form-control" id="tipopregunta_${index}" name="preguntas[${index}][tipopregunta]" value="${pregunta.tipopregunta}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="opcionA_${index}" class="form-label">Opción A</label>
+                            <input type="text" class="form-control" id="opcionA_${index}" name="preguntas[${index}][opcionA]" value="${pregunta.opcionA}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="opcionB_${index}" class="form-label">Opción B</label>
+                            <input type="text" class="form-control" id="opcionB_${index}" name="preguntas[${index}][opcionB]" value="${pregunta.opcionB}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="opcionC_${index}" class="form-label">Opción C</label>
+                            <input type="text" class="form-control" id="opcionC_${index}" name="preguntas[${index}][opcionC]" value="${pregunta.opcionC}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="opcionD_${index}" class="form-label">Opción D</label>
+                            <input type="text" class="form-control" id="opcionD_${index}" name="preguntas[${index}][opcionD]" value="${pregunta.opcionD}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="respuestaCorrecta_${index}" class="form-label">Respuesta Correcta</label>
+                            <input type="text" class="form-control" id="respuestaCorrecta_${index}" name="preguntas[${index}][respuestaCorrecta]" value="${pregunta.respuestaCorrecta}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pistasDeRespuesta_${index}" class="form-label">Pistas de Respuesta</label>
+                            <input type="text" class="form-control" id="pistasDeRespuesta_${index}" name="preguntas[${index}][pistasDeRespuesta]" value="${pregunta.pistasDeRespuesta}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="requerido_${index}" class="form-label">Requerido</label>
+                            <select id="requerido_${index}" name="preguntas[${index}][requerido]" class="form-select">
+                                <option value="1" ${pregunta.requerido == 1 ? 'selected' : ''}>Sí</option>
+                                <option value="0" ${pregunta.requerido == 0 ? 'selected' : ''}>No</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="especial_${index}" class="form-label">Especial</label>
+                            <select id="especial_${index}" name="preguntas[${index}][especial]" class="form-select">
+                                <option value="1" ${pregunta.especial == 1 ? 'selected' : ''}>Sí</option>
+                                <option value="0" ${pregunta.especial == 0 ? 'selected' : ''}>No</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status_${index}" class="form-label">Status de Pregunta</label>
+                            <select id="status_${index}" name="preguntas[${index}][status]" class="form-select">
+                                <option value="1" ${pregunta.status == 1 ? 'selected' : ''}>Activo</option>
+                                <option value="0" ${pregunta.status == 0 ? 'selected' : ''}>Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="prioridad_${index}" class="form-label">Prioridad</label>
+                            <input type="number" class="form-control" id="prioridad_${index}" name="preguntas[${index}][prioridad]" value="${pregunta.prioridad}" required>
+                        </div>
+                    `;
+                    preguntasContainer.appendChild(preguntaElement);
+                }
             });
         </script>
-      
 </body><!--end::Body-->
 
 </html>

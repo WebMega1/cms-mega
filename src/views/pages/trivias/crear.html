@@ -192,55 +192,48 @@
                         <div class="col-md-6">
                             <form id="crear-trivia-form">
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Título</label>
-                                    <input type="text" class="form-control" id="title" name="title" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="detail" class="form-label">Detalle</label>
-                                    <input type="text" class="form-control" id="detail" name="detail" required>
-                                </div>
-                                <div class="mb-3">
                                     <label for="url" class="form-label">URL</label>
                                     <input type="text" class="form-control" id="url" name="url" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagen" class="form-label">Imagen</label>
-                                    <input type="text" class="form-control" id="imagen" name="imagen" required>
+                                    <label for="cuerpo" class="form-label">Cuerpo</label>
+                                    <input type="text" class="form-control" id="cuerpo" name="cuerpo" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagen_m" class="form-label">Imagen M</label>
-                                    <input type="text" class="form-control" id="imagen_m" name="imagen_m" required>
+                                    <label for="bannerCabecera" class="form-label">Banner Cabecera</label>
+                                    <input type="text" class="form-control" id="bannerCabecera" name="bannerCabecera" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagen2" class="form-label">Imagen 2</label>
-                                    <input type="text" class="form-control" id="imagen2" name="imagen2" required>
+                                    <label for="bannerMovil" class="form-label">Banner Móvil</label>
+                                    <input type="text" class="form-control" id="bannerMovil" name="bannerMovil" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="terms" class="form-label">Términos</label>
-                                    <input type="text" class="form-control" id="terms" name="terms" required>
+                                    <label for="bannerLogoMarca" class="form-label">Banner Logo Marca</label>
+                                    <input type="text" class="form-control" id="bannerLogoMarca" name="bannerLogoMarca" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bg_color" class="form-label">Color de Fondo</label>
-                                    <input type="text" class="form-control" id="bg_color" name="bg_color" required>
+                                    <label for="colorFooter" class="form-label">Color de Footer</label>
+                                    <input type="text" class="form-control" id="colorFooter" name="colorFooter" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bg_color2" class="form-label">Color de Fondo 2</label>
-                                    <input type="text" class="form-control" id="bg_color2" name="bg_color2" required>
+                                    <label for="colorHeader" class="form-label">Color de Header</label>
+                                    <input type="text" class="form-control" id="colorHeader" name="colorHeader" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="date_start" class="form-label">Fecha de Inicio</label>
-                                    <input type="date" class="form-control" id="date_start" name="date_start" required>
+                                    <label for="terminosycondiciones" class="form-label">Términos y Condiciones</label>
+                                    <input type="text" class="form-control" id="terminosycondiciones" name="terminosycondiciones" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="date_end" class="form-label">Fecha de Fin</label>
-                                    <input type="date" class="form-control" id="date_end" name="date_end" required>
+                                    <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="hidden" class="form-label">Oculto</label>
-                                    <select class="form-control" id="hidden" name="hidden" required>
-                                        <option value="1">Sí</option>
-                                        <option value="0">No</option>
-                                    </select>
+                                    <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="visa" class="form-label">Visa</label>
@@ -250,12 +243,72 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ciudad_array" class="form-label">Array de Ciudad</label>
-                                    <input type="text" class="form-control" id="ciudad_array" name="ciudad_array" required>
+                                    <label for="trivia_status" class="form-label">Status de Trivia</label>
+                                    <select class="form-control" id="trivia_status" name="trivia_status" required>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bol_email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="bol_email" name="bol_email" required>
+                                    <label for="pregunta" class="form-label">Pregunta</label>
+                                    <input type="text" class="form-control" id="pregunta" name="pregunta" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tipopregunta" class="form-label">Tipo de Pregunta</label>
+                                    <input type="text" class="form-control" id="tipopregunta" name="tipopregunta" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionA" class="form-label">Opción A</label>
+                                    <input type="text" class="form-control" id="opcionA" name="opcionA" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionB" class="form-label">Opción B</label>
+                                    <input type="text" class="form-control" id="opcionB" name="opcionB" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionC" class="form-label">Opción C</label>
+                                    <input type="text" class="form-control" id="opcionC" name="opcionC" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionD" class="form-label">Opción D</label>
+                                    <input type="text" class="form-control" id="opcionD" name="opcionD" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="respuestaCorrecta" class="form-label">Respuesta Correcta</label>
+                                    <input type="text" class="form-control" id="respuestaCorrecta" name="respuestaCorrecta" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pistasDeRespuesta" class="form-label">Pistas de Respuesta</label>
+                                    <input type="text" class="form-control" id="pistasDeRespuesta" name="pistasDeRespuesta" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="requerido" class="form-label">Requerido</label>
+                                    <select class="form-control" id="requerido" name="requerido" required>
+                                        <option value="1">Sí</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="especial" class="form-label">Especial</label>
+                                    <select class="form-control" id="especial" name="especial" required>
+                                        <option value="1">Sí</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pregunta_status" class="form-label">Status de Pregunta</label>
+                                    <select class="form-control" id="pregunta_status" name="pregunta_status" required>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="prioridad" class="form-label">Prioridad</label>
+                                    <input type="text" class="form-control" id="prioridad" name="prioridad" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="trivia_id" class="form-label">Trivia ID</label>
+                                    <input type="text" class="form-control" id="trivia_id" name="trivia_id" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Crear Trivia</button>
                                 <a href="/trivias" class="btn btn-secondary">Cancelar</a>
@@ -314,22 +367,18 @@
                         scrollbars: {
                             theme: Default.scrollbarTheme,
                             autoHide: Default.scrollbarAutoHide,
-                            clickScroll: Default.scrollbarClickScroll,
+                            clickScroll: Default.clickScroll,
                         },
                     });
                 }
         
                 // Convertir el texto a mayúsculas mientras se escribe
-                document.getElementById('title').addEventListener('input', function() {
+                document.getElementById('cuerpo').addEventListener('input', function() {
                     this.value = this.value.toUpperCase();
                 });
         
                 // Convertir la primera letra a mayúscula y el resto a minúscula mientras se escribe
-                document.getElementById('detail').addEventListener('input', function() {
-                    this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();
-                });
-        
-                document.getElementById('terms').addEventListener('input', function() {
+                document.getElementById('terminosycondiciones').addEventListener('input', function() {
                     this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();
                 });
         
@@ -360,7 +409,6 @@
                 });
             });
         </script>
-     
-</body><!--end::Body-->
-
-</html>
+        </body><!--end::Body-->
+        
+        </html>
