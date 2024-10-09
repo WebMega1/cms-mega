@@ -9,12 +9,11 @@ const passport = require ('passport'); // Importa Passport, que es un middleware
 const flash = require('connect-flash'); // Importa Connect-Flash, que es un middleware para mostrar mensajes flash (notificaciones temporales).
 const MySQLStore = require('express-mysql-session')(session); // Importa el módulo para almacenar sesiones en una base de datos MySQL usando el módulo de sesiones de Express.
 
-
-
-
-
 // Inicializa la aplicación Express
 const app = express();
+
+
+
 
 require('./lib/authentication'); // Carga y ejecuta la configuración de autenticación desde un archivo externo.
 
@@ -31,6 +30,9 @@ app.set('port', process.env.PORT || 4000);
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'views'))); // Establece la carpeta 'views' como la carpeta de archivos estáticos, permitiendo que los archivos en esta carpeta se sirvan directamente.
+// Configurar la carpeta 'public' para servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));// Carpeta para recursos staticos reusables
+
 app.use('/uploads', express.static(path.join(__dirname, 'views/uploads'))); // Configurar la carpeta 'uploads' como estática es la carpeta de imagenes
 
 ///Middlewares

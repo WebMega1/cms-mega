@@ -30,9 +30,12 @@ closePopup.addEventListener('click', () => {
 
 // confirmar la ubicación seleccionada
 confirmLocationBtn.addEventListener('click', () => {
-    const selectedLocation = locationSelect.value;
+    const selectedLocation = locationSelect.options[locationSelect.selectedIndex].text;
+    
     locationButton.textContent = `📍 ${selectedLocation}`;
     locationPopup.style.display = 'none'; // Cerrar el popup
+    cardTarifario(locationSelect.value);
+    console.log(locationSelect.value);
 });
 
 /* ********** CARROUSEL PAQUETES ********** */

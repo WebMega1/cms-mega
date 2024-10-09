@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Poppins", system-ui;
 }
 
 .top-bar {
@@ -23,7 +23,12 @@ body {
     text-align: left;
     padding-left: 20px;
 }
-.location span{
+
+.top-bar .location p {
+    margin-bottom: 0;
+}
+
+.location span {
     cursor: pointer;
 }
 
@@ -32,6 +37,11 @@ body {
     text-align: right;
     padding-right: 20px;
     align-items: center;
+
+}
+
+.top-bar .sales-info p {
+    margin-bottom: 0;
 }
 
 .account-actions {
@@ -39,7 +49,8 @@ body {
     gap: 10px;
 }
 
-.account-btn, .pay-btn {
+.account-btn,
+.pay-btn {
     background-color: #99CC33;
     border: none;
     color: white;
@@ -67,6 +78,7 @@ header {
     list-style: none;
     gap: 100px;
     margin-left: auto;
+    margin-bottom: 0;
 }
 
 .menu ul li a {
@@ -75,7 +87,8 @@ header {
     font-weight: 300;
     font-size: 18px;
 }
-.menu ul li span a{
+
+.menu ul li span a {
     background-color: #004997;
     color: #fff;
     border-radius: 5px;
@@ -96,11 +109,23 @@ header {
     background-color: black;
 }
 
-.banner img {
-    width: 100%;
-    height: auto;
+/* *********Banner **********/
+
+#bannerCarousel button:hover{
+    background-color: transparent;
 }
 
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+     background-color: #007AFF33;
+     border-radius: 50px;
+     padding: 10px;
+  }
+ #bannerCarousel .carousel-inner, 
+  #bannerCarousel .carousel-inner img{
+    height: 600px;
+  }
+  
 /* menu en movil */
 .mobile-menu {
     display: none;
@@ -192,70 +217,324 @@ header {
 }
 
 /* ********** Paquetes ********** */
-.card_pack{
+.card_pack {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-top: 5px solid #007AFF;
     margin-top: 100px;
     margin-bottom: 100px;
 }
-.promo_megas{
-background-color: #F5F6F6;
-color: #007AFF;
-text-align: center;
-padding: 15px;
+
+.promo_megas {
+    background-color: #F5F6F6;
+    color: #007AFF;
+    text-align: center;
+    padding: 15px;
 }
 
 /* Xview */
-.xview-container{
+.xview-container {
     width: 150px;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
 }
-.xview-container img, .promo_partners img{
+
+.xview-container img,
+.promo_partners img {
     width: 100%;
 }
 
 /* Beneficios */
-.beneficios-pack{
+.beneficios-pack {
     padding: 0 30px;
 }
 
 /* Promo partners*/
-.promo_partners{
-width: 200px;
-margin: auto;
-margin-top: 30px;
-margin-bottom: 30px;
+.promo_partners {
+    width: 200px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 /* Precio*/
-.package_price{
+.package_price {
     display: flex;
     background-color: #f5f6f6;
     padding: 10px 30px;
     justify-content: center;
     align-items: center;
 }
-.price-pack{
+
+.price-pack {
     font-size: 40px;
     font-weight: 700;
 }
-.payment-time{
+
+.payment-time {
     margin-left: 10px;
     font-size: 20px;
     font-weight: 500;
 }
 
+/* Popup card btn */
+.btn-card {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.openCallPopup {
+    width: 100%;
+}
+
+.popup-call {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.popup-content-call {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    z-index: 10001;
+}
+
+.close-popup-call {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10002;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="tel"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #000;
+}
+
+/* ********** Paquetes ********** */
+.str-texts h2 {
+    font-size: 48px;
+    text-transform: uppercase;
+}
+
+.str-texts h2 span {
+    color: #EC503C;
+}
+
+.str-texts {
+    margin-bottom: 100px;
+}
+
+#streamings-container {
+    gap: 100px;
+    width: 65%;
+    margin: auto;
+}
+
+.str-name {
+    display: block;
+}
+
+.streaming-content h3 {
+    font-size: 20px;
+    margin-top: 20px;
+    line-height: 32px;
+}
+
+/* ********** Servicios ********** */
+#services-container {
+    gap: 50px;
+    margin-top: 150px;
+}
+
+.services-content h3 {
+    margin-top: 30px;
+}
+
+.btn-services {
+    margin-top: 10px;
+    padding: 10px 50px;
+}
+
+/* ********** XVIEW+ ********** */
+#xview-container {
+    margin-top: 250px;
+    margin-bottom: 250px;
+    padding: 0;
+}
+
+.xview-info {
+    background-color: #007AFF;
+    width: 45%;
+    border-radius: 16px 0 0 16px;
+    color: #fff;
+    padding: 50px;
+}
+
+.btn-xview-cont {
+    margin-top: 100px;
+}
+
+.btn-xview {
+    padding: 10px 50px;
+}
+
+.xview-img img {
+    border-radius: 16px 0 0 16px;
+}
+
+/* ********** Pago en Línea ********** */
+.btn-pago {
+    background-color: #F5F6F6;
+    margin-top: 10px;
+}
+
+.pago-texts h2 {
+    font-weight: 600;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+/* ********** Banners Promo ********** */
+#promo-banners {
+    margin-top: 150px;
+}
+
+.carousel-item {
+    height: 450px;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+}
+
+.carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+.carousel-indicators .active {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* ********** BPARTICIPA Y GANA ********** */
+#quiz-banner {
+    margin-top: 150px;
+}
+
+/* ********** FOOTER MENU********** */
+footer {
+    margin-top: 150px;
+}
+
+footer h5,
+footer h6 {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+footer ul {
+    padding: 0;
+}
+
+footer ul li {
+    list-style: none;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+footer ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-link {
+    margin-right: 20px;
+}
+
+.footer-black {
+    background-color: #000;
+    padding: 80px 0;
+}
+
+.footer-link h6 {
+    color: #fff;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.footer-link h6:hover {
+    text-decoration: underline;
+}
+
+.footer-links {
+    gap: 70px;
+
+}
+.footer-logos{
+    margin-top: 100px;
+}
+
+
+
+
+
 
 /* responsive */
 
-@media (max-width: 1140px){
+@media (max-width: 1140px) {
     .menu ul {
         gap: 50px;
     }
 }
-@media (max-width: 950px){
+
+@media (max-width: 950px) {
     .menu ul {
         gap: 30px;
     }
@@ -277,5 +556,14 @@ margin-bottom: 30px;
     .mobile-menu.show {
         display: block;
     }
-}
 
+    .popup-content-call {
+        width: 100%;
+        max-width: 90%;
+    }
+
+    .popup-content {
+        width: 100%;
+        max-width: 90%;
+    }
+}

@@ -57,120 +57,11 @@
             </div> <!--end::Container-->
         </nav> <!--end::Header--> <!--begin::Sidebar-->
 
-        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index" class="brand-link"> <!--begin::Brand Image--> <img src="../assets/img/logoMega.png" alt="Logo Mega" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">CMS-MEGA</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
-            <div class="sidebar-wrapper">
-                <nav class="mt-2"> <!--begin::Sidebar Menu-->
-                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item menu-open"> <a href="#" class="nav-link active"> <i class="nav-icon bi bi-speedometer"></i>
-                                <p>
-                                    Dashboard
-                                   
-                                </p>
-                            </a>
-
-                        </li>
-                        <li class="nav-header">FUNCIONES DEL SITIO</li>
-                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-journal-album"></i>
-                            <p>
-                                Sucursales
-                                <i class="nav-arrow bi bi-chevron-right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item"> <a href="../ubicaciones/" class="nav-link"> <i class="nav-icon bi bi-map"></i>
-                                    <p>Sucursales</p>
-                                </a> </li>
-                            <li class="nav-item"> <a href="../regiones/" class="nav-link"> <i class="nav-icon bi bi-map-fill"></i>
-                                    <p>Regiones</p>
-                                </a> </li>
-                                <li class="nav-item"> <a href="../cis/" class="nav-link"> <i class="nav-icon bi bi-geo-alt-fill"></i>
-                                    <p>CIS</p>
-                                </a> </li>
-                        </ul>
-                        </li>
-                        
-                        <li class="nav-item"> <a class="nav-link">  <i class="bi bi-tv"></i>
-                                <p>
-                                    Canales
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="../tiposcanales/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Categorias</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="../canales/" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Canales</p>
-                                    </a> </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item"> <a class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
-                                <p>
-                                    Tarifario
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="../importar-tarifario" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Importar Tarifario</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="../tipo-paquete" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Paquetes tarifarios</p>
-                                    </a> </li>
-                                <li class="nav-item"> <a href="../servicios-cable" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Servicios Cable</p>
-                                    </a> </li> 
-                                <li class="nav-item"> <a href="../banner-servicios-cable" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Banner servicios cable</p>
-                                    </a> </li>  
-                                <li class="nav-item"> <a href="../banner-tipo-paquete" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Banner tipo paquete</p>
-                                    </a> </li>          
-                                    
-                            </ul>
-                        </li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-gift"></i>
-                                <p>
-                                    Promociones
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-file-text"></i>
-                                <p>
-                                    Terminos y condiciones
-                                </p>
-                            </a>
-                        </li>
-                        
-                        <li class="nav-header">CONFIGURACIÓN</li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="bi bi-person-gear"></i>
-                            <p>
-                                Configurar Usuarios
-                                <i class="nav-arrow bi bi-chevron-right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                    <p>Usuarios</p>
-                                </a> </li>
-                            <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                    <p>Roles</p>
-                                </a> </li>
-                            <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                    <p>Permisos</p>
-                                </a> </li>    
-                                
-                        </ul>
-                    </li>
-
+        <!-- Contenedor para la sección importada -->
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark" id="left-sidebar" > <!--begin::Sidebar Brand-->
                     
-
-                    </ul> <!--end::Sidebar Menu-->
-                </nav>
-            </div> <!--end::Sidebar Wrapper-->
-        </aside> <!--end::Sidebar--> <!--begin::App Main-->
+                    
+        </aside>
         <main class="app-main">
             <!--begin::App Content Header-->
             <div class="app-content-header">
@@ -256,6 +147,47 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
         <!--end::Required Plugin(Bootstrap 5)-->
         <!--begin::Required Plugin(AdminLTE)-->
+        <script>
+            function onDOMContentLoaded() {
+                // Primera función: Cargar la sección HTML del sidebar
+                cargaLeftSidebar();
+                cargaNavBar();
+                // Segunda función: Otra lógica que deseas ejecutar al cargar la página
+                console.log('cargar secciones');
+            }
+    
+            document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
+    
+            function cargaLeftSidebar() {
+                fetch('/left-sidebar.html')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        document.getElementById('left-sidebar').innerHTML = data;
+                        
+                    })
+                    .catch(error => console.error('Error loading left-sidebar:', error));
+            }
+    
+            function cargaNavBar() {
+                fetch('/navBar.html')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        document.getElementById('navBar').innerHTML = data;
+                        
+                    })
+                    .catch(error => console.error('Error loading left-sidebar:', error));
+            }
+        </script>
         <script src="../../js/adminlte.js"></script>
         <!--end::Required Plugin(AdminLTE)-->
         <!--begin::OverlayScrollbars Configure-->
