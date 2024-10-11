@@ -50,34 +50,54 @@ router.get('/trivias/crear', (req, res) => {
 });
 
 // Ruta POST para insertar una nueva trivia en la base de datos
-router.post('/trivias/crear', (req, res) => {
+router.post('/trivias/crear', async (req, res) => {
     const {
         url, cuerpo, bannerCabecera, bannerMovil, bannerLogoMarca, colorFooter, colorHeader,
-        terminosycondiciones, fechaInicio, fechaFin, email, visa, trivia_status, pregunta,
-        tipopregunta, opcionA, opcionB, opcionC, opcionD, respuestaCorrecta, pistasDeRespuesta,
-        requerido, especial, pregunta_status, prioridad, trivia_id
+        terminosycondiciones, fechaInicio, fechaFin, email, visa, trivia_status, preguntas
     } = req.body;
 
-    db.query(
-        `INSERT INTO vista_completa_trivias_preguntas (
-            url, cuerpo, bannerCabecera, bannerMovil, bannerLogoMarca, colorFooter, colorHeader,
-            terminosycondiciones, fechaInicio, fechaFin, email, visa, trivia_status, pregunta,
-            tipopregunta, opcionA, opcionB, opcionC, opcionD, respuestaCorrecta, pistasDeRespuesta,
-            requerido, especial, pregunta_status, prioridad, trivia_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-            url, cuerpo, bannerCabecera, bannerMovil, bannerLogoMarca, colorFooter, colorHeader,
-            terminosycondiciones, fechaInicio, fechaFin, email, visa, trivia_status, pregunta,
-            tipopregunta, opcionA, opcionB, opcionC, opcionD, respuestaCorrecta, pistasDeRespuesta,
-            requerido, especial, pregunta_status, prioridad, trivia_id
-        ],
-        (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: 'Error al crear la trivia' });
-            }
-            res.json({ message: 'Trivia creada correctamente' });
+    try {
+        await db.beginTransaction();
+
+        // Insertar en la tabla trivias
+        const triviaResult = await db.query(
+            `INSERT INTO trivias (
+                url, cuerpo, bannerCabecera, bannerMovil, bannerLogoMarca, colorFooter, colorHeader,
+                terminosycondiciones, fechaInicio, fechaFin, email, visa, status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+                url, cuerpo, bannerCabecera, bannerMovil, bannerLogoMarca, colorFooter, colorHeader,
+                terminosycondiciones, fechaInicio, fechaFin, email, visa, trivia_status
+            ]
+        );
+
+        const trivia_id = triviaResult.insertId;
+
+        // Insertar en la tabla preguntas
+        for (const pregunta of preguntas) {
+            const {
+                pregunta_texto, tipopregunta, opcionA, opcionB, opcionC, opcionD, respuestaCorrecta,
+                pistasDeRespuesta, requerido, especial, pregunta_status, prioridad
+            } = pregunta;
+
+            await db.query(
+                `INSERT INTO preguntas (
+                    pregunta, tipopregunta, opcionA, opcionB, opcionC, opcionD, respuestaCorrecta,
+                    pistasDeRespuesta, requerido, especial, status, prioridad, trivia_id
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                    pregunta_texto, tipopregunta, opcionA, opcionB, opcionC, opcionD, respuestaCorrecta,
+                    pistasDeRespuesta, requerido, especial, pregunta_status, prioridad, trivia_id
+                ]
+            );
         }
-    );
+
+        await db.commit();
+        res.json({ message: 'Trivia creada correctamente' });
+    } catch (err) {
+        await db.rollback();
+        res.status(500).json({ error: 'Error al crear la trivia' });
+    }
 });
 
 // Ruta GET para servir la página HTML de editar de un tipo de canal

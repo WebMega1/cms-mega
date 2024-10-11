@@ -62,9 +62,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="../index">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Crear Trivia
-                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Crear Trivia</li>
                             </ol>
                         </div>
                     </div>
@@ -80,127 +78,86 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <form id="crear-trivia-form">
-                                <div class="mb-3">
-                                    <label for="url" class="form-label">URL</label>
-                                    <input type="text" class="form-control" id="url" name="url" required>
+                                <!-- Sección de Trivia -->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4>Información de la Trivia</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="url" class="form-label">URL</label>
+                                            <input type="text" class="form-control" id="url" name="url" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cuerpo" class="form-label">Cuerpo</label>
+                                            <input type="text" class="form-control" id="cuerpo" name="cuerpo" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="bannerCabecera" class="form-label">Banner Cabecera</label>
+                                            <input type="text" class="form-control" id="bannerCabecera" name="bannerCabecera" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="bannerMovil" class="form-label">Banner Móvil</label>
+                                            <input type="text" class="form-control" id="bannerMovil" name="bannerMovil" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="bannerLogoMarca" class="form-label">Banner Logo Marca</label>
+                                            <input type="text" class="form-control" id="bannerLogoMarca" name="bannerLogoMarca" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="colorFooter" class="form-label">Color de Footer</label>
+                                            <input type="text" class="form-control" id="colorFooter" name="colorFooter" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="colorHeader" class="form-label">Color de Header</label>
+                                            <input type="text" class="form-control" id="colorHeader" name="colorHeader" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="terminosycondiciones" class="form-label">Términos y Condiciones</label>
+                                            <input type="text" class="form-control" id="terminosycondiciones" name="terminosycondiciones" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                                            <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="visa" class="form-label">Visa</label>
+                                            <select class="form-control" id="visa" name="visa" required>
+                                                <option value="1">Sí</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="trivia_status" class="form-label">Status de Trivia</label>
+                                            <select class="form-control" id="trivia_status" name="trivia_status" required>
+                                                <option value="1">Activo</option>
+                                                <option value="0">Inactivo</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="cuerpo" class="form-label">Cuerpo</label>
-                                    <input type="text" class="form-control" id="cuerpo" name="cuerpo" required>
+        
+                                <!-- Sección de Preguntas -->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4>Preguntas</h4>
+                                        <button type="button" class="btn btn-success" id="add-question">Agregar Pregunta</button>
+                                    </div>
+                                    <div class="card-body" id="questions-container">
+                                        <!-- Aquí se agregarán dinámicamente las preguntas -->
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="bannerCabecera" class="form-label">Banner Cabecera</label>
-                                    <input type="text" class="form-control" id="bannerCabecera" name="bannerCabecera" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="bannerMovil" class="form-label">Banner Móvil</label>
-                                    <input type="text" class="form-control" id="bannerMovil" name="bannerMovil" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="bannerLogoMarca" class="form-label">Banner Logo Marca</label>
-                                    <input type="text" class="form-control" id="bannerLogoMarca" name="bannerLogoMarca" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="colorFooter" class="form-label">Color de Footer</label>
-                                    <input type="text" class="form-control" id="colorFooter" name="colorFooter" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="colorHeader" class="form-label">Color de Header</label>
-                                    <input type="text" class="form-control" id="colorHeader" name="colorHeader" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="terminosycondiciones" class="form-label">Términos y Condiciones</label>
-                                    <input type="text" class="form-control" id="terminosycondiciones" name="terminosycondiciones" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
-                                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="fechaFin" class="form-label">Fecha de Fin</label>
-                                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="visa" class="form-label">Visa</label>
-                                    <select class="form-control" id="visa" name="visa" required>
-                                        <option value="1">Sí</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="trivia_status" class="form-label">Status de Trivia</label>
-                                    <select class="form-control" id="trivia_status" name="trivia_status" required>
-                                        <option value="1">Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pregunta" class="form-label">Pregunta</label>
-                                    <input type="text" class="form-control" id="pregunta" name="pregunta" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tipopregunta" class="form-label">Tipo de Pregunta</label>
-                                    <input type="text" class="form-control" id="tipopregunta" name="tipopregunta" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="opcionA" class="form-label">Opción A</label>
-                                    <input type="text" class="form-control" id="opcionA" name="opcionA" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="opcionB" class="form-label">Opción B</label>
-                                    <input type="text" class="form-control" id="opcionB" name="opcionB" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="opcionC" class="form-label">Opción C</label>
-                                    <input type="text" class="form-control" id="opcionC" name="opcionC" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="opcionD" class="form-label">Opción D</label>
-                                    <input type="text" class="form-control" id="opcionD" name="opcionD" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="respuestaCorrecta" class="form-label">Respuesta Correcta</label>
-                                    <input type="text" class="form-control" id="respuestaCorrecta" name="respuestaCorrecta" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pistasDeRespuesta" class="form-label">Pistas de Respuesta</label>
-                                    <input type="text" class="form-control" id="pistasDeRespuesta" name="pistasDeRespuesta" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="requerido" class="form-label">Requerido</label>
-                                    <select class="form-control" id="requerido" name="requerido" required>
-                                        <option value="1">Sí</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="especial" class="form-label">Especial</label>
-                                    <select class="form-control" id="especial" name="especial" required>
-                                        <option value="1">Sí</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pregunta_status" class="form-label">Status de Pregunta</label>
-                                    <select class="form-control" id="pregunta_status" name="pregunta_status" required>
-                                        <option value="1">Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="prioridad" class="form-label">Prioridad</label>
-                                    <input type="text" class="form-control" id="prioridad" name="prioridad" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="trivia_id" class="form-label">Trivia ID</label>
-                                    <input type="text" class="form-control" id="trivia_id" name="trivia_id" required>
-                                </div>
+        
                                 <button type="submit" class="btn btn-primary">Crear Trivia</button>
                                 <a href="/trivias" class="btn btn-secondary">Cancelar</a>
                             </form>
@@ -246,9 +203,9 @@
                 // Segunda función: Otra lógica que deseas ejecutar al cargar la página
                 console.log('cargar secciones');
             }
-    
+        
             document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
-    
+        
             function cargaLeftSidebar() {
                 fetch('/left-sidebar.html')
                     .then(response => {
@@ -263,7 +220,7 @@
                     })
                     .catch(error => console.error('Error loading left-sidebar:', error));
             }
-    
+        
             function cargaNavBar() {
                 fetch('/navBar.html')
                     .then(response => {
@@ -325,9 +282,32 @@
                     formData.append('create_user', createUser);
                     formData.append('create_at', createAt);
         
+                    // Convertir las preguntas en un array de objetos
+                    const preguntas = [];
+                    document.querySelectorAll('#questions-container .card').forEach((card, index) => {
+                        const pregunta = {
+                            pregunta_texto: card.querySelector(`[name="pregunta_${index}"]`).value,
+                            tipopregunta: card.querySelector(`[name="tipopregunta_${index}"]`).value,
+                            opcionA: card.querySelector(`[name="opcionA_${index}"]`).value,
+                            opcionB: card.querySelector(`[name="opcionB_${index}"]`).value,
+                            opcionC: card.querySelector(`[name="opcionC_${index}"]`).value,
+                            opcionD: card.querySelector(`[name="opcionD_${index}"]`).value,
+                            respuestaCorrecta: card.querySelector(`[name="respuestaCorrecta_${index}"]`).value,
+                            pistasDeRespuesta: card.querySelector(`[name="pistasDeRespuesta_${index}"]`).value,
+                            requerido: card.querySelector(`[name="requerido_${index}"]`).value,
+                            especial: card.querySelector(`[name="especial_${index}"]`).value,
+                            pregunta_status: card.querySelector(`[name="pregunta_status_${index}"]`).value,
+                            prioridad: card.querySelector(`[name="prioridad_${index}"]`).value,
+                        };
+                        preguntas.push(pregunta);
+                    });
+        
+                    const data = Object.fromEntries(formData);
+                    data.preguntas = preguntas;
+        
                     fetch('/trivias/crear', {
                         method: 'POST',
-                        body: JSON.stringify(Object.fromEntries(formData)),
+                        body: JSON.stringify(data),
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -338,6 +318,89 @@
                         window.location.href = '/trivias';
                     })
                     .catch(error => console.error('Error al crear la trivia:', error));
+                });
+        
+                // Agregar funcionalidad para agregar preguntas dinámicamente
+                document.getElementById('add-question').addEventListener('click', function() {
+                    const questionContainer = document.getElementById('questions-container');
+                    const questionIndex = questionContainer.children.length;
+        
+                    const questionHtml = `
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h5>Pregunta ${questionIndex + 1}</h5>
+                                <button type="button" class="btn btn-danger remove-question">Eliminar</button>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="pregunta_${questionIndex}" class="form-label">Pregunta</label>
+                                    <input type="text" class="form-control" id="pregunta_${questionIndex}" name="pregunta_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tipopregunta_${questionIndex}" class="form-label">Tipo de Pregunta</label>
+                                    <input type="text" class="form-control" id="tipopregunta_${questionIndex}" name="tipopregunta_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionA_${questionIndex}" class="form-label">Opción A</label>
+                                    <input type="text" class="form-control" id="opcionA_${questionIndex}" name="opcionA_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionB_${questionIndex}" class="form-label">Opción B</label>
+                                    <input type="text" class="form-control" id="opcionB_${questionIndex}" name="opcionB_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionC_${questionIndex}" class="form-label">Opción C</label>
+                                    <input type="text" class="form-control" id="opcionC_${questionIndex}" name="opcionC_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="opcionD_${questionIndex}" class="form-label">Opción D</label>
+                                    <input type="text" class="form-control" id="opcionD_${questionIndex}" name="opcionD_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="respuestaCorrecta_${questionIndex}" class="form-label">Respuesta Correcta</label>
+                                    <input type="text" class="form-control" id="respuestaCorrecta_${questionIndex}" name="respuestaCorrecta_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pistasDeRespuesta_${questionIndex}" class="form-label">Pistas de Respuesta</label>
+                                    <input type="text" class="form-control" id="pistasDeRespuesta_${questionIndex}" name="pistasDeRespuesta_${questionIndex}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="requerido_${questionIndex}" class="form-label">Requerido</label>
+                                    <select class="form-control" id="requerido_${questionIndex}" name="requerido_${questionIndex}" required>
+                                        <option value="1">Sí</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="especial_${questionIndex}" class="form-label">Especial</label>
+                                    <select class="form-control" id="especial_${questionIndex}" name="especial_${questionIndex}" required>
+                                        <option value="1">Sí</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pregunta_status_${questionIndex}" class="form-label">Status de Pregunta</label>
+                                    <select class="form-control" id="pregunta_status_${questionIndex}" name="pregunta_status_${questionIndex}" required>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="prioridad_${questionIndex}" class="form-label">Prioridad</label>
+                                    <input type="text" class="form-control" id="prioridad_${questionIndex}" name="prioridad_${questionIndex}" required>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+        
+                    questionContainer.insertAdjacentHTML('beforeend', questionHtml);
+        
+                    // Agregar funcionalidad para eliminar preguntas
+                    questionContainer.querySelectorAll('.remove-question').forEach(button => {
+                        button.addEventListener('click', function() {
+                            this.closest('.card').remove();
+                        });
+                    });
                 });
             });
         </script>
