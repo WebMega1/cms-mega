@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link rel="stylesheet" href="/css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
 </head> <!--end::Head--> <!--begin::Body-->
@@ -30,7 +30,7 @@
                    
                     <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                            <li class="user-header text-bg-primary"> <img src="../assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
+                            <li class="user-header text-bg-primary"> <img src="/assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
                                 <p>
                                     Administrador - Web Developer
                                     
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Crear Región
                                 </li>
@@ -78,27 +78,48 @@
             <div class="app-content">
                 <!--begin::Container-->
                 <div class="container-fluid">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-6">
-                            <form id="crear-region-form">
-                                <div class="mb-3">
-                                    <label for="regionName" class="form-label">Nombre de la Región</label>
-                                    <input type="text" class="form-control" id="regionName" name="regionName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select class="form-control" id="status" name="status" required>
-                                        <option value="1">Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Crear Región</button>
-                                <a href="/regiones" class="btn btn-secondary">Cancelar</a>
-                            </form>
+                    <section class="content">
+
+                        <!-- Default box -->
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Nueva region</h3>
+                
+                            <div class="card-tools">
+                               
+                            </div>
                         </div>
-                    </div>
+                        <div class="card-body">
+                            <div class="col-md-5">
+                                <form id="crear-region-form">
+                                    <div class="mb-3">
+                                        <label for="regionName" class="form-label">Nombre de la Región</label>
+                                        <input type="text" class="form-control" id="regionName" name="regionName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-control" id="status" name="status" required>
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Crear Región</button>
+                                    <a href="/regiones" class="btn btn-secondary">Cancelar</a>
+                                </form>
+
+                            </div>                        
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            
+                        </div>
+                        <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                
+                    </section>
+
                 </div>
                 <!--end::Container-->
             </div>
@@ -106,16 +127,8 @@
         </main>
         <!--end::App Main-->
         <!--begin::Footer-->
-        <footer class="app-footer">
-            <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
-            <!--end::To the end-->
-            <!--begin::Copyright-->
-            <strong>
-                Comunicación Gráfica y Servicios Web Pruebas &copy; 2024&nbsp;
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
+        <footer class="app-footer" id="footer">
+           
         </footer>
         <!--end::Footer-->
         </div>
@@ -142,37 +155,10 @@
     
             document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
     
-            function cargaLeftSidebar() {
-                fetch('/left-sidebar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('left-sidebar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
-    
-            function cargaNavBar() {
-                fetch('/navBar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('navBar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
+            
         </script>
-        <script src="../../js/adminlte.js"></script>
+        <script src="/js/adminlte.js"></script>
+        <script src="/js/componentes.js"></script>
         <!--end::Required Plugin(AdminLTE)-->
         <!--begin::OverlayScrollbars Configure-->
         <script>
@@ -222,7 +208,7 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        alert(data.message);
+                        //alert(data.message);
                         window.location.href = '/regiones';
                     })
                     .catch(error => console.error('Error al crear la región:', error));
