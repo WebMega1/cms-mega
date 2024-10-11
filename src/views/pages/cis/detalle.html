@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link rel="stylesheet" href="/css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik" async defer></script>
@@ -31,7 +31,7 @@
                    
                     <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                            <li class="user-header text-bg-primary"> <img src="../assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
+                            <li class="user-header text-bg-primary"> <img src="/assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
                                 <p>
                                     Administrador - Web Developer
                                     
@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Detalle CIS
                                 </li>
@@ -138,13 +138,8 @@
                 </div> <!--end::Container-->
             </div> <!--end::App Content-->
         </main> <!--end::App Main--> <!--begin::Footer-->
-        <footer class="app-footer"> <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
-                Comunicación Gráfica y Servicios Web Pruebas  &copy; 2024&nbsp; 
-                
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
+        <footer class="app-footer" id="footer"> <!--begin::To the end-->
+            
         </footer> <!--end::Footer-->      
 
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
@@ -162,37 +157,10 @@
 
         document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
 
-        function cargaLeftSidebar() {
-            fetch('/left-sidebar.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('left-sidebar').innerHTML = data;
-                    
-                })
-                .catch(error => console.error('Error loading left-sidebar:', error));
-        }
-
-        function cargaNavBar() {
-            fetch('/navBar.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('navBar').innerHTML = data;
-                    
-                })
-                .catch(error => console.error('Error loading left-sidebar:', error));
-        }
     </script>
-    <script src="../js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script src="/js/adminlte.js"></script>
+    <script src="/js/componentes.js"></script>
+    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {
@@ -218,34 +186,29 @@
     </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
     
     <script>
-        
-        document.addEventListener('DOMContentLoaded', function() {
+         document.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
             fetch(`/cis/ver/data?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    if(data.status == 1){
-                        var status = data.status = "Activo";
+                    if (data.status == 1) {
+                        var status = "Activo";
                         var statusButton = `<a onclick="borrarCis(${data.idCis})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x">Desactivar</i></a>`;
-                        }else{
-                            var status = data.status = "Inactivo";
-                            var statusButton = `<a onclick="activarCis(${data.idCis})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check">Activar</i></a>`;
-                        }
+                    } else {
+                        var status = "Inactivo";
+                        var statusButton = `<a onclick="activarCis(${data.idCis})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check">Activar</i></a>`;
+                    }
 
                     const cardTitle = document.querySelector('.card-title');
                     cardTitle.textContent = data.cisName;
                     const cardTools = document.querySelector('.card-tools');
                     cardTools.innerHTML = `<a href="/cis/editar?id=${data.idCis}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
 
-                    const cardBodyRight = document.querySelector('.card-body-rigth');
-                   // cardBodyRight.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59732.907050148606!2d-103.36337923557541!3d20.65709804925275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428adf06007c687%3A0x3970d62f1899b668!2sCorporativo%20Megacable!5e0!3m2!1ses!2smx!4v1724886799252!5m2!1ses!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-                    
-
                     const cardBodyLeft = document.querySelector('.card-body-left');
                     cardBodyLeft.innerHTML = `  <p class="card-text"><strong>CIS:</strong> ${data.cisName}</p>
                                                 <p class="card-text"><strong>Id:</strong> ${data.idCis}</p>
-                                                <p class="card-text"><strong>Sucursal:</strong> ${data.sucursalName}</p>
+                                                <p class="card-text"><strong>Sucursal:</strong> ${data.sucursalName.toUpperCase()}</p>
                                                 <p class="card-text"><strong>Ciudad:</strong> ${data.ciudad}</p>
                                                 <p class="card-text"><strong>Estado:</strong> ${data.estado}</p>
                                                 <p class="card-text"><strong>Direccion:</strong> ${data.direccion}</p>
@@ -255,15 +218,15 @@
                                                 <p class="card-text"><strong>Latitud:</strong> ${data.latitud}</p>
                                                 <p class="card-text"><strong>Longitud:</strong> ${data.longitud}</p>
                                                 <p class="card-text"><strong>Discapacidad:</strong> ${data.discapacidad}</p>
-                                                <p class="card-text"><strong>Status:</strong> ${status}</p>
+                                                <p class="card-text"><strong>Status:</strong> ${status.toUpperCase()}</p>
                     `;
-                    //pasamos a numero la variable, para que la lea maps
+
+                    // Pasamos a número la variable, para que la lea maps
                     const latitud = parseFloat(data.latitud);
                     const longitud = parseFloat(data.longitud);
 
-                    //inicializamos el mapa
+                    // Inicializamos el mapa
                     iniciarMap(latitud, longitud);
-                    
                 })
                 .catch(error => console.error('Error al obtener la sucursal:', error));
         });
@@ -293,7 +256,7 @@
                 .catch(error => console.error('Error al borrar la Cis:', error));
             }
         }
-    
+
         function activarCis(id) {
             if (confirm('¿Estás seguro de que deseas activar esta Cis?')) {
                 fetch(`/cis/restaurar/${id}`, {
@@ -306,8 +269,7 @@
                 })
                 .catch(error => console.error('Error al activar la Cis:', error));
             }
-        }
-               
+        }       
     </script>
   
       

@@ -62,19 +62,26 @@ router.get('/cis/crear', (req, res) => {
 
 // Ruta POST para insertar una nueva sucursal en la base de datos
 router.post('/cis/crear', (req, res) => {
-    const { cisName,idSucursal, ciudad, estado, direccion, colonia, horario, telefono,
-    latitud, longitud, activo, discapacidad, status, create_at, create_user
-} = req.body;   
-        db.query(
-        'INSERT INTO cis (cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, status, create_at, create_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, status, create_at, create_user],
-        (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: 'Error al crear el CIS' });
-            }
-            res.json({ message: 'CIS creado correctamente' });
+    const { cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono,
+        latitud, longitud, discapacidad, status, create_at, create_user
+    } = req.body;
+
+    // Construir la consulta y los valores
+    const query = 'INSERT INTO cis (cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, discapacidad, status, create_at, create_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const values = [cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, discapacidad, status, create_at, create_user];
+
+    // Imprimir la consulta y los valores en la consola
+    console.log('Query:', query);
+    console.log('Values:', values);
+
+    // Ejecutar la consulta
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            return res.status(500).json({ error: 'Error al crear el CIS' });
         }
-    );
+        res.json({ message: 'CIS creado correctamente' });
+    });
 });
 
 // Ruta GET para servir la página HTML de edición de ubicación
@@ -85,10 +92,10 @@ router.get('/cis/editar', (req, res) => {
 
 // Ruta POST para actualizar los datos de una sucursal
 router.post('/cis/editar', (req, res) => {
-    const { idCis, cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad } = req.body;
+    const { idCis, cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, status, discapacidad } = req.body;
     db.query(
-        'UPDATE cis SET nombre = ?, sucursal = ?, ciudad = ?, estado = ?, direccion = ?, colonia = ?, horario = ?, telefono = ?, latitud = ?, longitud = ?, activo = ?, discapacidad = ? WHERE idCis = ?',
-        [cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, activo, discapacidad, idCis],
+        'UPDATE cis SET cisName = ?, idSucursal = ?, ciudad = ?, estado = ?, direccion = ?, colonia = ?, horario = ?, telefono = ?, latitud = ?, longitud = ?, status = ?, discapacidad = ? WHERE idCis = ?',
+        [cisName, idSucursal, ciudad, estado, direccion, colonia, horario, telefono, latitud, longitud, status, discapacidad, idCis],
         (err, result) => {
             if (err) {
                 console.error('Error al actualizar el CIS:', err);

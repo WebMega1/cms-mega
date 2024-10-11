@@ -69,85 +69,116 @@
             </div> <!--end::App Content Header--> <!--begin::App Content-->
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid"> <!--begin::Row-->
+                    <section class="content">
+
+                        <!-- Default box -->
+                        <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Edita CIS</h3>
+                
+                            <div class="card-tools">
+                           
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 card-body-left">
+                                    <form id="editar-form">
+                                        <input type="hidden" id="idCis" name="idCis">
+                                        <div class="mb-3">
+                                            <label for="nombre" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="cisName" name="cisName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="idSucursal" class="form-label">Sucursal</label>
+                                            <select  id="idSucursal" name="idSucursal" class="form-select" >
+                                                <option value="0">Elige Sucursal</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="ciudad" class="form-label">Ciudad</label>
+                                            <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="estado" class="form-label">Estado</label>
+                                            <input type="text" class="form-control" id="estado" name="estado" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="direccion" class="form-label">Dirección</label>
+                                            <textarea name="direccion" id="direccion" class="form-control" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="colonia" class="form-label">Colonia</label>
+                                            <input type="text" class="form-control" id="colonia" name="colonia" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="horario" class="form-label">Horario</label>
+                                            <input type="text" class="form-control" id="horario" name="horario" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="telefono" class="form-label">Teléfono</label>
+                                            <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="latitud" class="form-label">Latitud</label>
+                                            <input type="text" class="form-control" id="latitud" name="latitud" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="longitud" class="form-label">Longitud</label>
+                                            <input type="text" class="form-control" id="longitud" name="longitud" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select  id="status" name="status" class="form-select" >
+                                                <option value="1" selected>Activo</option>
+                                                <option value="0">Inactivo</option>
+                                            </select>
+                                        </div> 
+                                        <div class="mb-3">
+                                            <label for="discapacidad" class="form-label">Discapacidad</label>
+                                            <select  id="discapacidad" name="discapacidad" class="form-select" >
+                                                <option value="1" selected>Si</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-primary">Guardar Cambios</button>
+                                        <a href="/cis" class="btn btn-outline-secondary">Cancelar</a>
+                                    </form>
+                                   
+
+                                </div> 
+                                <div class="col-md-5 card-body-rigth">
+                                    <div id="map" style="height: 300px; width: 100%;"></div>                                    
+                                </div>   
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            
+                        </div>
+                        <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                
+                    </section>
+
+
+
                     <div class="row"> <!--begin::Col-->
                     </div> <!--end::Row--> <!--begin::Row-->
             
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-6"> 
-                            <form id="editar-form">
-                                <input type="hidden" id="idCis" name="idCis">
-                                <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="cisName" name="cisName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="idSucursal" class="form-label">Sucursal</label>
-                                    <select  id="idSucursal" name="idSucursal" class="form-select" >
-                                        <option value="0">Elige Sucursal</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="ciudad" class="form-label">Ciudad</label>
-                                    <input type="text" class="form-control" id="ciudad" name="ciudad" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="estado" class="form-label">Estado</label>
-                                    <input type="text" class="form-control" id="estado" name="estado" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="direccion" class="form-label">Dirección</label>
-                                    <input type="text" class="form-control" id="direccion" name="direccion" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="colonia" class="form-label">Colonia</label>
-                                    <input type="text" class="form-control" id="colonia" name="colonia" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="horario" class="form-label">Horario</label>
-                                    <input type="text" class="form-control" id="horario" name="horario" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="latitud" class="form-label">Latitud</label>
-                                    <input type="text" class="form-control" id="latitud" name="latitud" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="longitud" class="form-label">Longitud</label>
-                                    <input type="text" class="form-control" id="longitud" name="longitud" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select  id="status" name="status" class="form-select" >
-                                        <option value="1" selected>Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>
-                                </div> 
-                                <div class="mb-3">
-                                    <label for="discapacidad" class="form-label">Discapacidad</label>
-                                    <select  id="discapacidad" name="discapacidad" class="form-select" >
-                                        <option value="1" selected>Si</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-outline-primary">Guardar Cambios</button>
-                                <a href="/cis" class="btn btn-outline-secondary">Cancelar</a>
-                            </form>
+                           
                         </div>
                     </div>
                 </div> <!--end::Container-->
             </div> <!--end::App Content-->
         </main> <!--end::App Main--> <!--begin::Footer-->
-        <footer class="app-footer"> <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
-                Comunicación Gráfica y Servicios Web Pruebas  &copy; 2024&nbsp; 
-                
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
+        <footer class="app-footer" id="footer"> <!--begin::To the end-->
+          
         </footer> <!--end::Footer-->      
 
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
@@ -159,43 +190,15 @@
             // Primera función: Cargar la sección HTML del sidebar
             cargaLeftSidebar();
             cargaNavBar();
-            // Segunda función: Otra lógica que deseas ejecutar al cargar la página
-            console.log('cargar secciones');
+            cargaFooter();
         }
 
         document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
-
-        function cargaLeftSidebar() {
-            fetch('/left-sidebar.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('left-sidebar').innerHTML = data;
-                    
-                })
-                .catch(error => console.error('Error loading left-sidebar:', error));
-        }
-
-        function cargaNavBar() {
-            fetch('/navBar.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('navBar').innerHTML = data;
-                    
-                })
-                .catch(error => console.error('Error loading left-sidebar:', error));
-        }
+        
     </script>
-    <script src="../js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script src="../js/adminlte.js"></script>
+    <script src="../js/componentes.js"></script>
+    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
          const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {
@@ -273,7 +276,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.message);
+                //alert(data.message);
                 window.location.href = '/cis';
             })
             .catch(error => console.error('Error al actualizar el CIS:', error));
