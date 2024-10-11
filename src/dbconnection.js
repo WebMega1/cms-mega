@@ -11,5 +11,8 @@ db.connect(err => {
 });
 
 db.query = util.promisify(db.query); // Promisifica la función de consulta SQL para permitir el uso de promesas y async/await.
+db.beginTransaction = util.promisify(db.beginTransaction);
+db.commit = util.promisify(db.commit);
+db.rollback = util.promisify(db.rollback);
 
 module.exports = db; // Exporta la conexión a la base de datos para que pueda ser utilizada en otros archivos.

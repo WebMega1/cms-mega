@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 //rutas 
 const routesIndex = require('./routes/index'); // Importa las rutas para la página principal desde un archivo externo.
 const routesUsers = require('./routes/userLogInOut'); // Importa las rutas para el inicio y cierre de sesión de usuarios.
-const routesUbic = require('./routes/ubicaciones');  // Importa las rutas para gestionar ubicaciones.
+const routesUbic = require('./routes/ubicaciones');  // Importa las rutas para gestionar Sucursales.
 const routesCis = require('./routes/cis');  // Importa las rutas para gestionar cis.
 const routesRegi = require('./routes/regiones'); // Importa las rutas para gestionar Regiones.
 const routesTipoCanales = require('./routes/tipocanales');  // Importa las rutas para gestionar Categorias.

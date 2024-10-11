@@ -58,201 +58,277 @@
                
             
         </aside>
-        <main class="app-main">
-            <!--begin::App Content Header-->
-            <div class="app-content-header">
-                <!--begin::Container-->
-                <div class="container-fluid">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="mb-0">Trivias y Respuestas</h3>
+                <main class="app-main">
+                    <!--begin::App Content Header-->
+                    <div class="app-content-header">
+                        <!--begin::Container-->
+                        <div class="container-fluid">
+                            <!--begin::Row-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3 class="mb-0">Respuestas</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-end">
+                                        <li class="breadcrumb-item"><a href="../index">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            Respuestas
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <!--end::Row-->
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Trivias y Respuestas
-                                </li>
-                            </ol>
-                        </div>
+                        <!--end::Container-->
                     </div>
-                    <!--end::Row-->
-                </div>
-                <!--end::Container-->
-            </div>
-            <!--end::App Content Header-->
-            <!--begin::App Content-->
-            <div class="app-content">
-                <!--begin::Container-->
-                <div class="container-fluid">
-                    <!--begin::Row-->
-                    <section class="content">
-                        <!-- Default box -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Trivias y Respuestas</h3>
-                            </div>
-                            <div class="card-body">
-                                <table id="trivias_respuestas" class="table table-striped" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Trivia ID</th>
-                                            <th>Pregunta</th>
-                                            <th>Respuesta Correcta</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="trivias-respuestas-body" class="table-body">
-                                        <!-- Aquí se insertarán las filas dinámicamente -->
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Trivia ID</th>
-                                            <th>Pregunta</th>
-                                            <th>Respuesta Correcta</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer"></div>
-                            <!-- /.card-footer-->
+                    <!--end::App Content Header-->
+                    <!--begin::App Content-->
+                    <div class="app-content">
+                        <!--begin::Container-->
+                        <div class="container-fluid">
+                            <!--begin::Row-->
+                            <section class="content">
+                                <!-- Default box -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Respuestas</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="respuestas" class="table table-striped" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Trivia Id</th>
+                                                    <th>Fecha</th>
+                                                    <th>Nombre Cliente</th>
+                                                    <th>Edad</th>
+                                                    <th>Dirección</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Email</th>
+                                                    <th>Número de Contrato</th>
+                                                    <th>Nombre del Titular</th>
+                                                    <th>Ciudad</th>
+                                                    <th>Acepto Término</th>
+                                                    <th>Respuestas Correctas</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="respuestas-body" class="table-body">
+                                                <!-- Aquí se insertarán las filas dinámicamente -->
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Trivia Id</th>
+                                                    <th>Fecha</th>
+                                                    <th>Nombre Cliente</th>
+                                                    <th>Edad</th>
+                                                    <th>Dirección</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Email</th>
+                                                    <th>Número de Contrato</th>
+                                                    <th>Nombre del Titular</th>
+                                                    <th>Ciudad</th>
+                                                    <th>Acepto Término</th>
+                                                    <th>Respuestas Correctas</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer"></div>
+                                    <!-- /.card-footer-->
+                                </div>
+                                <!-- /.card -->
+                            </section>
                         </div>
-                        <!-- /.card -->
-                    </section>
-                </div>
-                <!--end::Container-->
-            </div>
-            <!--end::App Content-->
-        </main>
-        <!--end::App Main-->
-        <!--begin::Footer-->
-        <footer class="app-footer">
-            <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
-            <!--end::To the end-->
-            <!--begin::Copyright-->
-            <strong>
-                Comunicación Gráfica y Servicios Web Pruebas &copy; 2024&nbsp;
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
-        </footer>
-        <!--end::Footer-->
-        
-        <!--begin::Script-->
-        <!--begin::Third Party Plugin(OverlayScrollbars)-->
-        <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
-        <!--end::Third Party Plugin(OverlayScrollbars)-->
-        <!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
-        <!--end::Required Plugin(popperjs for Bootstrap 5)-->
-        <!--begin::Required Plugin(Bootstrap 5)-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
-        <!--end::Required Plugin(Bootstrap 5)-->
-        <!--begin::Required Plugin(AdminLTE)-->
-        <script>
-            function onDOMContentLoaded() {
-                // Primera función: Cargar la sección HTML del sidebar
-                cargaLeftSidebar();
-                cargaNavBar();
-                // Segunda función: Otra lógica que deseas ejecutar al cargar la página
-                console.log('cargar secciones');
-            }
-    
-            document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
-    
-            function cargaLeftSidebar() {
-                fetch('/left-sidebar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
+                        <!--end::Container-->
+                    </div>
+                    <!--end::App Content-->
+                </main>
+                <!--end::App Main-->
+                <!--begin::Footer-->
+                <footer class="app-footer">
+                    <!--begin::To the end-->
+                    <div class="float-end d-none d-sm-inline">Anything you want</div>
+                    <!--end::To the end-->
+                    <!--begin::Copyright-->
+                    <strong>
+                        Comunicación Gráfica y Servicios Web Pruebas &copy; 2024&nbsp;
+                    </strong>
+                    All rights reserved.
+                    <!--end::Copyright-->
+                </footer>
+                <!--end::Footer-->
+                
+                <!--begin::Script-->
+                <!--begin::Third Party Plugin(OverlayScrollbars)-->
+                <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
+                <!--end::Third Party Plugin(OverlayScrollbars)-->
+                <!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
+                <!--end::Required Plugin(popperjs for Bootstrap 5)-->
+                <!--begin::Required Plugin(Bootstrap 5)-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
+                <!--end::Required Plugin(Bootstrap 5)-->
+                <!--begin::Required Plugin(AdminLTE)-->
+                <script>
+                    function onDOMContentLoaded() {
+                        // Primera función: Cargar la sección HTML del sidebar
+                        cargaLeftSidebar();
+                        cargaNavBar();
+                        // Segunda función: Otra lógica que deseas ejecutar al cargar la página
+                        console.log('cargar secciones');
+                    }
+                
+                    document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
+                
+                    function cargaLeftSidebar() {
+                        fetch('/left-sidebar.html')
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                document.getElementById('left-sidebar').innerHTML = data;
+                                
+                            })
+                            .catch(error => console.error('Error loading left-sidebar:', error));
+                    }
+                
+                    function cargaNavBar() {
+                        fetch('/navBar.html')
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                document.getElementById('navBar').innerHTML = data;
+                                
+                            })
+                            .catch(error => console.error('Error loading left-sidebar:', error));
+                    }
+                </script>
+                <script src="../js/adminlte.js"></script>
+                <!--end::Required Plugin(AdminLTE)-->
+                <!--begin::OverlayScrollbars Configure-->
+                <script>
+                    const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+                    const Default = {
+                        scrollbarTheme: "os-theme-light",
+                        scrollbarAutoHide: "leave",
+                        scrollbarClickScroll: true,
+                    };
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+                        if (
+                            sidebarWrapper &&
+                            typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
+                        ) {
+                            OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                                scrollbars: {
+                                    theme: Default.scrollbarTheme,
+                                    autoHide: Default.scrollbarAutoHide,
+                                    clickScroll: Default.clickScroll,
+                                },
+                            });
                         }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('left-sidebar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
-    
-            function cargaNavBar() {
-                fetch('/navBar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
+                    });
+                </script>
+                <!--end::OverlayScrollbars Configure-->
+                <!-- OPTIONAL SCRIPTS -->
+                <!-- sortablejs -->
+                
+                <script>
+                    $(document).ready(function() {
+                        // Cargar datos dinámicamente
+                        fetch('/triviasrespuestas/data')  // Cambia la ruta a la correcta para obtener los datos
+                            .then(response => response.json())
+                            .then(data => {
+                                const tbody = document.getElementById('respuestas-body');
+                                tbody.innerHTML = ''; // Limpiar el contenido existente
+                                data.forEach(item => {
+                                    const row = document.createElement('tr');
+                
+                                    if (item.status == 1) {
+                                        var status = "Activo";
+                                        var statusButton = `<a onclick="borrarRespuesta(${item.id})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                                    } else {
+                                        var status = "Inactivo";
+                                        var statusButton = `<a onclick="activarRespuesta(${item.id})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                                    }
+                
+                                    row.innerHTML = `
+                                        <td>${item.id}</td>
+                                        <td>${item.trivia_id}</td>
+                                        <td>${item.fecha}</td>
+                                        <td>${item.nombrecliente}</td>
+                                        <td>${item.edad}</td>
+                                        <td>${item.direccion}</td>
+                                        <td>${item.telefono}</td>
+                                        <td>${item.email}</td>
+                                        <td>${item.numero_contrato}</td>
+                                        <td>${item.nombredeltitular}</td>
+                                        <td>${item.ciudad}</td>
+                                        <td>${item.acepto_termino}</td>
+                                        <td>${item.respuestas_correctas}</td>
+                                        <td>
+                                            <a href="/respuestas/ver?id=${item.id}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>
+                                            ${statusButton}
+                                        </td>
+                                    `;
+                                    tbody.appendChild(row);
+                                });
+                                // Inicializar DataTables después de cargar los datos
+                                $('#respuestas').DataTable();
+                            })
+                            .catch(error => {
+                                console.error('Error al cargar los datos:', error);
+                            });
+                    });
+                
+                    function borrarRespuesta(id) {
+                        if (confirm('¿Estás seguro de que deseas desactivar esta respuesta?')) {
+                            fetch(`/respuestas/borrar/${id}`, {
+                                method: 'PUT'
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert(data.message);
+                                location.reload();
+                            })
+                            .catch(error => console.error('Error al desactivar la respuesta:', error));
                         }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('navBar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
-        </script>
-        <script src="../js/adminlte.js"></script>
-        <!--end::Required Plugin(AdminLTE)-->
-        <!--begin::OverlayScrollbars Configure-->
-        <script>
-            const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
-            const Default = {
-                scrollbarTheme: "os-theme-light",
-                scrollbarAutoHide: "leave",
-                scrollbarClickScroll: true,
-            };
-            document.addEventListener("DOMContentLoaded", function() {
-                const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-                if (
-                    sidebarWrapper &&
-                    typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
-                ) {
-                    OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-                        scrollbars: {
-                            theme: Default.scrollbarTheme,
-                            autoHide: Default.scrollbarAutoHide,
-                            clickScroll: Default.clickScroll,
-                        },
-                    });
-                }
-            });
-        </script>
-        <!--end::OverlayScrollbars Configure-->
-        <!-- OPTIONAL SCRIPTS -->
-        <!-- sortablejs -->
+                    }
+                
+                    function activarRespuesta(id) {
+                        if (confirm('¿Estás seguro de que deseas activar esta respuesta?')) {
+                            fetch(`/respuestas/restaurar/${id}`, {
+                                method: 'PUT'
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert(data.message);
+                                location.reload();
+                            })
+                            .catch(error => console.error('Error al activar la respuesta:', error));
+                        }
+                    }
+                </script>        
+                </body><!--end::Body-->
+                
+                </html>
+                
         
-        <script>
-            $(document).ready(function() {
-                // Cargar datos dinámicamente
-                fetch('/triviasrespuestas/data')  // Cambia la ruta a la correcta para obtener los datos
-                    .then(response => response.json())
-                    .then(data => {
-                        const tbody = document.getElementById('trivias-respuestas-body');
-                        tbody.innerHTML = ''; // Limpiar el contenido existente
-                        data.forEach(item => {
-                            const row = document.createElement('tr');
-    
-                            row.innerHTML = `
-                                <td>${item.trivia_id}</td>
-                                <td>${item.pregunta}</td>
-                                <td>${item.respuestaCorrecta}</td>
-                            `;
-                            tbody.appendChild(row);
-                        });
-                        // Inicializar DataTables después de cargar los datos
-                        $('#trivias_respuestas').DataTable();
-                    })
-                    .catch(error => {
-                        console.error('Error al cargar los datos:', error);
-                    });
-            });
-        </script>
-
-        </body><!--end::Body-->
         
-        </html>
         
+        
+         
 
 
 
