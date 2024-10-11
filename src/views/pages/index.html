@@ -114,55 +114,12 @@
         }
 
         document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
-
-        function cargaLeftSidebar() {
-            fetch('/left-sidebar.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('left-sidebar').innerHTML = data;
-                    
-                })
-                .catch(error => console.error('Error loading left-sidebar:', error));
-        }
-
-        function cargaNavBar() {
-            fetch('/navBar.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('navBar').innerHTML = data;
-                    
-                })
-                .catch(error => console.error('Error loading left-sidebar:', error));
-        }
-
-        function cargaNavBar() {
-            fetch('/footer.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('footer').innerHTML = data;
-                    
-                })
-                .catch(error => console.error('Error loading left-sidebar:', error));
-        }
     </script>
   
   
-  <script src="/js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+  <script src="/js/adminlte.js"></script>
+  <script src="/js/componentes.js"></script>
+
   <script>
     function onDOMContentLoaded() {
         // Primera función: Cargar la sección HTML del sidebar

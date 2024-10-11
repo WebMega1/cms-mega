@@ -90,8 +90,8 @@
                         <div class="card-header">
                             <h3 class="card-title">Sucursales</h3>
                             <div class="card-tools">
-                                <a href="/ubicaciones/crear" class="btn btn-outline-success" title="Crear Nueva Sucursal">
-                                    <i class="bi bi-plus-circle"></i> Crear Nueva Sucursal
+                                <a href="/ubicaciones/crear" class="btn btn-outline-success" title="Nueva Sucursal">
+                                    <i class="bi bi-plus-circle"></i> Nueva Sucursal
                                 </a>
                             </div>
                         </div>
@@ -101,6 +101,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Sucursal</th>
+                                        <th>Región</th>
                                         <th>Status</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -112,6 +113,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Sucursal</th>
+                                        <th>Región</th>
                                         <th>Status</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -128,7 +130,7 @@
                 </div> <!--end::Container-->
             </div> <!--end::App Content-->
         </main> <!--end::App Main--> <!--begin::Footer-->
-        <footer class="app-footer"> <!--begin::To the end-->
+        <footer class="app-footer" id="footer"> <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
                 Comunicación Gráfica y Servicios Web Pruebas  &copy; 2024&nbsp; 
             </strong>
@@ -146,43 +148,15 @@
                 // Primera función: Cargar la sección HTML del sidebar
                 cargaLeftSidebar();
                 cargaNavBar();
-                // Segunda función: Otra lógica que deseas ejecutar al cargar la página
+                cargaFooter();                // Segunda función: Otra lógica que deseas ejecutar al cargar la página
                 console.log('cargar secciones');
             }
     
             document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
     
-            function cargaLeftSidebar() {
-                fetch('/left-sidebar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('left-sidebar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
-    
-            function cargaNavBar() {
-                fetch('/navBar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('navBar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
         </script>
-        <script src="../../js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+        <script src="/js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+        <script src="/js/componentes.js"></script>
         <script>
             const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
             const Default = {
@@ -208,8 +182,8 @@
         </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->
         <script>
             $(document).ready(function() {
-                // Cargar datos dinámicamente
-                fetch('/ubicaciones/data')  // Cambia la ruta a la correcta para obtener los datos
+                // Cargar los datos de la tabla de sucursales
+                fetch('/ubicaciones/data')  // Obtenemos la API con la vista de sucursales por region
                     .then(response => response.json())
                     .then(data => {
                         const tbody = document.getElementById('sucursales-body');
@@ -217,16 +191,21 @@
                             const row = document.createElement('tr');
         
                             if(item.status == 1){
-                            var status = item.status = "Activo";
+                            var status = item.status = "ACTIVO";
                             var statusButton = `<a onclick="borrarSucursal(${item.idSucursal})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
                             }else{
-                                var status = item.status = "Inactivo";
+                                var status = item.status = "INACTIVO";
                                 var statusButton = `<a onclick="activarSucursal(${item.idSucursal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                            }
+
+                            if(!item.regionName){
+                                item.regionName = 'SIN REGIÓN';
                             }
         
                             row.innerHTML = `
                                 <td>${item.idSucursal}</td>
                                 <td>${item.sucursalName}</td>
+                                <td>${item.regionName}</td>
                                 <td>${status}</td>
                                 <td>
                                     <a href="/ubicaciones/ver?id=${item.idSucursal}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
@@ -243,6 +222,33 @@
                         console.error('Error al cargar los datos:', error);
                     });
             });
+
+            function borrarSucursal(id) {
+                if (confirm('Se esta desactivando la sucursal')) {
+                    fetch(`/ubicaciones/borrar/${id}`, {
+                        method: 'PUT'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        //alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => console.error('Error al borrar la Cis:', error));
+                }
+            }
+            function activarSucursal(id) {
+                if (confirm('Se esta Activando la sucursal')) {
+                    fetch(`/ubicaciones/restaurar/${id}`, {
+                        method: 'PUT'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        //alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => console.error('Error al activar la Cis:', error));
+                }
+            }
         </script>
   
       
