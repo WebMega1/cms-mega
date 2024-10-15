@@ -30,7 +30,7 @@ router.get('/canales/data', (req, res) => {
    db.query('SELECT * FROM channels', (err, result) => {
        if (err) {
              // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
-           return res.status(500).json({ error: 'Error al obtener las sucursales' });
+           return res.status(500).json({ error: 'Error al obtener canales' });
        }
        // Si la consulta es exitosa, envía los resultados como un JSON
        res.json(result); // Envía los datos como JSON
@@ -43,13 +43,12 @@ router.get('/canales', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/canales', 'canales.html'));
 });
 
-
-// Ruta GET para obtener datos de un canal  específica en formato JSON
+// Ruta GET para obtener datos de un tipo de canal específico en formato JSON
 router.get('/canales/ver/data', (req, res) => {
     const { id } = req.query;
-    db.query('SELECT * FROM channels WHERE id = ?', [id], (err, result) => {
+    db.query('SELECT * FROM channels WHERE idChannels = ?', [id], (err, result) => {
         if (err) {
-            return res.status(500).json({ error: 'Error al obtener el  canal' });
+            return res.status(500).json({ error: 'Error al obtener el canal' });
         }
         if (result.length === 0) {
             return res.status(404).json({ error: 'Canal no encontrado' });
@@ -72,7 +71,7 @@ router.get('/canales/crear', (req, res) => {
 router.post('/canales/crear', (req, res) => {
     const { id, name, type, status, code, active, create_user, create_at } = req.body;
     const image = req.file ? req.file.filename : null; // Obtener el nombre del archivo subido
-    const query = 'INSERT INTO channels (id, name, image, type, status, code, active, create_user, create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO channels (idChannels, name, image, type, status, code, active, create_user, create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     const values = [id, name, image, type, status, code, active, create_user, create_at];
 
     db.query(query, values, (err, result) => {
@@ -94,7 +93,7 @@ router.post('/canales/editar/:id', upload.single('image'), (req, res) => {
     const { id } = req.params;
     const { name, type, status, code, active } = req.body;
     const image = req.file ? req.file.filename : req.body.existingImage; // Usar la nueva imagen si se sube, de lo contrario usar la existente
-    const query = 'UPDATE channels SET name = ?, image = ?, type = ?, status = ?, code = ?, active = ? WHERE id = ?';
+    const query = 'UPDATE channels SET name = ?, image = ?, type = ?, status = ?, code = ?, active = ? WHERE idChannels = ?';
     const values = [name, image, type, status, code, active, id];
 
     db.query(query, values, (err, result) => {
@@ -109,7 +108,7 @@ router.post('/canales/editar/:id', upload.single('image'), (req, res) => {
 // Ruta POST para activar un canal
 router.post('/canales/activar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE channels SET active = 1 WHERE id = ?', [id], (err, result) => {
+    db.query('UPDATE channels SET status = 1 WHERE idChannels = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al activar el  canal' });
         }
@@ -120,7 +119,7 @@ router.post('/canales/activar/:id', (req, res) => {
 // Ruta POST para desactivar un canal
 router.post('/canales/desactivar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE channels SET active = 0 WHERE id = ?', [id], (err, result) => {
+    db.query('UPDATE channels SET status = 0 WHERE idChannels = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al activar el  canal' });
         }

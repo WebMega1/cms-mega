@@ -6,7 +6,7 @@ const db = require('../dbconnection');
 
 // Ruta GET para obtener datos de todas los tipo de servicios de cable  en formato JSON
 router.get('/servicioscable/data', (req, res) => {
-    db.query('SELECT * FROM serviciocable', (err, result) => {
+    db.query('SELECT * FROM view_servicioscable', (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener los tipos de canales' });
         }
@@ -22,7 +22,7 @@ router.get('/servicioscable', (req, res) => {
 // Ruta GET para obtener datos de un tipo de servicio de cable  específico en formato JSON
 router.get('/servicioscable/ver/data', (req, res) => {
     const { id } = req.query;
-    db.query('SELECT * FROM serviciocable WHERE idServicioCable = ?', [id], (err, result) => {
+    db.query('SELECT * FROM `view_servicioscable` WHERE idServicioCable = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener el tipo de canal' });
         }

@@ -44,12 +44,17 @@ router.get('/tiposcanales/crear', (req, res) => {
 
 // Ruta POST para guardar un nuevo tipo de canal
 router.post('/tiposcanales/crear', (req, res) => {
-    const { nombre, premier, prioridad, visible, create_user, create_at } = req.body;
+    const { tipoCanal, premier, prioridad, visible, create_user, create_at } = req.body;
     const query = 'INSERT INTO tipocanales (tipoCanal, premier, prioridad, status, create_user, create_at) VALUES (?, ?, ?, ?, ?, ?)';
-    const values = [nombre, premier, prioridad, visible, create_user, create_at];
+    const values = [tipoCanal, premier, prioridad, visible, create_user, create_at];
+
+    // Imprimir la consulta y los valores en la consola
+    console.log('Query:', query);
+    console.log('Values:', values);
 
     db.query(query, values, (err, result) => {
         if (err) {
+            console.error('Error al ejecutar la consulta:', err);
             return res.status(500).json({ error: 'Error al crear el tipo de canal' });
         }
         res.json({ message: 'Tipo de canal creado exitosamente' });
@@ -63,17 +68,24 @@ router.get('/tiposcanales/editar', (req, res) => {
 
 // Ruta POST para actualizar un tipo de canal
 router.post('/tiposcanales/editar', (req, res) => {
-    const { id_tipocanal, nombre, premier, prioridad, visible } = req.body;
-    db.query(
-        'UPDATE tipocanales SET tipoCanal = ?, premier = ?, prioridad = ?, status = ? WHERE idTipoCanal = ?',
-        [nombre, premier, prioridad, visible, id_tipocanal],
-        (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: 'Error al actualizar el tipo de canal' });
-            }
-            res.json({ message: 'Tipo de canal actualizado correctamente' });
+    const { idTipoCanal, tipoCanal, premier, prioridad, visible } = req.body;
+
+    // Construir la consulta y los valores
+    const query = 'UPDATE tipocanales SET tipoCanal = ?, premier = ?, prioridad = ?, status = ? WHERE idTipoCanal = ?';
+    const values = [tipoCanal, premier, prioridad, visible, idTipoCanal];
+
+    // Imprimir la consulta y los valores en la consola
+    console.log('Query:', query);
+    console.log('Values:', values);
+
+    // Ejecutar la consulta
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            return res.status(500).json({ error: 'Error al actualizar el tipo de canal' });
         }
-    );
+        res.json({ message: 'Tipo de canal actualizado correctamente' });
+    });
 });
 
 // Ruta POST para activar un tipo de canal

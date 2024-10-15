@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="../../js/metadata.js"></script>
+    <script src="/js/metadata.js"></script>
 
     <title id="title">CPanel - Mega</title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../../css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link rel="stylesheet" href="/css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
 
    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
@@ -43,7 +43,7 @@
                    
                     <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                            <li class="user-header text-bg-primary"> <img src="../assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
+                            <li class="user-header text-bg-primary"> <img src="/assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
                                 <p>
                                     Administrador - Web Developer
                                     
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Editar Canal
                                 </li>
@@ -100,36 +100,29 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-6">
                             <form id="editar-form" enctype="multipart/form-data">
-                                <input type="hidden" id="id" name="id">
+                                <input type="hidden" id="idChannels" name="idChannels">
                                 <input type="hidden" id="existingImage" name="existingImage">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nombre del Canal</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <input type="text" class="form-control" id="nameChannel" name="nameChannel" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Imagen</label>
                                     <input type="file" class="form-control" id="image" name="image">
                                     <img id="current-image" src="" alt="Imagen actual" style="width: 100px; height: auto;">
                                 </div>
+                                
                                 <div class="mb-3">
-                                    <label for="type" class="form-label">Tipo</label>
-                                    <input type="text" class="form-control" id="type" name="type" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Estado</label>
-                                    <input type="text" class="form-control" id="status" name="status" required>
-                                </div>
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-control" id="status" name="status" required>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>                                </div>
                                 <div class="mb-3">
                                     <label for="code" class="form-label">Código</label>
                                     <input type="text" class="form-control" id="code" name="code" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="active" class="form-label">Activo</label>
-                                    <select class="form-control" id="active" name="active" required>
-                                        <option value="1">Sí</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
+                               
                                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                                 <a href="/canales" class="btn btn-secondary">Cancelar</a>
                             </form>
@@ -142,15 +135,8 @@
         </main>
         <!--end::App Main-->
         <!--begin::Footer-->
-        <footer class="app-footer">
-            <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
-            <!--end::To the end-->
-            <!--begin::Copyright-->
-            <strong>
-                Comunicación Gráfica y Servicios Web Pruebas &copy; 2024&nbsp;
-            </strong>
-            All rights reserved.
+        <footer class="app-footer" id="footer">
+           
             <!--end::Copyright-->
         </footer>
         <!--end::Footer-->
@@ -178,38 +164,11 @@
     
             document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
     
-            function cargaLeftSidebar() {
-                fetch('/left-sidebar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('left-sidebar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
-    
-            function cargaNavBar() {
-                fetch('/navBar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('navBar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
         </script>
         
-        <script src="../../js/adminlte.js"></script>
+        <script src="/js/adminlte.js"></script>
+        <script src="/js/componentes.js"></script>
+
         <!--end::Required Plugin(AdminLTE)-->
         <!--begin::OverlayScrollbars Configure-->
         <script>
@@ -245,14 +204,12 @@
                 fetch(`/canales/ver/data?id=${id}`)
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('id').value = data.id;
-                        document.getElementById('name').value = data.name;
+                        document.getElementById('idChannels').value = data.idChannels;
+                        document.getElementById('nameChannels').value = data.nameChannels;
                         document.getElementById('existingImage').value = data.image;
-                        document.getElementById('current-image').src = `/uploads/${data.image}`;
-                        document.getElementById('type').value = data.type;
-                        document.getElementById('status').value = data.status;
+                        document.getElementById('current-image').src = `/uploads/canales/${data.image}`;
                         document.getElementById('code').value = data.code;
-                        document.getElementById('active').value = data.active ? "1" : "0";
+                        document.getElementById('status').value = data.active ? "1" : "0";
                     })
                     .catch(error => console.error('Error al obtener el canal:', error));
         
@@ -277,7 +234,3 @@
 </body><!--end::Body-->
 
 </html>
-
-
-
-

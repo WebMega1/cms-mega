@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="../index">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Tipos de Canales
                                 </li>
@@ -142,16 +142,8 @@
         </main>
         <!--end::App Main-->
         <!--begin::Footer-->
-        <footer class="app-footer">
-            <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
-            <!--end::To the end-->
-            <!--begin::Copyright-->
-            <strong>
-                Comunicación Gráfica y Servicios Web Pruebas &copy; 2024&nbsp;
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
+        <footer class="app-footer" id="footer">
+          
         </footer>
         <!--end::Footer-->
         </div>
@@ -172,44 +164,16 @@
                 // Primera función: Cargar la sección HTML del sidebar
                 cargaLeftSidebar();
                 cargaNavBar();
-                // Segunda función: Otra lógica que deseas ejecutar al cargar la página
-                console.log('cargar secciones');
+                cargaFooter();
+
             }
     
             document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
-    
-            function cargaLeftSidebar() {
-                fetch('/left-sidebar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('left-sidebar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
-    
-            function cargaNavBar() {
-                fetch('/navBar.html')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        document.getElementById('navBar').innerHTML = data;
-                        
-                    })
-                    .catch(error => console.error('Error loading left-sidebar:', error));
-            }
         </script>
       
-        <script src="../../js/adminlte.js"></script>
+        <script src="/js/adminlte.js"></script>
+        <script src="/js/componentes.js"></script>
+
         <!--end::Required Plugin(AdminLTE)-->
         <!--begin::OverlayScrollbars Configure-->
         <script>
