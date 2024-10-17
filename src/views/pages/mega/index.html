@@ -40,10 +40,7 @@
             <span class="close-popup">X</span>
             <h3>Si deseas cambiar tu ubicación, selecciona una opción de esta lista</h3>
             <select id="location-select">
-                <option value="Abasolo">Abasolo</option>
-                <option value="Guadalajara">Guadalajara</option>
-                <option value="Zapopan">Zapopan</option>
-                <option value="Tlaquepaque">Tlaquepaque</option>
+                
             </select>
             <button id="confirm-location">Cambiar</button>
         </div>
@@ -76,13 +73,11 @@
 
     <!-- banner -->
     <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+        <div class="carousel-inner" id="bannerCarousel-inner">
             <div class="carousel-item active">
-                <img src="/assets/mega/assets/img/banner-01.webp" class="d-block w-100" alt="Banner 1">
+                <img src="/uploads/bannerHero/244__imagen_1727122798.jpg" class="d-block w-100" alt="Banner 1">
             </div>
-            <div class="carousel-item">
-                <img src="/assets/mega/assets/img/xview-promo.png" class="d-block w-100" alt="Banner 2">
-            </div>
+           
 
         </div>
         <!-- flechas-->
@@ -170,34 +165,7 @@
         </div>
 
         <div id="streamings-container" class="d-flex justify-content-center flex-wrap">
-            <div class="streaming-content">
-                <img class="streaming-img" src="assets/img/streamings/streaming_netflix.png" alt="">
-                <h3 class="streaming-title">Agrega<span class="str-name">Netflix</span></h3>
-            </div>
-            <div class="streaming-content">
-                <img class="streaming-img" src="assets/img/streamings/streaming_amazon.png" alt="">
-                <h3 class="streaming-title">Agrega<span class="str-name"></span>Amazon</h3>
-            </div>
-            <div class="streaming-content">
-                <img class="streaming-img" src="assets/img/streamings/streaming_disney.png" alt="">
-                <h3 class="streaming-title">Agrega<span class="str-name"></span>Disney+</h3>
-            </div>
-            <div class="streaming-content">
-                <img class="streaming-img" src="assets/img/streamings/streaming_max.png" alt="">
-                <h3 class="streaming-title">Agrega<span class="str-name"></span>Max</h3>
-            </div>
-            <div class="streaming-content">
-                <img class="streaming-img" src="assets/img/streamings/streaming_paramount.png" alt="">
-                <h3 class="streaming-title">Agrega<span class="str-name"></span>Paramount</h3>
-            </div>
-            <div class="streaming-content">
-                <img class="streaming-img" src="assets/img/streamings/streaming_fox-sports.png" alt="">
-                <h3 class="streaming-title">Agrega<span class="str-name"></span>Fox Sports Pemium</h3>
-            </div>
-            <div class="streaming-content">
-                <img class="streaming-img" src="assets/img/streamings/streaming_mlb.png" alt="">
-                <h3 class="streaming-title">Agrega<span class="str-name"></span>MLB</h3>
-            </div>
+           
         </div>
     </section>
 
@@ -260,12 +228,12 @@
         <div class="carousel-indicators"></div>
 
         <!-- Imágenes del slider -->
-        <div class="carousel-inner">
-            <div class="carousel-item">
-                <img src="assets/img/xview-promo.png" class="d-block w-100 img-fluid" alt="Promo 2">
+        <div class="carousel-inner" id="promo-banners-footer">
+            <div class="carousel-item ">
+                <img src="/uploads/bannerHomeFooter/113__imagen_1727885398.png" class="d-block w-100 img-fluid" alt="Promo 2">
             </div>
-            <div class="carousel-item active">
-                <img src="assets/img/fox-promo.png" class="d-block w-100 img-fluid" alt="Promo 1">
+            <div class="carousel-item ">
+                <img src="/uploads/bannerHomeFooter/143__imagen_1693588254.png" class="d-block w-100 img-fluid" alt="Promo 1">
             </div>
         </div>
     </div>
@@ -396,14 +364,93 @@
                         option.textContent = item.sucursalName;
                         slcOptions.appendChild(option);
                     });
-    
+
                     // Cargar las tarjetas para la primera sucursal en la lista
                     if (data.length > 0) {
                         cardTarifario(data[0].idSucursal);
                     }
                 })
                 .catch(error => console.error('Error al cargar los datos de las sucursales:', error));
-    
+
+            // Fetch para obtener banners de Hero
+            fetch('/api/bannerHero/')
+                .then(response => response.json())
+                .then(data => {
+                    const divBannerHero = document.getElementById('bannerCarousel-inner');
+                    divBannerHero.innerHTML = ''; // Limpiar el contenido existente
+                    data.forEach((item, index) => {
+                        divBannerHero.innerHTML += `
+                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                <img src="${item.ruta}${item.archivo}" class="d-block w-100" alt="${item.archivo}">
+                            </div>
+                        `;
+                    });
+
+                    // Inicializar el carrusel de Bootstrap
+                    $('#bannerCarousel').carousel();
+                })
+                .catch(error => console.error('Error al cargar los datos de los banners:', error));
+
+                // Fetch para obtener banners de streaming
+                fetch('/api/bannerStreaming/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const divStreaming = document.getElementById('streamings-container');
+                        divStreaming.innerHTML = ''; // Limpiar el contenido existente
+                        data.forEach((item, index) => {
+                            divStreaming.innerHTML += `
+                                <div class="streaming-content">
+                                    <a href="/mega/${item.linkHome}">
+                                        <img class="streaming-img" src="${item.ruta}${item.archivo}" alt="${item.archivo}">
+                                        
+                                    </a>
+                                </div>
+                            `;
+                        });
+
+                    })
+                    .catch(error => console.error('Error al cargar los datos de los banners:', error));
+
+
+                // Fetch para obtener banners de streaming
+                fetch('/api/bannerServices/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const divServices = document.getElementById('services-container');
+                        divServices.innerHTML = ''; // Limpiar el contenido existente
+                        data.forEach((item, index) => {
+                            divServices.innerHTML += `
+                                <div class="services-content">
+                                    <img src="${item.ruta}${item.archivo}" alt="${item.archivo}">
+                                    <h3>${item.nameServicio}</h3>
+                                    <a class="btn btn-dark btn-services" href="${item.linkHome}">Saber más</a>
+                                </div>
+                            `;
+                        });
+
+                    })
+                    .catch(error => console.error('Error al cargar los datos de los banners:', error));
+
+                 // Fetch para obtener banners de Footer
+                fetch('/api/bannerFooter/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const divBannerFooter = document.getElementById('promo-banners-footer');
+                        divBannerFooter.innerHTML = ''; // Limpiar el contenido existente
+                        data.forEach((item, index) => {
+                            divBannerFooter.innerHTML += `
+                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                    <img src="${item.ruta}${item.archivo}" class="d-block w-100" alt="${item.archivo}">
+                                </div>
+                            `;
+                        });
+
+                        // Inicializar el carrusel de Bootstrap
+                        $('#promo-banners-footer').carousel();
+                    })
+                    .catch(error => console.error('Error al cargar los datos de los banners:', error));
+
+
             // Función para cargar las tarjetas del tarifario
             function cardTarifario(idSucursal) {
                 console.log(`Cargando tarifario para la sucursal: ${idSucursal}`);
@@ -414,80 +461,58 @@
                         console.log('Datos del tarifario:', data);
                         const container = document.getElementById('carousel-packages'); // Contenedor donde se agregarán las tarjetas
                         container.innerHTML = ''; // Limpiar el contenido existente
-    
+
                         data.forEach(item => {
                             // Crear la estructura de la tarjeta
                             const card = document.createElement('div');
                             card.className = 'item card_pack';
-                            
 
-
-                            if(item.nameServicioCable == '0'){
-                                var sc = ''; 
-                            }else{
-                                var sc =`   <div class="xview-container">
-                                            <img src="${item.ruta}${item.archivo}" alt="${item.archivo}">
-                                            </div>
-                                             <div class="beneficios-pack">
-                                                <ul>
-                                                    <li>${item.textoServicioCable}</li>
-                                                    <li>Más de 40 en HD </li>
-                                                    <li>Más de 20.000 horas en películas y series</li>
-                                                    
-                                                    <li>Telefonía fija</li>
-                                                </ul>
-                                            </div>
-                                            `; 
+                            let sc = '';
+                            if (item.nameServicioCable !== '0') {
+                                sc = `
+                                    <div class="xview-container">
+                                        <img src="${item.ruta}${item.archivo}" alt="${item.archivo}">
+                                    </div>
+                                    <div class="beneficios-pack">
+                                        <ul>
+                                            <li>${item.textoServicioCable}</li>
+                                            <li>Más de 40 en HD </li>
+                                            <li>Más de 20.000 horas en películas y series</li>
+                                            <li>Telefonía fija</li>
+                                        </ul>
+                                    </div>
+                                `;
                             }
-    
+
                             card.innerHTML = `
-                            <div class="promo_megas">
-                                <h3>Internet Ilimitado ${item.velocidadInternet} Megas</h3>
-                                <h4>${item.velocidadPromo} MBPS</h4>
-                                <h3>x${item.tiempoVelocidaPromo} meses*</h3>
-                            </div>
-                            ${sc}
-
-                           
-                            <div class="promo_partners">
-                                <img src="/assets/mega/assets/img/promo-partner.png" alt="">
-                            </div>
-                            <div class="package_price">
-                                <p class="price-pack">${item.tarifaPromocional}</p>
-                                <p class="payment-time"> / AL MES</p>
-                            </div>
-
-                            <!-- Botón para abrir el popup -->
-                            <div class="btn-card">
-                                <button id="card-call" class="btn btn-dark openCallPopup">¡Llámame!</button>
-                            </div>
+                                <div class="promo_megas">
+                                    <h3>Internet Ilimitado ${item.velocidadInternet} Megas</h3>
+                                    <h4>${item.velocidadPromo} MBPS</h4>
+                                    <h3>x${item.tiempoVelocidaPromo} meses*</h3>
+                                </div>
+                                ${sc}
+                                <div class="promo_partners">
+                                    <img src="/assets/mega/assets/img/promo-partner.png" alt="">
+                                </div>
+                                <div class="package_price">
+                                    <p class="price-pack">${item.tarifaPromocional}</p>
+                                    <p class="payment-time"> / AL MES</p>
+                                </div>
+                                <!-- Botón para abrir el popup -->
+                                <div class="btn-card">
+                                    <button id="card-call" class="btn btn-dark openCallPopup">¡Llámame!</button>
+                                </div>
                             `;
-    
+
                             // Agregar la tarjeta al contenedor
                             container.appendChild(card);
                         });
-    
-                        // Inicializar el carrusel de Owl Carousel después de agregar las tarjetas
-                        $('#carousel-packages').owlCarousel({
-                            loop: true,
-                            margin: 10,
-                            nav: true,
-                            responsive: {
-                                0: {
-                                    items: 1
-                                },
-                                600: {
-                                    items: 2
-                                },
-                                1000: {
-                                    items: 3
-                                }
-                            }
-                        });
+
+                       
                     })
                     .catch(error => console.error('Error al cargar los datos del tarifario:', error));
             }
-    
+
             // Evento para cambiar la sucursal y cargar las tarjetas correspondientes
             document.getElementById('location-select').addEventListener('change', function() {
                 const idSucursal = this.value;
@@ -495,9 +520,74 @@
             });
         });
     </script>
-        <script src="/assets/mega/assets/main.js"></script>
+    <script>
+        /* ********* Menu responsive ********** */
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeBtn = document.querySelector('.close-btn');
 
+        hamburgerMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('show');
+        });
 
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('show');
+        });
+
+        /* ********** Popup ********** */
+        const locationButton = document.querySelector('.location span');
+        const locationPopup = document.getElementById('location-popup');
+        const closePopup = document.querySelector('.close-popup');
+        const confirmLocationBtn = document.getElementById('confirm-location');
+        const locationSelect = document.getElementById('location-select');
+
+        // abrir popup al hacer clic en el lugar
+        locationButton.addEventListener('click', () => {
+            locationPopup.style.display = 'flex';
+        });
+
+        // cerar popup con x
+        closePopup.addEventListener('click', () => {
+            locationPopup.style.display = 'none';
+        });
+
+        // confirmar la ubicación seleccionada
+        confirmLocationBtn.addEventListener('click', () => {
+            const selectedLocationText = locationSelect.options[locationSelect.selectedIndex].text;//modificado para que devielva el texto del select y no el value
+            locationButton.textContent = `📍 ${selectedLocationText}`;
+            locationPopup.style.display = 'none'; // Cerrar el popup
+        });
+
+        /* ********** CARROUSEL PAQUETES ********** */
+        /* Carrousel  peliculas*/
+        $(document).ready(function(){
+            $("#carousel-packages").owlCarousel({
+                loop: true,
+                margin: 30,
+                nav: true,
+                dots: false,
+                autoplay: true,
+                autoplayTimeout: 6000,
+                autoplayHoverPause: true,
+                responsive:{
+                    0:{
+                        items: 2
+                    },
+                    576:{
+                        items: 2
+                    },
+                    768:{
+                        items: 3
+                    },
+                    1200:{
+                        items: 4
+                    }
+                }
+            });
+        });
+        
+    </script>
+    <script src="/assets/mega/assets/main.js"></script>
 </body>
 
 </html>

@@ -33,6 +33,48 @@ router.get('/api/tarifario/:idSucursal', (req, res) => {
   });
 });
 
+
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/bannerHero/', (req, res) => {
+  db.query('SELECT * FROM `view_bannerherohome` ', (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banners de home' });
+      }
+      res.json(result);
+  });
+});
+
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/bannerStreaming/', (req, res) => {
+  db.query('SELECT * FROM `view_bannerstreaminghome` ', (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de streaming' });
+      }
+      res.json(result);
+  });
+});
+
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/bannerServices/', (req, res) => {
+  db.query('SELECT * FROM `view_bannerservices` ', (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de streaming' });
+      }
+      res.json(result);
+  });
+});
+
+
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/bannerFooter/', (req, res) => {
+  db.query('SELECT * FROM `view_bannerhomefooter` ', (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+
 /*router.get('/mega/tarifario', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
 });*/

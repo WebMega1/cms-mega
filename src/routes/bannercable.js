@@ -27,7 +27,7 @@ const upload = multer({ storage: storage });
 // Ruta GET para obtener datos de los banners en formato JSON
 router.get('/bannercable/data', (req, res) => {
     // Realiza una consulta SQL para obtener todos los registros de la tabla 'sucursal'
-   db.query('SELECT * FROM bannerserviciocable', (err, result) => {
+   db.query('SELECT * FROM banners WHERE tipoBanner = 1 ', (err, result) => {
        if (err) {
              // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
            return res.status(500).json({ error: 'Error al obtener las sucursales' });
@@ -47,7 +47,7 @@ router.get('/bannercable', (req, res) => {
 // Ruta GET para obtener datos de un banner específico en formato JSON
 router.get('/bannercable/ver/data', (req, res) => {
     const { id } = req.query;
-    db.query('SELECT * FROM bannerserviciocable WHERE idBannerServicioCable = ?', [id], (err, result) => {
+    db.query('SELECT * FROM banners WHERE idBanner = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener el banner' });
         }
@@ -75,7 +75,7 @@ router.post('/bannercable/crear', upload.single('archivo'), (req, res) => {
 
     const { ruta, status, create_user, create_as } = req.body;
     const archivo = req.file ? req.file.filename : null; // Obtener el nombre del archivo subido
-    const query = 'INSERT INTO bannerserviciocable (ruta, archivo, status, create_user, create_as) VALUES (?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO banners (ruta, archivo, status, create_user, create_as) VALUES (?, ?, ?, ?, ?)';
     const values = [ruta, archivo, status, create_user, create_as];
 
     db.query(query, values, (err, result) => {
@@ -97,7 +97,7 @@ router.post('/bannercable/editar/:id', upload.single('archivo'), (req, res) => {
     const { id } = req.params;
     const { ruta, status, create_user, create_as } = req.body;
     const archivo = req.file ? req.file.filename : req.body.existingArchivo; // Usar el nuevo archivo si se sube, de lo contrario usar el existente
-    const query = 'UPDATE bannerserviciocable SET ruta = ?, archivo = ?, status = ?, create_user = ?, create_as = ? WHERE idBannerServicioCable = ?';
+    const query = 'UPDATE banners SET ruta = ?, archivo = ?, status = ?, create_user = ?, create_as = ? WHERE idBannerServicioCable = ?';
     const values = [ruta, archivo, status, create_user, create_as, id];
 
     db.query(query, values, (err, result) => {
@@ -111,7 +111,7 @@ router.post('/bannercable/editar/:id', upload.single('archivo'), (req, res) => {
 // Ruta POST para activar un banner de servicio de cable
 router.post('/bannercable/activar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE bannerserviciocable SET status = 1 WHERE idBannerServicioCable = ?', [id], (err, result) => {
+    db.query('UPDATE banners SET status = 1 WHERE idBannerServicioCable = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al activar el banner de servicio de cable' });
         }
@@ -122,7 +122,7 @@ router.post('/bannercable/activar/:id', (req, res) => {
 // Ruta POST para desactivar un banner de servicio de cable
 router.post('/bannercable/desactivar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE bannerserviciocable SET status = 0 WHERE idBannerServicioCable = ?', [id], (err, result) => {
+    db.query('UPDATE banners SET status = 0 WHERE idBannerServicioCable = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al desactivar el banner de servicio de cable' });
         }
