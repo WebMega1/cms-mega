@@ -172,23 +172,7 @@
     <!-- ********** Servicios ********** -->
     <div class="container">
         <div id="services-container" class="d-flex align-items-end text-center">
-            <div class="services-content">
-                <img src="assets/img/service-internet.png" alt="">
-                <h3>Internet</h3>
-                <a class="btn btn-dark btn-services" href="">Saber más</a>
-            </div>
 
-            <div class="services-content">
-                <img src="assets/img/service-streaming.png" alt="">
-                <h3>Servicios de Streaming</h3>
-                <a class="btn btn-dark btn-services" href="">Saber más</a>
-            </div>
-
-            <div class="services-content">
-                <img src="assets/img/service-megamovil.png" alt="">
-                <h3>Mega Móvil</h3>
-                <a class="btn btn-dark btn-services" href="">Saber más</a>
-            </div>
         </div>
     </div>
 
@@ -200,11 +184,11 @@
             </h4>
             <div class="btn-xview-cont d-flex justify-content-between align-items-center">
                 <a class="btn btn-light btn-xview" href="">Saber más</a>
-                <img src="assets/img/xview-logo-wt.png" alt="">
+                <img src="uploads/banners/xview-logo-wt.png" alt="xview+">
             </div>
         </div>
         <div class="xview-img">
-            <img src="assets/img/xview-pantalla.webp" alt="">
+            <img src="uploads/banners/xview-pantalla.webp" alt="">
         </div>
     </section>
 
@@ -217,7 +201,7 @@
                 <a class="btn btn-pago" href="">Saber más</a>
             </div>
             <div class="col-7 text-center">
-                <img src="assets/img/pago-en-linea-img.png" alt="">
+                <img src="uploads/banners/pago-en-linea-img.png" alt="">
             </div>
         </div>
     </section>
@@ -232,9 +216,7 @@
             <div class="carousel-item ">
                 <img src="/uploads/bannerHomeFooter/113__imagen_1727885398.png" class="d-block w-100 img-fluid" alt="Promo 2">
             </div>
-            <div class="carousel-item ">
-                <img src="/uploads/bannerHomeFooter/143__imagen_1693588254.png" class="d-block w-100 img-fluid" alt="Promo 1">
-            </div>
+            
         </div>
     </div>
 
@@ -430,6 +412,7 @@
 
                     })
                     .catch(error => console.error('Error al cargar los datos de los banners:', error));
+
 
                  // Fetch para obtener banners de Footer
                 fetch('/api/bannerFooter/')
