@@ -70,13 +70,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Editar Canal</h3>
+                            <h3 class="mb-0">Banners</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Editar Canal
+                                    Editar banner
                                 </li>
                             </ol>
                         </div>
@@ -90,6 +90,63 @@
             <div class="app-content">
                 <!--begin::Container-->
                 <div class="container-fluid">
+
+                    <section class="content">
+                        <!-- Default box -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Editar banner</h3>
+                                <div class="card-tools">
+                                    <a href="/banners/crear" class="btn btn-outline-success" title="Nuevo banner">
+                                        <i class="bi bi-plus-circle"></i> Nuevo Banner
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-md-6">
+                                    <form id="editar-form" enctype="multipart/form-data">
+                                        <input type="text" id="idBanner" name="idBanner">
+                                        <input type="text" id="existingImage" name="existingImage">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Ruta del banner</label>
+                                            <input type="text" class="form-control" id="rutaBanner" name="rutaBanner" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="image" class="form-label">Imagen</label>
+                                            <input type="file" class="form-control" id="image" name="image">
+                                            <img id="current-image" src="" alt="Imagen actual" style="width: 100px; height: auto;">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select class="form-control" id="status" name="status" required>
+                                                <option value="1">Activo</option>
+                                                <option value="0">Inactivo</option>
+                                            </select>                                </div>
+                                        <div class="mb-3">
+                                            <label for="code" class="form-label">Tipo de banner</label>
+                                            <input type="text" class="form-control" id="tipoBanner" name="tipoBanner" required>
+                                        </div>
+                                       
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                        <a href="/banners" class="btn btn-secondary">Cancelar</a>
+                                    </form>
+
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                </div>
+                                
+                                
+
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                            </div>
+                            <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                    </section>
                     <!--begin::Row-->
                     <div class="row">
                         <!--begin::Col-->
@@ -99,33 +156,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-6">
-                            <form id="editar-form" enctype="multipart/form-data">
-                                <input type="hidden" id="idChannels" name="idChannels">
-                                <input type="hidden" id="existingImage" name="existingImage">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Nombre del Canal</label>
-                                    <input type="text" class="form-control" id="nameChannel" name="nameChannel" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="image" class="form-label">Imagen</label>
-                                    <input type="file" class="form-control" id="image" name="image">
-                                    <img id="current-image" src="" alt="Imagen actual" style="width: 100px; height: auto;">
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select class="form-control" id="status" name="status" required>
-                                        <option value="1">Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>                                </div>
-                                <div class="mb-3">
-                                    <label for="code" class="form-label">Código</label>
-                                    <input type="text" class="form-control" id="code" name="code" required>
-                                </div>
-                               
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                <a href="/canales" class="btn btn-secondary">Cancelar</a>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -201,31 +232,31 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const params = new URLSearchParams(window.location.search);
                 const id = params.get('id');
-                fetch(`/canales/ver/data?id=${id}`)
+                fetch(`/banners/ver/data?id=${id}`)
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('idChannels').value = data.idChannels;
-                        document.getElementById('nameChannels').value = data.nameChannels;
+                        document.getElementById('idBanner').value = data.idBanner;
+                        document.getElementById('rutaBanner').value = data.archivo;
                         document.getElementById('existingImage').value = data.image;
-                        document.getElementById('current-image').src = `/uploads/canales/${data.image}`;
-                        document.getElementById('code').value = data.code;
+                        document.getElementById('current-image').src = `${data.ruta}${data.archivo}`;
+                        document.getElementById('tipoBanner').value = data.tipoBanner;
                         document.getElementById('status').value = data.active ? "1" : "0";
                     })
-                    .catch(error => console.error('Error al obtener el canal:', error));
+                    .catch(error => console.error('Error al obtener el banner:', error));
         
                 document.getElementById('editar-form').addEventListener('submit', function(event) {
                     event.preventDefault();
                     const formData = new FormData(this);
-                    fetch(`/canales/editar/${document.getElementById('id').value}`, {
+                    fetch(`/banners/editar/${document.getElementById('id').value}`, {
                         method: 'POST',
                         body: formData
                     })
                     .then(response => response.json())
                     .then(data => {
                         alert(data.message);
-                        window.location.href = '/canales';
+                        window.location.href = '/banners';
                     })
-                    .catch(error => console.error('Error al actualizar el canal:', error));
+                    .catch(error => console.error('Error al actualizar el banner:', error));
                 });
             });
         </script>      

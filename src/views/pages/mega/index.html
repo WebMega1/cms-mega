@@ -446,49 +446,21 @@
                         container.innerHTML = ''; // Limpiar el contenido existente
 
                         data.forEach(item => {
-                            // Crear la estructura de la tarjeta
                             const card = document.createElement('div');
-                            card.className = 'item card_pack';
-
-                            let sc = '';
-                            if (item.nameServicioCable !== '0') {
-                                sc = `
-                                    <div class="xview-container">
-                                        <img src="${item.ruta}${item.archivo}" alt="${item.archivo}">
-                                    </div>
-                                    <div class="beneficios-pack">
-                                        <ul>
-                                            <li>${item.textoServicioCable}</li>
-                                            <li>Más de 40 en HD </li>
-                                            <li>Más de 20.000 horas en películas y series</li>
-                                            <li>Telefonía fija</li>
-                                        </ul>
-                                    </div>
-                                `;
-                            }
-
+                            card.classList.add('item', 'card_pack');
                             card.innerHTML = `
                                 <div class="promo_megas">
-                                    <h3>Internet Ilimitado ${item.velocidadInternet} Megas</h3>
-                                    <h4>${item.velocidadPromo} MBPS</h4>
-                                    <h3>x${item.tiempoVelocidaPromo} meses*</h3>
+                                    <h4>${item.name}</h4>
+                                    <h4>${item.velocidad} MBPS</h4>
                                 </div>
-                                ${sc}
-                                <div class="promo_partners">
-                                    <img src="/assets/mega/assets/img/promo-partner.png" alt="">
+                                <div class="xview-container">
+                                    <img src="assets/img/xview-logo.png" alt="">
                                 </div>
-                                <div class="package_price">
-                                    <p class="price-pack">${item.tarifaPromocional}</p>
-                                    <p class="payment-time"> / AL MES</p>
-                                </div>
-                                <!-- Botón para abrir el popup -->
-                                <div class="btn-card">
-                                    <button id="card-call" class="btn btn-dark openCallPopup">¡Llámame!</button>
-                                </div>
-                            `;
-
-                            // Agregar la tarjeta al contenedor
-                            container.appendChild(card);
+                                <div class="beneficios-pack">
+                                    <ul>
+                                        <li>Más de 120 canales</li>
+                                </div>)`;        
+                            
                         });
 
                        

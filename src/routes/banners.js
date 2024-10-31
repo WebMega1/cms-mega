@@ -46,12 +46,12 @@ router.get('/banners', (req, res) => {
 // Ruta GET para obtener datos de un tipo de canal específico en formato JSON
 router.get('/banners/ver/data', (req, res) => {
     const { id } = req.query;
-    db.query('SELECT * FROM banners WHERE idBanner = ?', [id], (err, result) => {
+    db.query('SELECT * FROM view_banners WHERE idBanner = ?', [id], (err, result) => {
         if (err) {
-            return res.status(500).json({ error: 'Error al obtener el canal' });
+            return res.status(500).json({ error: 'Error al obtener el banner' });
         }
         if (result.length === 0) {
-            return res.status(404).json({ error: 'Canal no encontrado' });
+            return res.status(404).json({ error: 'Banner no encontrado' });
         }
         res.json(result[0]);
     });
@@ -84,7 +84,7 @@ router.post('/banners/crear', (req, res) => {
 
 // Ruta GET para servir la página HTML de editar de un canal
 router.get('/banners/editar', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/pages/canales', 'editar.html'));
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'editar.html'));
 });
 
 
@@ -98,9 +98,9 @@ router.post('/banners/editar/:id', upload.single('image'), (req, res) => {
 
     db.query(query, values, (err, result) => {
         if (err) {
-            return res.status(500).json({ error: 'Error al actualizar el canal' });
+            return res.status(500).json({ error: 'Error al actualizar el banner' });
         }
-        res.json({ message: 'Canal actualizado exitosamente' });
+        res.json({ message: 'Banner actualizado exitosamente' });
     });
 });
 
@@ -108,22 +108,22 @@ router.post('/banners/editar/:id', upload.single('image'), (req, res) => {
 // Ruta POST para activar un canal
 router.post('/banners/activar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE channels SET status = 1 WHERE idChannels = ?', [id], (err, result) => {
+    db.query('UPDATE banners SET status = 1 WHERE idBanner = ?', [id], (err, result) => {
         if (err) {
-            return res.status(500).json({ error: 'Error al activar el  canal' });
+            return res.status(500).json({ error: 'Error al activar el banner' });
         }
-        res.json({ success: true, message: 'Canal activado correctamente' });
+        res.json({ success: true, message: 'Banner activado correctamente' });
     });
 });
 
 // Ruta POST para desactivar un canal
 router.post('/banners/desactivar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE channels SET status = 0 WHERE idChannels = ?', [id], (err, result) => {
+    db.query('UPDATE banners SET status = 0 WHERE idBanner = ?', [id], (err, result) => {
         if (err) {
-            return res.status(500).json({ error: 'Error al activar el  canal' });
+            return res.status(500).json({ error: 'Error al activar el banner' });
         }
-        res.json({ success: true, message: 'Canal desactivado correctamente' });
+        res.json({ success: true, message: 'Banner desactivado correctamente' });
     });
 });
 

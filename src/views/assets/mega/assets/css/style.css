@@ -216,6 +216,43 @@ header {
     color: black;
 }
 
+/* ********** Paquetes Alexis ********** */
+.paquetehome {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-top: 5px solid #007AFF;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.velocidad {
+    text-align: center  ;
+    margin: 0;
+    padding-bottom: 0 !important;
+    font-weight: 600;
+}
+
+.velocidad-promo {
+    font-size: 2em;
+}
+.velocidad-simetrico {
+    color: #000; 
+    padding: 1.2em 0 0;
+    font-size: 1.2em;
+}
+
+.velocidad-ilimitado {
+    padding: 0.2em 0 0;
+    font-size: 0.7em;
+}
+
+.velocidad-promo-tiempo {
+    font-size: 0.7em;
+    padding: 0.2em 0 0;
+    color: #408ed6;
+}
+
+
+
 /* ********** Paquetes ********** */
 .card_pack {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);

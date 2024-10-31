@@ -193,25 +193,25 @@
                 .then(data => {
                     const active = data.status ? "Activo" : "Inactivo";
                     const statusButton = data.status ? 
-                        `<a onclick="desactivarCanal(${data.idChannels})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
-                        `<a onclick="activarCanal(${data.idChannels})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
+                        `<a onclick="desactivarBanner(${data.idChannels})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
+                        `<a onclick="activarBanner(${data.idChannels})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
     
                     const cardTitle = document.querySelector('.card-title');
-                    cardTitle.textContent = data.nameChannel;
+                    cardTitle.textContent = data.archivo;
                     const cardTools = document.querySelector('.card-tools');
-                    cardTools.innerHTML = `<a href="/canales/editar?id=${data.idChannels}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+                    cardTools.innerHTML = `<a href="/banners/editar?id=${data.idChannels}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
     
                     const cardBodyLeft = document.querySelector('.card-body-left');
                     cardBodyLeft.innerHTML = `
-                        <h2>${data.nameChannel}</h2>  
+                        <h2>${data.archivo}</h2>  
                         <br />
-                        <p class="card-text"><strong>Id:</strong> ${data.idChannels}</p>
-                        <p class="card-text"><strong>Imagen:</strong> <img src="/uploads/canales/${encodeURIComponent(data.image)}" alt="${data.image}" style="width: auto; height: 100px;"></p>
-                        <p class="card-text"><strong>Código de canal:</strong> ${data.code}</p>
+                        <p class="card-text"><strong>Id:</strong> ${data.idBanner}</p>
+                        <p class="card-text"><strong>Imagen:</strong> <img src="${data.ruta}${data.archivo}" alt="${data.archivo}" style="width: auto; height: 100px;"></p>
+                        <p class="card-text"><strong>Tipo de banner:</strong> ${data.nameTipoBanner}</p>
                         <p class="card-text"><strong>Status:</strong> ${active}</p>
                     `;
                 })
-                .catch(error => console.error('Error al obtener el canal:', error));
+                .catch(error => console.error('Error al obtener el banner:', error));
         });
     
         function activarCanal(id) {

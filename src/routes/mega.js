@@ -19,11 +19,15 @@ router.get('/mega/data', (req, res) => {
 router.get('/mega', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'index.html'));
 });
+// Ruta GET para servir la página HTML principal
+router.get('/mega/paquetes-tv', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/pages/mega', 'paquetes-tv.html'));
+});
 
 // Ruta GET para obtener los datos de la vista tarifario
 router.get('/api/tarifario/:idSucursal', (req, res) => {
   const { idSucursal } = req.params;
-  const query = 'SELECT * FROM vistatarifario WHERE idSucursal = ?';
+  const query = 'SELECT * FROM vistatarifario WHERE idSucursal = ? AND tipoPaquete = 3';
 
   db.query(query, [idSucursal], (err, results) => {
       if (err) {
