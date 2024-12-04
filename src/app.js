@@ -78,6 +78,8 @@ const routesTrivias = require('./routes/trivias');  // Importa para cargar Banne
 const routesTriviasRespuestas = require('./routes/triviasrespuesta');  // Importa para cargar Banner de tipo de paquetes
 
 const routesBanners = require('./routes/banners');  // Importa para cargar banners
+const routesSecciones = require('./routes/secciones');  // Importa para cargar Secciones
+
 
 
 
@@ -99,6 +101,8 @@ app.use(routesTrivias);// Monta las rutas para tipos de Banner de cable.
 app.use(routesTriviasRespuestas);// Monta las rutas para tipos de Banner de cable.
 
 app.use(routesBanners);// Monta las rutas para tipos de Banner de cable.
+app.use(routesSecciones);// Monta las rutas para tipos de Banner de cable.
+
 
 
 

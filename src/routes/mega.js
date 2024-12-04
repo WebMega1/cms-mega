@@ -111,7 +111,7 @@ router.get('/api/bannerServices/', (req, res) => {
 // Ruta GET para obtener datos de todas las Regiones en formato JSON
 router.get('/api/bannerFooter/', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  db.query('SELECT * FROM `view_bannerhomefooter` ', (err, result) => {
+  db.query('SELECT * FROM `banners` WHERE tipoBanner = 5 AND status = 1 ', (err, result) => {
       if (err) {
           return res.status(500).json({ error: 'Error al obtener banner de footer' });
       }
@@ -132,10 +132,10 @@ router.get('/api/bannerPromoExtrasCard/', (req, res) => {
 
 
 // Ruta GET para obtener los datos de los canales por sucursal
-router.get('/api/canales/:idSucursal', (req, res) => {
+router.get('/api/configuraciones/home/', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   const { idSucursal } = req.params;
-  const query = 'SELECT * FROM vistatarifario WHERE idSucursal = ? AND tipoPaquete = 3';
+  const query = `SELECT * FROM configsecciones WHERE seccion = 'HOME';`;
 
   db.query(query, [idSucursal], (err, results) => {
       if (err) {
