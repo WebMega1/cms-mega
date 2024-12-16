@@ -109,11 +109,11 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nombre</th>
+                                            <th>Canal</th>
+                                            <th>Tipo de canal</th>
                                             <th>Imagen</th>
+                                            <th>Selector</th>
                                             <th>Status</th>
-                                            <th>Código</th>
-                                            <th>Activo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -123,11 +123,11 @@
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nombre</th>
+                                            <th>Canal</th>
+                                            <th>Tipo de canal</th>
                                             <th>Imagen</th>
+                                            <th>Selector</th>
                                             <th>Status</th>
-                                            <th>Código</th>
-                                            <th>Activo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </tfoot>
@@ -217,19 +217,19 @@
         
                             const active = item.status ? "Activo" : "Inactivo";
                             const statusButton = item.status ? 
-                                `<a onclick="desactivarCanal(${item.idChannels})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
-                                `<a onclick="activarCanal(${item.idChannels})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                                `<a onclick="desactivarCanal(${item.id_canal})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
+                                `<a onclick="activarCanal(${item.id_canal})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
         
                             row.innerHTML = `
-                                <td>${item.idChannels}</td>
-                                <td>${item.nameChannel}</td>
-                               <td><img src="/uploads/canales/${encodeURIComponent(item.image)}" alt="${item.image}" style="width: 50px; height: auto;"></td>
-                                <td>${item.status}</td>
-                                <td>${item.code}</td>
+                                <td>${item.id_canal}</td>
+                                <td>${item.nombre}</td>
+                                <td>${item.familia}</td>
+                                <td><img src="/uploads/canales/${encodeURIComponent(item.imagen)}" alt="${item.imagen}" style="width: 50px; height: auto;"></td>
+                                <td>${item.id_guia}</td>
                                 <td>${active}</td>
                                 <td>
-                                    <a href="/canales/ver?id=${item.idChannels}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                    <a href="/canales/editar?id=${item.idChannels}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                                    <a href="/canales/ver?id=${item.id_canal}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                                    <a href="/canales/editar?id=${item.id_canal}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
                                     ${statusButton}
                                 </td>
                             `;

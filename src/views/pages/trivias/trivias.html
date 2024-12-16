@@ -103,10 +103,11 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Url</th>
-                                            <th>Fecha de inicio</th>
-                                            <th>Fecha de fin</th>
+                                            <th>Url/endPoint</th>
+                                            <th>Banner Principal</th>
                                             <th>Status</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Fin</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -116,10 +117,11 @@
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Url</th>
-                                            <th>Fecha de inicio</th>
-                                            <th>Fecha de fin</th>
+                                            <th>Url/endPoint</th>
+                                            <th>Banner Principal</th>
                                             <th>Status</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Fin</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </tfoot>
@@ -246,21 +248,26 @@
         
                             if (item.status == 1) {
                                 var status = "Activo";
-                                var statusButton = `<a onclick="borrarTrivia(${item.id})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
+                                var statusButton = `<a onclick="borrarTrivia(${item.idTriviaConfig})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>`;
                             } else {
                                 var status = "Inactivo";
-                                var statusButton = `<a onclick="activarTrivia(${item.id})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                                var statusButton = `<a onclick="activarTrivia(${item.idTriviaConfig})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
                             }
+
+                            // Formatear las fechas para mostrar solo la parte de la fecha
+                            const fhInicio = new Date(item.fhInicio).toISOString().split('T')[0];
+                            const fhFin = new Date(item.fhFin).toISOString().split('T')[0];
         
                             row.innerHTML = `
-                                <td>${item.id}</td>
-                                <td>${item.url}</td>
-                                <td>${item.fechaInicio}</td>
-                                <td>${item.fechaFin}</td>
+                                <td>${item.idTriviaConfig}</td>
+                                <td>${item.urlEndPoint}</td>
+                                <td><img src="${item.rutaPrincipal}${encodeURIComponent(item.archivoPrincipal)}" alt="${item.archivoPrincipal}" style="width: 200px; height: auto;"></td>
                                 <td>${status}</td>
+                                <td>${fhInicio}</td>
+                                <td>${fhFin}</td>
                                 <td>
-                                    <a href="/trivias/ver?id=${item.id}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                    <a href="/trivias/editar?id=${item.id}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                                    <a href="/trivias/ver?id=${item.idTriviaConfig}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                                    <a href="/trivias/editar?id=${item.idTriviaConfig}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
                                     ${statusButton}
                                 </td>
                             `;

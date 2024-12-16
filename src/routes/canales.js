@@ -24,10 +24,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-// Ruta GET para obtener datos de todas los canales en formato JSON
+// Listar todos los canales
 router.get('/canales/data', (req, res) => {
     // Realiza una consulta SQL para obtener todos los registros de la tabla 'sucursal'
-   db.query('SELECT * FROM channels', (err, result) => {
+   db.query(`SELECT t1.*, t2.tipoCanal as familia, t2.prioridad FROM mega_canales as t1
+                LEFT JOIN tipocanales as t2 on t1.tipocanal = t2.idTipoCanal 
+                WHERE t1.status = 1`, (err, result) => {
        if (err) {
              // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
            return res.status(500).json({ error: 'Error al obtener canales' });

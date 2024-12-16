@@ -5,7 +5,10 @@ const db = require('../dbconnection');
 
 // Ruta GET para obtener datos de todas las tipo de canales en formato JSON
 router.get('/trivias/data', (req, res) => {
-    db.query('SELECT * FROM trivias', (err, result) => {
+    db.query(`SELECT t1.*, t2.ruta AS rutaPrincipal , t2.archivo AS archivoPrincipal, t3.ruta AS rutaMovil, t3.archivo AS archivoMovil 
+                FROM triviasconfig as t1
+                LEFT JOIN banners as t2 on t1.idBannerPrincipal = t2.idBanner
+                LEFT JOIN banners as t3 on t1.idBannerMovil = t3.idBanner`, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener los tipos de canales' });
         }
@@ -21,15 +24,26 @@ router.get('/trivias', (req, res) => {
 // Ruta GET para obtener datos de una trivia específica y sus preguntas en formato JSON
 router.get('/trivias/ver/data', (req, res) => {
     const { id } = req.query;
-    db.query(`
-        SELECT 
-            url, cuerpo, bannerCabecera, bannerMovil, bannerLogoMarca, colorFooter, colorHeader,
-            terminosycondiciones, fechaInicio, fechaFin, email, visa, trivia_status, pregunta,
-            tipopregunta, opcionA, opcionB, opcionC, opcionD, respuestaCorrecta, pistasDeRespuesta,
-            requerido, especial, pregunta_status, prioridad, trivia_id
-        FROM vista_completa_trivias_preguntas
-        WHERE trivia_id = ?
+    db.query(`SELECT t1.*, t2.ruta AS rutaPrincipal , t2.archivo AS archivoPrincipal, t3.ruta AS rutaMovil, t3.archivo AS archivoMovil 
+                FROM triviasconfig as t1
+                LEFT JOIN banners as t2 on t1.idBannerPrincipal = t2.idBanner
+                LEFT JOIN banners as t3 on t1.idBannerMovil = t3.idBanner
+                WHERE idTriviaConfig = ?
     `, [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener la trivia' });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Trivia no encontrada' });
+        }
+        res.json(result);
+    });
+});
+
+// Ruta GET para obtener datos de una trivia específica y sus preguntas en formato JSON
+router.get('/trivias/preguntas/data', (req, res) => {
+    const { id } = req.query;
+    db.query(`SELECT * FROM preguntastrivia WHERE idTrivia = ? `, [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener la trivia' });
         }

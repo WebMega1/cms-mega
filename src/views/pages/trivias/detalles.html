@@ -91,22 +91,15 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-5 card-body-left">
+                                    <div class="col-md-7 card-body-left">
                                         <!-- Aquí se insertarán los detalles dinámicamente -->
                                     </div>
                                     <div class="col-md-5 card-body-right">
-                                        <div id="map" style="height: 300px; width: 100%;"></div>
+                                        <!-- Aquí se insertarán los detalles dinámicamente -->
                                     </div>
+                                    
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>Preguntas</h4>
-                                        <div id="preguntas-container">
-                                            <!-- Aquí se insertarán las preguntas dinámicamente -->
-                                        </div>
-                                    </div>
-                                </div>
+                              
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer"></div>
@@ -219,69 +212,77 @@
                     .then(data => {
                         if (data.length > 0) {
                             const trivia = data[0];
-                            if (trivia.trivia_status == 1) {
+                            if (trivia.idTriviaConfig == 1) {
                                 var status = "Activo";
-                                var statusButton = `<a onclick="borrarTrivia(${trivia.trivia_id})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x">Desactivar</i></a>`;
+                                var statusButton = `<a onclick="borrarTrivia(${trivia.idTriviaConfig})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x">Desactivar</i></a>`;
                             } else {
                                 var status = "Inactivo";
-                                var statusButton = `<a onclick="activarTrivia(${trivia.trivia_id})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check">Activar</i></a>`;
+                                var statusButton = `<a onclick="activarTrivia(${trivia.idTriviaConfig})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check">Activar</i></a>`;
                             }
+                            
+                            if (trivia.emailStatus == 1) {
+                                var mail = "Activo";
+                            } else {
+                                var mail = "Inactivo";
+                            }
+                            if (trivia.visa == 1) {
+                                var visaStatus = "Activo";
+                            } else {
+                                var visaStatus = "Inactivo";
+                            }
+
+                            // Formatear las fechas para mostrar solo la parte de la fecha
+                            const fhInicio = new Date(trivia.fhInicio).toISOString().split('T')[0];
+                            const fhFin = new Date(trivia.fhFin).toISOString().split('T')[0];
         
                             const cardTitle = document.querySelector('.card-title');
-                            cardTitle.textContent = trivia.pregunta;
+                            cardTitle.textContent = trivia.urlEndPoint;
                             const cardTools = document.querySelector('.card-tools');
-                            cardTools.innerHTML = `<a href="/trivias/editar?id=${trivia.trivia_id}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+                            cardTools.innerHTML = `<a href="/trivias/editar?id=${trivia.idTriviaConfig}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
         
                             const cardBodyLeft = document.querySelector('.card-body-left');
                             cardBodyLeft.innerHTML = `
-                                <p class="card-text"><strong>Id:</strong> ${trivia.trivia_id}</p>
-                                <p class="card-text"><strong>URL:</strong> ${trivia.url}</p>
-                                <p class="card-text"><strong>Cuerpo:</strong> ${trivia.cuerpo}</p>
-                                <p class="card-text"><strong>Banner Cabecera:</strong> ${trivia.bannerCabecera}</p>
-                                <p class="card-text"><strong>Banner Móvil:</strong> ${trivia.bannerMovil}</p>
-                                <p class="card-text"><strong>Banner Logo Marca:</strong> ${trivia.bannerLogoMarca}</p>
-                                <p class="card-text"><strong>Color de Footer:</strong> ${trivia.colorFooter}</p>
-                                <p class="card-text"><strong>Color de Header:</strong> ${trivia.colorHeader}</p>
-                                <p class="card-text"><strong>Términos y Condiciones:</strong> ${trivia.terminosycondiciones}</p>
-                                <p class="card-text"><strong>Fecha de Inicio:</strong> ${trivia.fechaInicio}</p>
-                                <p class="card-text"><strong>Fecha de Fin:</strong> ${trivia.fechaFin}</p>
-                                <p class="card-text"><strong>Email:</strong> ${trivia.email}</p>
-                                <p class="card-text"><strong>Visa:</strong> ${trivia.visa}</p>
-                                <p class="card-text"><strong>Status de Trivia:</strong> ${status}</p>
-                                <p class="card-text"><strong>Pregunta:</strong> ${trivia.pregunta}</p>
-                                <p class="card-text"><strong>Tipo de Pregunta:</strong> ${trivia.tipopregunta}</p>
-                                <p class="card-text"><strong>Opción A:</strong> ${trivia.opcionA}</p>
-                                <p class="card-text"><strong>Opción B:</strong> ${trivia.opcionB}</p>
-                                <p class="card-text"><strong>Opción C:</strong> ${trivia.opcionC}</p>
-                                <p class="card-text"><strong>Opción D:</strong> ${trivia.opcionD}</p>
-                                <p class="card-text"><strong>Respuesta Correcta:</strong> ${trivia.respuestaCorrecta}</p>
-                                <p class="card-text"><strong>Pistas de Respuesta:</strong> ${trivia.pistasDeRespuesta}</p>
-                                <p class="card-text"><strong>Requerido:</strong> ${trivia.requerido}</p>
-                                <p class="card-text"><strong>Especial:</strong> ${trivia.especial}</p>
-                                <p class="card-text"><strong>Status de Pregunta:</strong> ${trivia.pregunta_status}</p>
-                                <p class="card-text"><strong>Prioridad:</strong> ${trivia.prioridad}</p>
+                                <p>Id: <strong>${trivia.idTriviaConfig}</strong></p>
+                                <p>Url / End Point: <strong>${trivia.urlEndPoint}</strong></p>
+                                <p>Banner Cabecera:</p>
+                                <p><img src="${trivia.rutaPrincipal}${encodeURIComponent(trivia.archivoPrincipal)}" alt="${trivia.archivoPrincipal}" style="width: 500px; height: auto;"> </p>
+                                <p>Banner Móvil:</p>
+                                <p><img src="${trivia.rutaMovil}${encodeURIComponent(trivia.archivoMovil)}" alt="${trivia.archivoMovil}" style="width: 300px; height: auto;"> </p>
+                                <p>Color de Footer: <input type="color" id="colorFooter" name="colorFooter" value="${trivia.colorFooter}" /> </p>
+                                <p>Color de Header: <input type="color" id="colorHeader" name="colorHeader" value="${trivia.colorHeader}" /> </p>
+                                <p>Términos y Condiciones: <a href="./uploads/legal/${trivia.legal}">  ${trivia.legal} </a></p>
+                                <p>Fecha de Inicio:<strong> ${fhInicio}</strong></p>
+                                <p>Fecha de Fin:<strong> ${fhFin} </strong></p>
+                                <p>Email:<strong> ${mail}</strong></p>
+                                <p>Visa:<strong> ${visaStatus}</strong></p>
+                                <p>Status:<strong> ${status} </strong></p>
+                            `;
+
+                            const cardBodyRight = document.querySelector('.card-body-right');
+                            cardBodyRight.innerHTML = `
+                            <h2>Preguntas</h2>
                             `;
         
-                            const preguntasContainer = document.getElementById('preguntas-container');
-                            data.forEach(pregunta => {
-                                const preguntaElement = document.createElement('div');
-                                preguntaElement.classList.add('pregunta');
-                                preguntaElement.innerHTML = `
-                                    <h5>Pregunta: ${pregunta.pregunta}</h5>
-                                    <p><strong>Tipo de Pregunta:</strong> ${pregunta.tipopregunta}</p>
-                                    <p><strong>Opción A:</strong> ${pregunta.opcionA}</p>
-                                    <p><strong>Opción B:</strong> ${pregunta.opcionB}</p>
-                                    <p><strong>Opción C:</strong> ${pregunta.opcionC}</p>
-                                    <p><strong>Opción D:</strong> ${pregunta.opcionD}</p>
-                                    <p><strong>Respuesta Correcta:</strong> ${pregunta.respuestaCorrecta}</p>
-                                    <p><strong>Pistas de Respuesta:</strong> ${pregunta.pistasDeRespuesta}</p>
-                                    <p><strong>Requerido:</strong> ${pregunta.requerido}</p>
-                                    <p><strong>Especial:</strong> ${pregunta.especial}</p>
-                                    <p><strong>Status de Pregunta:</strong> ${pregunta.pregunta_status}</p>
-                                    <p><strong>Prioridad:</strong> ${pregunta.prioridad}</p>
-                                `;
-                                preguntasContainer.appendChild(preguntaElement);
-                            });
+                            // const preguntasContainer = document.getElementById('preguntas-container');
+                            // data.forEach(pregunta => {
+                            //     const preguntaElement = document.createElement('div');
+                            //     preguntaElement.classList.add('pregunta');
+                            //     preguntaElement.innerHTML = `
+                            //         <h5>Pregunta: ${pregunta.pregunta}</h5>
+                            //         <p><strong>Tipo de Pregunta:</strong> ${pregunta.tipopregunta}</p>
+                            //         <p><strong>Opción A:</strong> ${pregunta.opcionA}</p>
+                            //         <p><strong>Opción B:</strong> ${pregunta.opcionB}</p>
+                            //         <p><strong>Opción C:</strong> ${pregunta.opcionC}</p>
+                            //         <p><strong>Opción D:</strong> ${pregunta.opcionD}</p>
+                            //         <p><strong>Respuesta Correcta:</strong> ${pregunta.respuestaCorrecta}</p>
+                            //         <p><strong>Pistas de Respuesta:</strong> ${pregunta.pistasDeRespuesta}</p>
+                            //         <p><strong>Requerido:</strong> ${pregunta.requerido}</p>
+                            //         <p><strong>Especial:</strong> ${pregunta.especial}</p>
+                            //         <p><strong>Status de Pregunta:</strong> ${pregunta.pregunta_status}</p>
+                            //         <p><strong>Prioridad:</strong> ${pregunta.prioridad}</p>
+                            //     `;
+                            //     preguntasContainer.appendChild(preguntaElement);
+                            // });
         
                             // Inicializar el mapa
                             const latitud = parseFloat(trivia.latitud);
@@ -291,18 +292,6 @@
                     })
                     .catch(error => console.error('Error al obtener la trivia:', error));
             });
-        
-            function iniciarMap(latitud, longitud) {
-                var coord = { lat: latitud, lng: longitud };
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15,
-                    center: coord
-                });
-                var marker = new google.maps.Marker({
-                    position: coord,
-                    map: map
-                });
-            }
         
             function borrarTrivia(id) {
                 if (confirm('¿Estás seguro de que deseas borrar esta Trivia?')) {
@@ -317,6 +306,8 @@
                     .catch(error => console.error('Error al borrar la Trivia:', error));
                 }
             }
+
+            
         
             function activarTrivia(id) {
                 if (confirm('¿Estás seguro de que deseas activar esta Trivia?')) {
