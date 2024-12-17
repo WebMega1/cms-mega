@@ -259,35 +259,10 @@
                             `;
 
                             const cardBodyRight = document.querySelector('.card-body-right');
-                            cardBodyRight.innerHTML = `
-                            <h2>Preguntas</h2>
-                            `;
+                            cardBodyRight.innerHTML = ``;
+                            
         
-                            // const preguntasContainer = document.getElementById('preguntas-container');
-                            // data.forEach(pregunta => {
-                            //     const preguntaElement = document.createElement('div');
-                            //     preguntaElement.classList.add('pregunta');
-                            //     preguntaElement.innerHTML = `
-                            //         <h5>Pregunta: ${pregunta.pregunta}</h5>
-                            //         <p><strong>Tipo de Pregunta:</strong> ${pregunta.tipopregunta}</p>
-                            //         <p><strong>Opción A:</strong> ${pregunta.opcionA}</p>
-                            //         <p><strong>Opción B:</strong> ${pregunta.opcionB}</p>
-                            //         <p><strong>Opción C:</strong> ${pregunta.opcionC}</p>
-                            //         <p><strong>Opción D:</strong> ${pregunta.opcionD}</p>
-                            //         <p><strong>Respuesta Correcta:</strong> ${pregunta.respuestaCorrecta}</p>
-                            //         <p><strong>Pistas de Respuesta:</strong> ${pregunta.pistasDeRespuesta}</p>
-                            //         <p><strong>Requerido:</strong> ${pregunta.requerido}</p>
-                            //         <p><strong>Especial:</strong> ${pregunta.especial}</p>
-                            //         <p><strong>Status de Pregunta:</strong> ${pregunta.pregunta_status}</p>
-                            //         <p><strong>Prioridad:</strong> ${pregunta.prioridad}</p>
-                            //     `;
-                            //     preguntasContainer.appendChild(preguntaElement);
-                            // });
-        
-                            // Inicializar el mapa
-                            const latitud = parseFloat(trivia.latitud);
-                            const longitud = parseFloat(trivia.longitud);
-                            iniciarMap(latitud, longitud);
+                            
                         }
                     })
                     .catch(error => console.error('Error al obtener la trivia:', error));
