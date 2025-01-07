@@ -197,7 +197,21 @@ router.get('/api/triviaspreguntas/data', (req, res) => {
   });
 });
 
+// Ruta GET para obtener los datos de la vista tarifario
+router.get('/api/canales/:idSucursal', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  const { idSucursal } = req.params;
+  const query = `SELECT *, COUNT(*) as validacion
+                  FROM view_alineacioncanales WHERE idSucursal = ?
+                  GROUP BY selectorCanal `;
 
+  db.query(query, [idSucursal], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener los datos del tarifario' });
+      }
+      res.json(results);
+  });
+});
 
 /*router.get('/mega/tarifario', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
