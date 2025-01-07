@@ -146,6 +146,58 @@ router.get('/api/configuraciones/home/', (req, res) => {
 });
 
 
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/trivias/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  db.query(`SELECT t1.*, t2.ruta AS rutaPrincipal , t2.archivo AS archivoPrincipal, t3.ruta AS rutaMovil, t3.archivo AS archivoMovil 
+                FROM triviasconfig as t1
+                LEFT JOIN banners as t2 on t1.idBannerPrincipal = t2.idBanner
+                LEFT JOIN banners as t3 on t1.idBannerMovil = t3.idBanner
+                 WHERE t1.status = 1`, (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+
+// Ruta GET para obtener datos de una trivia específica y sus preguntas en formato JSON
+router.get('/api/trivias/data', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  const { id } = req.query;
+  db.query(`SELECT t1.*, t2.ruta AS rutaPrincipal , t2.archivo AS archivoPrincipal, t3.ruta AS rutaMovil, t3.archivo AS archivoMovil 
+            FROM triviasconfig as t1
+            LEFT JOIN banners as t2 on t1.idBannerPrincipal = t2.idBanner
+            LEFT JOIN banners as t3 on t1.idBannerMovil = t3.idBanner
+            WHERE t1.urlEndPoint = ? AND t1.status = 1
+  `, [id], (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener la trivia' });
+      }
+      if (result.length === 0) {
+          return res.status(404).json({ error: 'Trivia no encontrada' });
+      }
+      res.json(result[0]); // Asegúrate de enviar solo el primer resultado
+  });
+});
+
+
+// Ruta GET para obtener datos de una trivia específica y sus preguntas en formato JSON
+router.get('/api/triviaspreguntas/data', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  const { id } = req.query;
+  db.query(`SELECT * FROM triviaspreguntas WHERE idtriviaConfig = ?`, [id], (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener las preguntas trivia' });
+      }
+      if (result.length === 0) {
+          return res.status(404).json({ error: 'Preguntas de la trivia no encontrada' });
+      }
+      res.json(result); 
+  });
+});
+
+
 
 /*router.get('/mega/tarifario', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
