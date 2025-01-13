@@ -79,7 +79,7 @@ router.get('/api/triplePack/:idSucursal', (req, res) => {
 // Ruta para API con los banners activos, abierta para todos
 router.get('/api/bannerHero/', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  db.query('SELECT * FROM `view_bannerherohome` ', (err, result) => {
+  db.query('SELECT * FROM bannerhome WHERE status = 1 ', (err, result) => {
       if (err) {
           return res.status(500).json({ error: 'Error al obtener banners de home' });
       }
@@ -207,7 +207,7 @@ router.get('/api/canales/:idSucursal', (req, res) => {
 
   db.query(query, [idSucursal], (err, results) => {
       if (err) {
-          return res.status(500).json({ error: 'Error al obtener los datos del tarifario' });
+          return res.status(500).json({ error: 'Error al obtener los datos de canales' });
       }
       res.json(results);
   });
