@@ -213,6 +213,20 @@ router.get('/api/canales/:idSucursal', (req, res) => {
   });
 });
 
+// Ruta GET para obtener los datos de configuracion card streaming
+router.get('/api/streaming/:idStreaming', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  const { idStreaming } = req.params;
+  const query = `SELECT * FROM paquetesstreaming WHERE idStreaming = ? ; `;
+
+  db.query(query, [idStreaming], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener los datos de la API streaming' });
+      }
+      res.json(results);
+  });
+});
+
 /*router.get('/mega/tarifario', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
 });*/
