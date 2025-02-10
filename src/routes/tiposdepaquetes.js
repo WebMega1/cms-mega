@@ -100,4 +100,47 @@ router.post('/tipodepaquete/desactivar/:id', (req, res) => {
     });
 });
 
+// Ruta GET para servir una página HTML con información de los tipos de paquetes
+router.get('/fullConnected', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/tipopaquetes', 'fullConnected.html'));
+});
+
+// Ruta GET para obtener datos de todas las tipo de paquetes en formato JSON
+router.get('/fullConnected/data', (req, res) => {
+    db.query(`SELECT t1.idSucursal, t1.status, t2.sucursalName
+                FROM tarifario  as t1
+                LEFT JOIN sucursal as t2 on t1.idSucursal = t2.idSucursal
+                WHERE idTipoPaquete = 1  
+                ORDER BY sucursalName ASC`, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener los tipos de canales' });
+        }
+        res.json(result);
+    });
+});
+
+// Ruta POST para activar un tipo de paquete
+router.post('/fullConnected/activar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE `tarifario` SET status = 1 WHERE idSucursal = ? AND idTipoPaquete = 1;', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al activar el tipo de paquete' });
+        }
+        res.json({ success: true, message: 'Tipo de paquete activado correctamente' });
+    });
+});
+
+// Ruta POST para desactivar un tipo de paquete
+router.post('/fullConnected/desactivar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE `tarifario` SET status = 0 WHERE idSucursal = ? AND idTipoPaquete = 1;', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al desactivar el tipo de paquete' });
+        }
+        res.json({ success: true, message: 'Tipo de paquete desactivado correctamente' });
+    });
+});
+
+
+
 module.exports = router;

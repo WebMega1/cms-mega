@@ -83,6 +83,7 @@ const routesSecciones = require('./routes/secciones');  // Importa para cargar S
 
 
 
+
 // Monta las rutas en la aplicación
 app.use(routesIndex); // Monta las rutas principales en la aplicación.
 app.use(routesUsers); // Monta las rutas de usuarios en la aplicación.
