@@ -172,7 +172,7 @@ router.get('/bannerHome/editar', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannerHomeEditar.html'));
 });
 
-// Ruta POST para actualizar un canal
+// Ruta POST para actualizar 
 router.post('/bannerHome/editar/:id', upload.single('image'), (req, res) => {
     const { id } = req.params;
     const { name, type, status, code, active } = req.body;
