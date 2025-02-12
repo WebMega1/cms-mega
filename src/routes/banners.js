@@ -26,20 +26,16 @@ const upload = multer({ storage: storage });
 
 // Ruta GET para obtener datos de todas los canales en formato JSON
 router.get('/banners/data', (req, res) => {
-    // Realiza una consulta SQL para obtener todos los registros de la tabla 'sucursal'
    db.query('SELECT * FROM view_banners', (err, result) => {
        if (err) {
-             // Si ocurre un error en la consulta, devuelve un error 500 con un mensaje JSON
            return res.status(500).json({ error: 'Error al obtener Banners' });
        }
-       // Si la consulta es exitosa, envía los resultados como un JSON
        res.json(result); // Envía los datos como JSON
    });
 });
 
 // Ruta GET para renderizar una página HTML con información de los canales
 router.get('/banners', (req, res) => {
-    // Envía el archivo HTML 'canales.html' ubicado en la carpeta 'views/pages/canales'
   res.sendFile(path.join(__dirname, '../views/pages/banners', 'banners.html'));
 });
 
@@ -144,7 +140,7 @@ router.get('/bannerHome', (req, res) => {
 
 // Ruta GET para obtener datos de todas los canales en formato JSON
 router.get('/bannersHome/data', (req, res) => {
-   db.query(`SELECT * FROM bannerhome WHERE status = 1;`, (err, result) => {
+   db.query(`SELECT * FROM bannerhome;`, (err, result) => {
        if (err) {
            return res.status(500).json({ error: 'Error al obtener Banners' });
        }
@@ -171,5 +167,47 @@ router.get('/bannerHome/ver/data', (req, res) => {
     });
 });
 
+// Ruta GET para servir la página HTML de editar de un canal
+router.get('/bannerHome/editar', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannerHomeEditar.html'));
+});
+
+// Ruta POST para actualizar un canal
+router.post('/bannerHome/editar/:id', upload.single('image'), (req, res) => {
+    const { id } = req.params;
+    const { name, type, status, code, active } = req.body;
+    const image = req.file ? req.file.filename : req.body.existingImage; // Usar la nueva imagen si se sube, de lo contrario usar la existente
+    const query = 'UPDATE bannerhome SET name = ?, image = ?, type = ?, status = ?, code = ?, active = ? WHERE idChannels = ?';
+    const values = [name, image, type, status, code, active, id];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al actualizar el banner' });
+        }
+        res.json({ message: 'Banner actualizado exitosamente' });
+    });
+});
+
+// Ruta POST para activar un canal
+router.post('/bannerHome/activar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE bannerhome SET status = 1 WHERE idBannerHome = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al activar el banner' });
+        }
+        res.json({ success: true, message: 'Banner activado correctamente' });
+    });
+});
+
+// Ruta POST para desactivar un canal
+router.post('/bannerHome/desactivar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE bannerhome SET status = 0 WHERE idBannerHome = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al activar el banner' });
+        }
+        res.json({ success: true, message: 'Banner desactivado correctamente' });
+    });
+});
 
 module.exports = router; // Exporta el router para que pueda ser utilizado por la aplicación principal.

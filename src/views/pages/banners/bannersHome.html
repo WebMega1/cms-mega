@@ -261,8 +261,8 @@
                 });
         });
 
-        function activarCanal(id) {
-            fetch(`/banners/activar/${id}`, {
+        function activarBannerHome(id) {
+            fetch(`/bannerHome/activar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -273,16 +273,16 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al activar el canal:', data.error);
+                        console.error('Error al activar el banner home:', data.error);
                     }
                 })
                 .catch(error => {
-                    console.error('Error al activar el canal:', error);
+                    console.error('Error al activar el banner home:', error);
                 });
         }
 
-        function desactivarCanal(id) {
-            fetch(`/banners/desactivar/${id}`, {
+        function desactivarBannerHome(id) {
+            fetch(`/bannerHome/desactivar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -293,11 +293,11 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al desactivar el canal:', data.error);
+                        console.error('Error al desactivar el banner home:', data.error);
                     }
                 })
                 .catch(error => {
-                    console.error('Error al desactivar el canal:', error);
+                    console.error('Error al desactivar el banner home:', error);
                 });
         }
     </script>

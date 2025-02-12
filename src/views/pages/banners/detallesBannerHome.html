@@ -195,13 +195,13 @@
                 .then(data => {
                     const active = data.status ? "Activo" : "Inactivo";
                     const statusButton = data.status ? 
-                        `<a onclick="desactivarBanner(${data.idBannerHome})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
-                        `<a onclick="activarBanner(${data.idBannerHome})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
+                        `<a onclick="desactivarBannerHome(${data.idBannerHome})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
+                        `<a onclick="activarBannerHome(${data.idBannerHome})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
     
                     const cardTitle = document.querySelector('.card-title');
                     cardTitle.textContent = data.title;
                     const cardTools = document.querySelector('.card-tools');
-                    cardTools.innerHTML = `<a href="/banners/editar?id=${data.idBannerHome}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+                    cardTools.innerHTML = `<a href="/bannerHome/editar?id=${data.idBannerHome}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
     
                     const cardBodyLeft = document.querySelector('.card-body-left');
                     cardBodyLeft.innerHTML = `
@@ -217,7 +217,7 @@
                         <p><strong>Imagen Movil:</strong></p>
                         <p> <img src="${config.serverUrl}src/assets/${data.ruta}${data.imagenMobile}" alt="${data.imagenMobile}" style="width: 200px; height: auto;"></p>
                         <br />
-                        <p><b>Status:</b> ${data.status} </p>
+                        <p><b>Status:</b> ${active} </p>
                         <p><b>Fecha de inicio:</b> ${data.fhInicio} </p>
                         <p><b>Fecha Fin:</b> ${data.fhFin} </p>
                     `;
@@ -225,8 +225,8 @@
                 .catch(error => console.error('Error al obtener el banner:', error));
         });
     
-        function activarCanal(id) {
-            fetch(`/banners/activar/${id}`, {
+        function activarBannerHome(id) {
+            fetch(`/bannerHome/activar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -237,16 +237,16 @@
                 if (data.success) {
                     location.reload(); // Recargar la página para reflejar los cambios
                 } else {
-                    console.error('Error al activar el canal:', data.error);
+                    console.error('Error al activar el banner home:', data.error);
                 }
             })
             .catch(error => {
-                console.error('Error al activar el canal:', error);
+                console.error('Error al activar el banner home:', error);
             });
         }
     
-        function desactivarCanal(id) {
-            fetch(`/banners/desactivar/${id}`, {
+        function desactivarBannerHome(id) {
+            fetch(`/bannerHome/desactivar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -257,11 +257,11 @@
                 if (data.success) {
                     location.reload(); // Recargar la página para reflejar los cambios
                 } else {
-                    console.error('Error al desactivar el canal:', data.error);
+                    console.error('Error al desactivar el banner home:', data.error);
                 }
             })
             .catch(error => {
-                console.error('Error al desactivar el canal:', error);
+                console.error('Error al desactivar el banner home:', error);
             });
         }
     </script>
