@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="/js/metadata.js"></script>
+    <script src="/js/config.js"></script>
 
     <title id="title">CPanel - Mega</title><!--begin::Primary Meta Tags-->
     <meta name="viewport" id="metaViewport" content="">
@@ -87,14 +88,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Administrar Secciones</h3>
-
+                            <h3 class="mb-0">Banners Home</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Secciones
+                                    Banners de home
                                 </li>
                             </ol>
                         </div>
@@ -114,36 +114,39 @@
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-
-                                <div class="col-sm-4">
-                                    <p>
-                                        Selecciona el modulo a administrar
-                                    </p>
-                                    <select name="slcSecciones" id="slcSecciones" class="form-control">
-                                        <option value="0">Selecciona el modulo</option>
-                                    </select>
-                                </div>
-
+                                <p>Configura los banners que se muestran en el Banner principal del HOME</p>
                                 <div class="card-tools">
-
+                                    <a href="/bannerHome/crear" class="btn btn-outline-success" title="Nuevo banner">
+                                        <i class="bi bi-plus-circle"></i> Nuevo Banner
+                                    </a>
                                 </div>
                             </div>
-                            <div class="card-body" id="cardBodySecciones">
-                                <table class="table">
+                            <div class="card-body">
+                                <table id="tableBannerHome" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Componente</th>
-                                            <th>Sección</th>
-                                            <th>Inicio</th>
-                                            <th>Fin</th>
+                                            <th>Id</th>
+                                            <th>Principal</th>
+                                            <th>Movil</th>
+                                            <th>Background</th>
                                             <th>Status</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="seccionesTableBody">
-                                        <!-- Rows will be added here dynamically -->
+                                    <tbody id="bannersHome-body" class="table-body">
+                                        <!-- Aquí se insertarán las filas dinámicamente -->
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Principal</th>
+                                            <th>Movil</th>
+                                            <th>Background</th>
+                                            <th>Status</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
-
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
@@ -221,56 +224,45 @@
     <!-- OPTIONAL SCRIPTS -->
     <!-- sortablejs -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const select = document.getElementById('slcSecciones');
+        $(document).ready(function () {
 
-            // Fetch options for the select element
-            fetch('/configuracion/data')
+            // Cargar datos dinámicamente
+            fetch('/bannersHome/data')  // Asegúrate de que esta ruta sea correcta
                 .then(response => response.json())
                 .then(data => {
+                    const tbody = document.getElementById('bannersHome-body'); // Asegúrate de que el ID coincida
                     data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.seccion;
-                        option.textContent = item.seccion;
-                        select.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
+                        const row = document.createElement('tr');
 
-            // Add event listener for select change
-            select.addEventListener('change', function () {
-                const selectedValue = select.value;
-                if (selectedValue !== "0") {
-                    fetch(`/configuracion/data/${selectedValue}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const tableBody = document.getElementById('seccionesTableBody');
-                            tableBody.innerHTML = ''; // Clear previous content
-                            data.forEach(item => {
-                                const row = document.createElement('tr');
-                                row.innerHTML = `
-                                <td>${item.nombreComponente}</td>
-                                <td>${item.seccion}</td>
-                                <td><input type="date" value="${new Date(item.fhInicio).toISOString().split('T')[0]}" data-id="${item.idConfigSecciones}" data-field="fhInicio" onchange="updateDate(this)" class="form-control"></td>
-                                <td><input type="date" value="${new Date(item.fhFin).toISOString().split('T')[0]}" data-id="${item.idConfigSecciones}" data-field="fhFin" onchange="updateDate(this)" class="form-control"></td>
+                        const active = item.status ? "Activo" : "Inactivo";
+                        const statusButton = item.status ?
+                            `<a onclick="desactivarBannerHome(${item.idBannerHome})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
+                            `<a onclick="activarBannerHome(${item.idBannerHome})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+
+                        row.innerHTML = `
+                                <td>${item.idBannerHome}</td>
+                                <td><img src="${config.serverUrl}src/assets/${item.ruta}${item.imagenBanner}" alt="${item.imagenBanner}" style="width: 100px; height: auto;"></td>
+                                <td><img src="${config.serverUrl}src/assets/${item.ruta}${item.imagenMobile}" alt="${item.imagenMobile}" style="width: 100px; height: auto;"></td>
+                                <td><img src="${config.serverUrl}src/assets/${item.ruta}${item.background}" alt="${item.background}" style="width: 100px; height: auto;"></td>
+                                <td>${active}</td>
                                 <td>
-                                    <input type="checkbox" ${item.status === 1 ? 'checked' : ''} 
-                                    data-id="${item.idConfigSecciones}" 
-                                    onchange="toggleStatus(this)" class="form-check-input" >
+                                    <a href="/bannerHome/ver?id=${item.idBannerHome}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                                    <a href="/bannerHome/editar?id=${item.idBannerHome}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                                    ${statusButton}
                                 </td>
                             `;
-                                tableBody.appendChild(row);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching section data:', error));
-                }
-            });
+                        tbody.appendChild(row);
+                    });
+                    // Inicializar DataTables después de cargar los datos
+                    $('#canales').DataTable();
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos:', error);
+                });
         });
 
-        function toggleStatus(checkbox) {
-            const id = checkbox.getAttribute('data-id');
-            const newStatus = checkbox.checked ? 'activar' : 'desactivar';
-            fetch(`/secciones/${newStatus}/${id}`, {
+        function activarCanal(id) {
+            fetch(`/banners/activar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -278,29 +270,36 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Status updated:', data);
+                    if (data.success) {
+                        location.reload(); // Recargar la página para reflejar los cambios
+                    } else {
+                        console.error('Error al activar el canal:', data.error);
+                    }
                 })
-                .catch(error => console.error('Error updating status:', error));
+                .catch(error => {
+                    console.error('Error al activar el canal:', error);
+                });
         }
 
-        function updateDate(input) {
-            const id = input.getAttribute('data-id');
-            const field = input.getAttribute('data-field');
-            const value = input.value;
-            fetch(`/configuracion/updateDate/${id}`, {
+        function desactivarCanal(id) {
+            fetch(`/banners/desactivar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ [field]: value })
+                }
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Date updated:', data);
+                    if (data.success) {
+                        location.reload(); // Recargar la página para reflejar los cambios
+                    } else {
+                        console.error('Error al desactivar el canal:', data.error);
+                    }
                 })
-                .catch(error => console.error('Error updating date:', error));
+                .catch(error => {
+                    console.error('Error al desactivar el canal:', error);
+                });
         }
-
     </script>
 </body><!--end::Body-->
 

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es-MX"> <!--begin::Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="/js/config.js"></script>
+
+
+    <title id="title">CPanel - Mega</title><!--begin::Primary Meta Tags-->
+    <meta name="viewport" id="metaViewport" content="">
+    <meta name="title" id="metaTitle" content="">
+    <meta name="author" id="metaAuthor" content="">
+    <meta name="description" id="metaDescription" content="">
+    <meta name="keywords" id="metaKeywords" content=""><!--end::Primary Meta Tags--><!--begin::Fonts-->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="/css/adminlte.css"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
+    
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    
+</head> <!--end::Head--> <!--begin::Body-->
+
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
+    <div class="app-wrapper"> <!--begin::Header-->
+        <nav class="app-header navbar navbar-expand bg-body"> <!--begin::Container-->
+            <div class="container-fluid"> <!--begin::Start Navbar Links-->
+                <ul class="navbar-nav">
+                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="bi bi-list"></i> </a> </li>
+                </ul> <!--end::Start Navbar Links--> <!--begin::End Navbar Links-->
+                <ul class="navbar-nav ms-auto"> <!--begin::Navbar Search-->
+                   
+                    <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="bi bi-person"></i> <span class="d-none d-md-inline">Administrador</span> </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
+                            <li class="user-header text-bg-primary"> <img src="/assets/img/logoMega.png" class="rounded-circle shadow" alt="User Image">
+                                <p>
+                                    Administrador - Web Developer
+                                    
+                                </p>
+                            </li> <!--end::User Image--> <!--begin::Menu Body-->
+                           
+                            <li class="user-footer"> <a href="#" class="btn btn-default btn-flat">Settings</a> <a href="#" class="btn btn-default btn-flat float-end">Sign out</a> </li> <!--end::Menu Footer-->
+                        </ul>
+                    </li> <!--end::User Menu Dropdown-->
+                </ul> <!--end::End Navbar Links-->
+            </div> <!--end::Container-->
+        </nav> <!--end::Header--> <!--begin::Sidebar-->
+
+        <!-- Contenedor para la sección importada -->
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark" id="left-sidebar" > <!--begin::Sidebar Brand-->
+                    
+                    
+        </aside>
+
+    <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="mb-0">Banner del HOME</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-end">
+                            <li class="breadcrumb-item"><a href="/index">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Banner del HOME
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+                <section class="content">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Detalles del Canal</h3>
+                            <div class="card-tools">
+                                <!-- Aquí se insertarán los botones dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10 card-body-left">
+                                    <!-- Aquí se insertarán los detalles dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <!-- Aquí se puede agregar contenido adicional si es necesario -->
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                </section>
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+    </main>
+    <!--end::App Main-->
+    <!--begin::Footer-->
+    <footer class="app-footer" id="footer">
+        
+    </footer>
+    <!--end::Footer-->
+    </div>
+    <!--end::App Wrapper-->
+    <!--begin::Script-->
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
+    <!--end::Third Party Plugin(OverlayScrollbars)-->
+    <!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
+    <!--end::Required Plugin(popperjs for Bootstrap 5)-->
+    <!--begin::Required Plugin(Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
+    <!--end::Required Plugin(Bootstrap 5)-->
+    <!--begin::Required Plugin(AdminLTE)-->
+    <script>
+        function onDOMContentLoaded() {
+            // Primera función: Cargar la sección HTML del sidebar
+            cargaLeftSidebar();
+            cargaNavBar();
+            // Segunda función: Otra lógica que deseas ejecutar al cargar la página
+            console.log('cargar secciones');
+        }
+
+        document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
+
+    </script>
+    
+    <script src="/js/adminlte.js"></script>
+    <script src="/js/componentes.js"></script>
+
+    <!--end::Required Plugin(AdminLTE)-->
+    <!--begin::OverlayScrollbars Configure-->
+    <script>
+        const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+        const Default = {
+            scrollbarTheme: "os-theme-light",
+            scrollbarAutoHide: "leave",
+            scrollbarClickScroll: true,
+        };
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+            if (
+                sidebarWrapper &&
+                typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
+            ) {
+                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: Default.scrollbarTheme,
+                        autoHide: Default.scrollbarAutoHide,
+                        clickScroll: Default.clickScroll,
+                    },
+                });
+            }
+        });
+    </script>
+    <!--end::OverlayScrollbars Configure-->
+    <!-- OPTIONAL SCRIPTS -->
+    <!-- sortablejs -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            fetch(`/bannerHome/ver/data?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    const active = data.status ? "Activo" : "Inactivo";
+                    const statusButton = data.status ? 
+                        `<a onclick="desactivarBanner(${data.idBannerHome})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
+                        `<a onclick="activarBanner(${data.idBannerHome})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
+    
+                    const cardTitle = document.querySelector('.card-title');
+                    cardTitle.textContent = data.title;
+                    const cardTools = document.querySelector('.card-tools');
+                    cardTools.innerHTML = `<a href="/banners/editar?id=${data.idBannerHome}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+    
+                    const cardBodyLeft = document.querySelector('.card-body-left');
+                    cardBodyLeft.innerHTML = `
+                        <h2>${data.title}</h2>  
+                        <br />
+                        <p><b>Id:</b> ${data.idBannerHome} </p>
+                        <p><b>Ruta de imagen:</b> ${data.ruta} </p>
+                        <p><b>Link del bonton de acción:</b> ${data.linkButton} </p>
+                        <p><strong>Background:</strong></p>
+                        <p> <img src="${config.serverUrl}src/assets/${data.ruta}${data.background}" alt="${data.background}" style="width: 400px; height: auto;"></p>
+                        <p><strong>Imagen Banner:</strong></p>
+                        <p> <img src="${config.serverUrl}src/assets/${data.ruta}${data.imagenBanner}" alt="${data.imagenBanner}" style="width: 400px; height: auto;"></p>
+                        <p><strong>Imagen Movil:</strong></p>
+                        <p> <img src="${config.serverUrl}src/assets/${data.ruta}${data.imagenMobile}" alt="${data.imagenMobile}" style="width: 200px; height: auto;"></p>
+                        <br />
+                        <p><b>Status:</b> ${data.status} </p>
+                        <p><b>Fecha de inicio:</b> ${data.fhInicio} </p>
+                        <p><b>Fecha Fin:</b> ${data.fhFin} </p>
+                    `;
+                })
+                .catch(error => console.error('Error al obtener el banner:', error));
+        });
+    
+        function activarCanal(id) {
+            fetch(`/banners/activar/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload(); // Recargar la página para reflejar los cambios
+                } else {
+                    console.error('Error al activar el canal:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error al activar el canal:', error);
+            });
+        }
+    
+        function desactivarCanal(id) {
+            fetch(`/banners/desactivar/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload(); // Recargar la página para reflejar los cambios
+                } else {
+                    console.error('Error al desactivar el canal:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error al desactivar el canal:', error);
+            });
+        }
+    </script>
+    <!--end::OverlayScrollbars Configure-->
+</body><!--end::Body-->
+
+</html>
+
+
+
+
+

@@ -127,4 +127,49 @@ router.post('/banners/desactivar/:id', (req, res) => {
     });
 });
 
+// Ruta GET para obtener datos de tipo de banner
+router.get('/banners/tipoBanner/', (req, res) => {
+   db.query('SELECT * FROM tipobanner', (err, result) => {
+       if (err) {
+           return res.status(500).json({ error: 'Error al obtener tipo de banner' });
+       }
+       res.json(result); // Envía los datos como JSON
+   });
+});
+
+// Ruta GET para renderizar una página HTML con información de los canales
+router.get('/bannerHome', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannersHome.html'));
+});
+
+// Ruta GET para obtener datos de todas los canales en formato JSON
+router.get('/bannersHome/data', (req, res) => {
+   db.query(`SELECT * FROM bannerhome WHERE status = 1;`, (err, result) => {
+       if (err) {
+           return res.status(500).json({ error: 'Error al obtener Banners' });
+       }
+       res.json(result); // Envía los datos como JSON
+   });
+});
+
+// Ruta GET para rendirizar una página HTML con el detalle del canal
+router.get('/bannerHome/ver', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'detallesBannerHome.html'));
+});
+
+// Ruta GET para obtener datos de un tipo de canal específico en formato JSON
+router.get('/bannerHome/ver/data', (req, res) => {
+    const { id } = req.query;
+    db.query(`SELECT * FROM bannerhome WHERE idBannerHome = ?`, [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener el banner' });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Banner no encontrado' });
+        }
+        res.json(result[0]);
+    });
+});
+
+
 module.exports = router; // Exporta el router para que pueda ser utilizado por la aplicación principal.
