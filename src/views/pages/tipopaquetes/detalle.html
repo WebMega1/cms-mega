@@ -227,18 +227,18 @@
                     .then(data => {
                         const status = data.status ? "Activo" : "Inactivo";
                         const statusButton = data.status ? 
-                            `<a onclick="desactivarPaquete(${data.idtipodepaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
-                            `<a onclick="activarPaquete(${data.idtipodepaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
+                            `<a onclick="desactivarPaquete(${data.idTipoPaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
+                            `<a onclick="activarPaquete(${data.idTipoPaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
         
                         const cardTitle = document.querySelector('.card-title');
-                        cardTitle.textContent = data.nombretipodepaquete;
+                        cardTitle.textContent = data.nombreTipoPaquete;
                         const cardTools = document.querySelector('.card-tools');
-                        cardTools.innerHTML = `<a href="/tipodepaquete/editar?id=${data.idtipodepaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+                        cardTools.innerHTML = `<a href="/tipodepaquete/editar?id=${data.idTipoPaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
         
                         const cardBodyLeft = document.querySelector('.card-body-left');
-                        cardBodyLeft.innerHTML = `<h2>${data.nombretipodepaquete}</h2>  
+                        cardBodyLeft.innerHTML = `<h2>${data.nombreTipoPaquete}</h2>  
                                                     <br />
-                                                    <p class="card-text"><strong>Id:</strong> ${data.idtipodepaquete}</p>
+                                                    <p class="card-text"><strong>Id:</strong> ${data.idTipoPaquete}</p>
                                                     <p class="card-text"><strong>Status:</strong> ${status}</p>
                                                     <p class="card-text"><strong>Fecha de Creación:</strong> ${data.created_at}</p>
                         `;

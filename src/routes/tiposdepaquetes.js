@@ -23,7 +23,7 @@ router.get('/tipodepaquete', (req, res) => {
 // Ruta GET para obtener datos de un tipo de paquetes específico en formato JSON
 router.get('/tipodepaquete/ver/data', (req, res) => {
     const { id } = req.query;
-    db.query('SELECT * FROM tipodepaquete WHERE idtipodepaquete= ?', [id], (err, result) => {
+    db.query('SELECT * FROM tipodepaquete WHERE idTipoPaquete= ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener el tipo de canal' });
         }
@@ -63,25 +63,29 @@ router.get('/tipodepaquete/editar', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/tipopaquetes', 'editar.html'));
 });
 
-// Ruta POST para actualizar un tipo de paquete
+// Ruta para editar un tipo de paquete
 router.post('/tipodepaquete/editar', (req, res) => {
-    const { idtipodepaquete, nombretipodepaquete, status } = req.body;
-    db.query(
-        'UPDATE tipodepaquete SET nombretipodepaquete = ?, status = ? WHERE idtipodepaquete = ?',
-        [nombretipodepaquete, status, idtipodepaquete],
-        (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: 'Error al actualizar el tipo de paquete' });
-            }
-            res.json({ message: 'Tipo de paquete actualizado correctamente' });
+    const { idTipoPaquete, nombreTipoPaquete, status } = req.body;
+    console.log('Datos recibidos:', req.body); // Añadir para depuración
+
+    const query = `UPDATE tipodepaquete SET nombreTipoPaquete = ?, status = ? WHERE idTipoPaquete = ?`;
+    const values = [nombreTipoPaquete, status, idTipoPaquete];
+    console.log('Query:', query); // Añadir para depuración
+    console.log('Values:', values); // Añadir para depuración
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al actualizar el tipo de paquete:', err); // Añadir para depuración
+            return res.status(500).json({ error: 'Error al actualizar el tipo de paquete' });
         }
-    );
+        res.json({ message: 'Tipo de paquete actualizado correctamente' });
+    });
 });
 
 // Ruta POST para activar un tipo de paquete
 router.post('/tipodepaquete/activar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE tipodepaquete SET status = 1 WHERE idtipodepaquete = ?', [id], (err, result) => {
+    db.query('UPDATE tipodepaquete SET status = 1 WHERE idTipoPaquete = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al activar el tipo de paquete' });
         }
@@ -92,7 +96,7 @@ router.post('/tipodepaquete/activar/:id', (req, res) => {
 // Ruta POST para desactivar un tipo de paquete
 router.post('/tipodepaquete/desactivar/:id', (req, res) => {
     const { id } = req.params;
-    db.query('UPDATE tipodepaquete SET status = 0 WHERE idtipodepaquete = ?', [id], (err, result) => {
+    db.query('UPDATE tipodepaquete SET status = 0 WHERE idTipoPaquete = ?', [id], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al desactivar el tipo de paquete' });
         }

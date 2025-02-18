@@ -23,7 +23,9 @@ const dbConfig = require('./dbConfig');
 
 
 // Configuración de la aplicación
-app.set('port', process.env.PORT || 4000);
+app.set('port', process.env.PORT || 80);
+
+// app.set('port', process.env.PORT || 4000); ///local
 
 // Configuración de EJS como motor de plantillas
 // no se esta utilizando, pero se tienen por si en un futuro de necesita

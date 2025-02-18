@@ -249,17 +249,17 @@
         
                             const status = item.status ? "Activo" : "Inactivo";
                             const statusButton = item.status ? 
-                                `<a onclick="desactivarPaquete(${item.idtipodepaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
-                                `<a onclick="activarPaquete(${item.idtipodepaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                                `<a onclick="desactivarPaquete(${item.idTipoPaquete})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
+                                `<a onclick="activarPaquete(${item.idTipoPaquete})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
         
                             row.innerHTML = `
-                                <td>${item.idtipodepaquete}</td>
-                                <td>${item.nombretipodepaquete}</td>
+                                <td>${item.idTipoPaquete}</td>
+                                <td>${item.nombreTipoPaquete}</td>
                                 <td>${status}</td>
                                 <td>${item.created_at}</td>
                                 <td>
-                                    <a href="/tipodepaquete/ver?id=${item.idtipodepaquete}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
-                                    <a href="/tipodepaquete/editar?id=${item.idtipodepaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
+                                    <a href="/tipodepaquete/ver?id=${item.idTipoPaquete}" class="btn btn-outline-dark" title="Ver"><i class="bi bi-eye"></i></a>        
+                                    <a href="/tipodepaquete/editar?id=${item.idTipoPaquete}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text"></i></a>
                                     ${statusButton}
                                 </td>
                             `;
