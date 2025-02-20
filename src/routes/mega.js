@@ -227,6 +227,33 @@ router.get('/api/streaming/:idStreaming', (req, res) => {
   });
 });
 
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/fullConnected/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  db.query(`SELECT t1.idSucursal, t1.status, t2.sucursalName
+                FROM tarifario  as t1
+                LEFT JOIN sucursal as t2 on t1.idSucursal = t2.idSucursal
+                WHERE idTipoPaquete = 1  and t1.status = 1
+                ORDER BY sucursalName ASC;`, (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+
+
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/cardStreaming/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  db.query(`SELECT * FROM cardsstreaming WHERE status = 1;`, (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+
 /*router.get('/mega/tarifario', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
 });*/

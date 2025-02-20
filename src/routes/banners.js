@@ -26,17 +26,17 @@ const upload = multer({ storage: storage });
 
 // Ruta GET para obtener datos de todas los canales en formato JSON
 router.get('/banners/data', (req, res) => {
-   db.query('SELECT * FROM view_banners', (err, result) => {
-       if (err) {
-           return res.status(500).json({ error: 'Error al obtener Banners' });
-       }
-       res.json(result); // Envía los datos como JSON
-   });
+    db.query('SELECT * FROM view_banners', (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener Banners' });
+        }
+        res.json(result); // Envía los datos como JSON
+    });
 });
 
 // Ruta GET para renderizar una página HTML con información de los canales
 router.get('/banners', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/pages/banners', 'banners.html'));
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'banners.html'));
 });
 
 // Ruta GET para obtener datos de un tipo de canal específico en formato JSON
@@ -125,27 +125,27 @@ router.post('/banners/desactivar/:id', (req, res) => {
 
 // Ruta GET para obtener datos de tipo de banner
 router.get('/banners/tipoBanner/', (req, res) => {
-   db.query('SELECT * FROM tipobanner', (err, result) => {
-       if (err) {
-           return res.status(500).json({ error: 'Error al obtener tipo de banner' });
-       }
-       res.json(result); // Envía los datos como JSON
-   });
+    db.query('SELECT * FROM tipobanner', (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener tipo de banner' });
+        }
+        res.json(result); // Envía los datos como JSON
+    });
 });
 
 // Ruta GET para renderizar una página HTML con información de los canales
 router.get('/bannerHome', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannersHome.html'));
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannersHome.html'));
 });
 
 // Ruta GET para obtener datos de todas los canales en formato JSON
 router.get('/bannersHome/data', (req, res) => {
-   db.query(`SELECT * FROM bannerhome;`, (err, result) => {
-       if (err) {
-           return res.status(500).json({ error: 'Error al obtener Banners' });
-       }
-       res.json(result); // Envía los datos como JSON
-   });
+    db.query(`SELECT * FROM bannerhome;`, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener Banners' });
+        }
+        res.json(result); // Envía los datos como JSON
+    });
 });
 
 // Ruta GET para rendirizar una página HTML con el detalle del canal
@@ -209,5 +209,40 @@ router.post('/bannerHome/desactivar/:id', (req, res) => {
         res.json({ success: true, message: 'Banner desactivado correctamente' });
     });
 });
+
+// Ruta GET para renderizar una página HTML con información de los canales
+router.get('/bannerStreaming', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannerStreaming.html'));
+});
+
+// Ruta GET para obtener datos de todas los canales en formato JSON
+router.get('/bannerStreaming/data', (req, res) => {
+    db.query(`SELECT * FROM cardsstreaming`, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener Banners streaming' });
+        }
+        res.json(result); 
+    });
+});
+
+// Ruta GET para rendirizar una página HTML con el detalle del canal
+router.get('/bannerStreaming/ver', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'detallesStreaming.html'));
+});
+
+// Ruta GET para obtener datos de un tipo de canal específico en formato JSON
+router.get('/bannerStreaming/ver/data', (req, res) => {
+    const { id } = req.query;
+    db.query(`SELECT * FROM cardsstreaming WHERE idCardStreaming = ?`, [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener el card de streaming' });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Card no encontrado' });
+        }
+        res.json(result[0]);
+    });
+});
+
 
 module.exports = router; // Exporta el router para que pueda ser utilizado por la aplicación principal.
