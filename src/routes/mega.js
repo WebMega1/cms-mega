@@ -254,6 +254,17 @@ router.get('/api/cardStreaming/', (req, res) => {
   });
 });
 
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/tv/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  db.query(`SELECT * FROM xviewsucursal;`, (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+
 /*router.get('/mega/tarifario', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/pages/mega', 'tarifario.html'));
 });*/
