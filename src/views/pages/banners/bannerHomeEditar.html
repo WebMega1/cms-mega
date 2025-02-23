@@ -120,80 +120,89 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="col-md-5">
-                                    <form id="editar-form" enctype="multipart/form-data">
-                                        <p>
-                                            <label for="idBannerHome"><b>Id banner Home</b></label>
-                                            <input type="text" id="idBannerHome" name="idBannerHome"
-                                                class="form-control" disabled>
-                                        </p>
-                                        <p>
-                                            <label for="rutaBannerHome"><b>Ruta de los archivos</b></label>
-                                            <input type="text" id="rutaBannerHome" name="rutaBannerHome"
-                                                class="form-control" disabled>
-                                        </p>
-                                        <p>
-                                            <label for="newBackground"><b>Background</b></label>
-                                            <input type="file" id="newBackground" name="newBackground"
-                                                class="form-control">
-                                        </p>
-                                        <p>
-                                            
-                                            <img src="" alt="" id="background" name="background"
-                                                style="width: 500px; height: auto;">
-                                        </p>
-                                        <p>
-                                            <label for="titleBanner"><b>Titulo *texto del banner</b></label>
-                                            <input type="text" id="titleBanner" name="titleBanner" class="form-control">
-                                        </p>
-                                        <p>
-                                            <label for="linkButton"><b>Link del botón</b></label>
-                                            <input type="text" id="linkButton" name="linkButton" class="form-control">
-                                        </p>
-                                        <p>
-                                            <label for="textButton"><b>Texto del botón</b></label>
-                                            <input type="text" id="textButton" name="textButton" class="form-control">
-                                        </p>
-                                        <p>
-                                            <label for="imagenBanner"><b>Imagen Banner</b></label>
-                                            <input type="file" id="newImagenBanner" name="newImagenBanner"
-                                                class="form-control">
-                                        </p>
-                                        <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
-                                            <img src="" alt="" id="imagenBanner" name="imagenBanner"
-                                                style="width: 500px; height: auto;">
-                                        </p>
-                                        <p>
-                                            <label for="imagenMobil"><b>Imagen Mobile</b></label>
-                                            <input type="file" id="newImagenMobil" name="newImagenMobil"
-                                                class="form-control">
-                                        </p>
-                                        <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
-                                            <img src="" alt="" id="imagenMobil" name="imagenMobil"
-                                                style="width: 300px; height: auto;">
-                                        </p>
-                                        <p>
-                                            <label for="fhInicio"><b>Link del botón</b></label>
-                                            <input type="date" id="fhInicio" name="fhInicio" class="form-control">
-                                        </p>
-                                        <p>
-                                            <label for="fhFin"><b>Link del botón</b></label>
-                                            <input type="date" id="fhFin" name="fhFin" class="form-control">
-                                        </p>
-                                        <p>
-                                            <label for="status" class="form-label"><b>Status</b></label>
-                                            <select class="form-control" id="status" name="status" required>
-                                                <option value="1">Activo</option>
-                                                <option value="0">Inactivo</option>
-                                            </select>
-                                        </p>
+                                <form id="editar-form" enctype="multipart/form-data"></form>
+                                <div class="col-md-6">
 
-                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                        <a href="/bannerhome" class="btn btn-secondary">Cancelar</a>
-                                    </form>
+                                    <p>
+                                        <label for="idBannerHome"><b>Id banner Home</b></label>
+                                        <input type="text" id="idBannerHome" name="idBannerHome" class="form-control"
+                                            disabled>
+                                    </p>
+                                    <p>
+                                        <label for="rutaBannerHome"><b>Ruta de los archivos</b></label>
+                                        <input type="text" id="rutaBannerHome" name="rutaBannerHome"
+                                            class="form-control" disabled>
+                                    </p>
+                                    <p>
+                                        <label for="newBackground"><b>Background</b></label>
+                                        <input type="file" id="newBackground" name="newBackground" class="form-control">
+                                    </p>
+                                    <p>
+
+                                        <img src="" alt="" id="background" name="background"
+                                            style="width: 500px; height: auto;">
+                                    </p>
+                                    <p>
+                                        <label for="titleBanner"><b>Titulo *texto del banner</b></label>
+                                        <input type="text" id="titleBanner" name="titleBanner" class="form-control">
+                                    </p>
+                                    <p>
+                                        <label for="linkButton"><b>Link del botón</b></label>
+                                        <input type="text" id="linkButton" name="linkButton" class="form-control">
+                                    </p>
+                                    <p>
+                                        <label for="textButton"><b>Texto del botón</b></label>
+                                        <input type="text" id="textButton" name="textButton" class="form-control">
+                                    </p>
+                                    <p>
+                                        <label for="imagenBanner"><b>Imagen Banner</b></label>
+                                        <input type="file" id="newImagenBanner" name="newImagenBanner"
+                                            class="form-control">
+                                    </p>
+                                    <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
+                                        <img src="" alt="" id="imagenBanner" name="imagenBanner"
+                                            style="width: 500px; height: auto;">
+                                    </p>
+                                    <p>
+                                        <label for="imagenMobil"><b>Imagen Mobile</b></label>
+                                        <input type="file" id="newImagenMobil" name="newImagenMobil"
+                                            class="form-control">
+                                    </p>
+                                    <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
+                                        <img src="" alt="" id="imagenMobil" name="imagenMobil"
+                                            style="width: 300px; height: auto;">
+                                    </p>
+                                    <p>
+                                        <label for="fhInicio"><b>Fecha de inicio</b></label>
+                                        <input type="date" id="fhInicio" name="fhInicio" class="form-control">
+                                    </p>
+                                    <p>
+                                        <label for="fhFin"><b>Fecha de fin</b></label>
+                                        <input type="date" id="fhFin" name="fhFin" class="form-control">
+                                    </p>
+                                    <p>
+                                        <label for="status" class="form-label"><b>Status</b></label>
+                                        <select class="form-control" id="status" name="status" required>
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </p>
+                                    <hr />
+
+
+
 
                                 </div>
-                                
+                                <div class="col-md-5">
+                                    <h3>Visibilidad sucursales</h3>
+                                    <div id="sucursales-list"></div>
+
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <a href="/bannerhome" class="btn btn-secondary">Cancelar</a>
+                                </form>
+
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
@@ -202,21 +211,21 @@
                         </div>
                         <!-- /.card -->
                     </section>
-                    
-                    
-                    </div>
-                </div>
-                <!--end::Container-->
-            </div>
-            <!--end::App Content-->
-        </main>
-        <!--end::App Main-->
-        <!--begin::Footer-->
-        <footer class="app-footer" id="footer">
 
-            <!--end::Copyright-->
-        </footer>
-        <!--end::Footer-->
+
+                </div>
+            </div>
+            <!--end::Container-->
+    </div>
+    <!--end::App Content-->
+    </main>
+    <!--end::App Main-->
+    <!--begin::Footer-->
+    <footer class="app-footer" id="footer">
+
+        <!--end::Copyright-->
+    </footer>
+    <!--end::Footer-->
     </div>
     <!--end::App Wrapper-->
     <!--begin::Script-->
@@ -296,13 +305,80 @@
                     document.getElementById('fhInicio').value = `${new Date(data.fhInicio).toISOString().split('T')[0]}`;
                     document.getElementById('fhFin').value = `${new Date(data.fhFin).toISOString().split('T')[0]}`;
 
+                    // Obtener la lista de permisos
+                    fetch('/bannerStreaming/permisos')
+                        .then(response => response.json())
+                        .then(permisos => {
+                            const permisosMap = new Map();
+                            permisos.forEach(permiso => {
+                                permisosMap.set(permiso.idSucursal, true);
+                            });
+
+                            // Obtener la lista de sucursales
+                            fetch('/api/sucursales')
+                                .then(response => response.json())
+                                .then(sucursales => {
+                                    const sucursalesList = document.getElementById('sucursales-list');
+                                    sucursales.forEach(sucursal => {
+                                        const checkbox = document.createElement('input');
+                                        checkbox.type = 'checkbox';
+                                        checkbox.id = `sucursal-${sucursal.idSucursal}`;
+                                        checkbox.name = 'sucursales';
+                                        checkbox.value = sucursal.idSucursal;
+                                        checkbox.checked = permisosMap.has(sucursal.idSucursal);
+                                        checkbox.addEventListener('change', function () {
+                                            if (this.checked) {
+                                                // Insertar en la tabla permisosucursal
+                                                fetch('/api/permisosucursal', {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Content-Type': 'application/json'
+                                                    },
+                                                    body: JSON.stringify({
+                                                        objetoName: 'BannerHome',
+                                                        idObjeto: data.idBannerHome,
+                                                        idSucursal: sucursal.idSucursal
+                                                    })
+                                                })
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        console.log('Permiso agregado:', data);
+                                                    })
+                                                    .catch(error => console.error('Error al agregar permiso:', error));
+                                            } else {
+                                                // Eliminar de la tabla permisosucursal
+                                                fetch(`/api/permisosucursal/${data.idBannerHome}/${sucursal.idSucursal}`, {
+                                                    method: 'DELETE'
+                                                })
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        console.log('Permiso eliminado:', data);
+                                                    })
+                                                    .catch(error => console.error('Error al eliminar permiso:', error));
+                                            }
+                                        });
+
+                                        const label = document.createElement('label');
+                                        label.htmlFor = `sucursal-${sucursal.idSucursal}`;
+                                        label.textContent = sucursal.sucursalName;
+
+                                        const div = document.createElement('div');
+                                        div.appendChild(checkbox);
+                                        div.appendChild(label);
+
+                                        sucursalesList.appendChild(div);
+                                    });
+                                })
+                                .catch(error => console.error('Error al obtener sucursales:', error));
+                        })
+                        .catch(error => console.error('Error al obtener permisos:', error));
                 })
                 .catch(error => console.error('Error al obtener el banner:', error));
 
             document.getElementById('editar-form').addEventListener('submit', function (event) {
                 event.preventDefault();
                 const formData = new FormData(this);
-                fetch(`/bannerHome/editar/${document.getElementById('id').value}`, {
+                fetch(`/bannerHome/editar/${document.getElementById('idBannerHome').value}`, {
                     method: 'POST',
                     body: formData
                 })

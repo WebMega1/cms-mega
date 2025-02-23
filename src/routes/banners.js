@@ -230,6 +230,7 @@ router.get('/bannerStreaming/ver', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/banners', 'detallesStreaming.html'));
 });
 
+
 // Ruta GET para obtener datos de un tipo de canal específico en formato JSON
 router.get('/bannerStreaming/ver/data', (req, res) => {
     const { id } = req.query;
@@ -241,6 +242,45 @@ router.get('/bannerStreaming/ver/data', (req, res) => {
             return res.status(404).json({ error: 'Card no encontrado' });
         }
         res.json(result[0]);
+    });
+});
+
+
+// Ruta GET para obtener datos de todas los canales en formato JSON
+router.get('/bannerStreaming/permisos', (req, res) => {
+    db.query(`SELECT * FROM permisosucursal WHERE objetoName = 'BannerHome';`, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener Banners streaming' });
+        }
+        res.json(result); 
+    });
+});
+
+
+router.post('/api/permisosucursal', (req, res) => {
+    const { objetoName, idObjeto, idSucursal } = req.body;
+    const query = 'INSERT INTO permisosucursal (objetoName, idObjeto, idSucursal) VALUES (?, ?, ?)';
+    const values = [objetoName, idObjeto, idSucursal];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al insertar permiso:', err);
+            return res.status(500).json({ error: 'Error al insertar permiso' });
+        }
+        res.json({ message: 'Permiso agregado correctamente' });
+    });
+});
+router.delete('/api/permisosucursal/:idObjeto/:idSucursal', (req, res) => {
+    const { idObjeto, idSucursal } = req.params;
+    const query = 'DELETE FROM permisosucursal WHERE idObjeto = ? AND idSucursal = ?';
+    const values = [idObjeto, idSucursal];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al eliminar permiso:', err);
+            return res.status(500).json({ error: 'Error al eliminar permiso' });
+        }
+        res.json({ message: 'Permiso eliminado correctamente' });
     });
 });
 
