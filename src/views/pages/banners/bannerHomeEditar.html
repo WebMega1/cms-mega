@@ -195,7 +195,13 @@
                                 </div>
                                 <div class="col-md-5">
                                     <h3>Visibilidad sucursales</h3>
+
+                                    <textarea id="sucursales-input" class="form-control" rows="5"
+                                        placeholder="Ingrese los IDs o nombres de las sucursales, uno por línea"></textarea>
+                                    <button id="check-sucursales" class="btn btn-primary mt-2">Marcar
+                                        Sucursales</button>
                                     <div id="sucursales-list"></div>
+
 
                                 </div>
 
@@ -367,6 +373,39 @@
                                         div.appendChild(label);
 
                                         sucursalesList.appendChild(div);
+                                    });
+
+                                    // Agregar evento al botón para marcar sucursales
+                                    document.getElementById('check-sucursales').addEventListener('click', function () {
+                                        const input = document.getElementById('sucursales-input').value;
+                                        const idsOrNames = input.split('\n').map(item => item.trim().toUpperCase());
+
+                                        sucursales.forEach(sucursal => {
+                                            const checkbox = document.getElementById(`sucursal-${sucursal.idSucursal}`);
+                                            if (idsOrNames.includes(sucursal.idSucursal.toString()) || idsOrNames.includes(sucursal.sucursalName.toUpperCase())) {
+                                                checkbox.checked = true;
+                                                // Insertar en la tabla permisosucursal si no está ya presente
+                                                if (!permisosMap.has(sucursal.idSucursal)) {
+                                                    fetch('/api/permisosucursal', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify({
+                                                            objetoName: 'BannerHome',
+                                                            idObjeto: data.idBannerHome,
+                                                            idSucursal: sucursal.idSucursal
+                                                        })
+                                                    })
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            console.log('Permiso agregado:', data);
+                                                            permisosMap.set(sucursal.idSucursal, true);
+                                                        })
+                                                        .catch(error => console.error('Error al agregar permiso:', error));
+                                                }
+                                            }
+                                        });
                                     });
                                 })
                                 .catch(error => console.error('Error al obtener sucursales:', error));
