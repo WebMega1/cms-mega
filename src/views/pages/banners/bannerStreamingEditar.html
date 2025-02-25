@@ -87,13 +87,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Banner Home</h3>
+                            <h3 class="mb-0">Banner card streaming</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Editar BANNER HOME
+                                    Editar Card Streaming
                                 </li>
                             </ol>
                         </div>
@@ -112,65 +112,53 @@
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Editar banner</h3>
+                                <h3 class="card-title">Editar card de streaming</h3>
                                 <div class="card-tools">
-                                    <a href="/bannerHome/crear" class="btn btn-outline-success" title="Nuevo banner">
-                                        <i class="bi bi-plus-circle"></i> Nuevo Banner
+                                    <a href="/bannerStreaming/crear" class="btn btn-outline-success" title="Nuevo banner">
+                                        <i class="bi bi-plus-circle"></i> Nuevo card streaming
                                     </a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <form id="editar-form" enctype="multipart/form-data"></form>
                                 <div class="col-md-6">
-
                                     <p>
-                                        <label for="idBannerHome"><b>Id banner Home</b></label>
-                                        <input type="text" id="idBannerHome" name="idBannerHome" class="form-control"
+                                        <label for="idCardStreaming"><b>idCardStreaming</b></label>
+                                        <input type="text" id="idCardStreaming" name="idCardStreaming" class="form-control"
                                             disabled>
                                     </p>
                                     <p>
-                                        <label for="rutaBannerHome"><b>Ruta de los archivos</b></label>
-                                        <input type="text" id="rutaBannerHome" name="rutaBannerHome"
-                                            class="form-control" disabled>
-                                    </p>
-                                    <p>
-                                        <label for="newBackground"><b>Background</b></label>
-                                        <input type="file" id="newBackground" name="newBackground" class="form-control">
-                                    </p>
-                                    <p>
-
-                                        <img src="" alt="" id="background" name="background"
-                                            style="width: 500px; height: auto;">
-                                    </p>
-                                    <p>
-                                        <label for="titleBanner"><b>Titulo *texto del banner</b></label>
-                                        <input type="text" id="titleBanner" name="titleBanner" class="form-control">
-                                    </p>
-                                    <p>
-                                        <label for="linkButton"><b>Link del botón</b></label>
-                                        <input type="text" id="linkButton" name="linkButton" class="form-control">
+                                        <label for="nameCard"><b>Nombre del card</b></label>
+                                        <input type="text" id="nameCard" name="nameCard" class="form-control">
                                     </p>
                                     <p>
                                         <label for="textButton"><b>Texto del botón</b></label>
                                         <input type="text" id="textButton" name="textButton" class="form-control">
                                     </p>
                                     <p>
-                                        <label for="imagenBanner"><b>Imagen Banner</b></label>
-                                        <input type="file" id="newImagenBanner" name="newImagenBanner"
-                                            class="form-control">
-                                    </p>
-                                    <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
-                                        <img src="" alt="" id="imagenBanner" name="imagenBanner"
-                                            style="width: 500px; height: auto;">
+                                        <label for="linkButton"><b>Link del botón</b></label>
+                                        <input type="text" id="linkButton" name="linkButton" class="form-control">
                                     </p>
                                     <p>
-                                        <label for="imagenMobil"><b>Imagen Mobile</b></label>
-                                        <input type="file" id="newImagenMobil" name="newImagenMobil"
+                                        <label for="logoCardFile"><b>Logo</b></label>
+                                        <input type="file" id="logoCardFile" name="logoCardFile"
                                             class="form-control">
                                     </p>
-                                    <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
-                                        <img src="" alt="" id="imagenMobil" name="imagenMobil"
-                                            style="width: 300px; height: auto;">
+                                    <p id="logoCardContainer" style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
+                                        <img src="" alt="" id="logoCard" name="logoCard" style="width: 500px; height: auto;">
+                                    </p>
+                                    <p>
+                                        <label for="backgroundColor"><b>Background color</b></label>
+                                        <input type="color" id="backgroundColor" name="backgroundColor" class="form-control">
+
+                                    </p>
+                                    <p>
+                                        <label for="backgroundCardFile"><b>Background Image</b></label>
+                                        <input type="file" id="backgroundCardFile" name="backgroundCardFile"
+                                            class="form-control">
+                                    </p>
+                                    <p id="backgroundCardContainer" style="padding: 10px; border-radius: 5px;">
+                                        <img src="" alt="" id="backgroundCard" name="backgroundCard" style="width: 200px; height: 100%;">
                                     </p>
                                     <p>
                                         <label for="fhInicio"><b>Fecha de inicio</b></label>
@@ -307,21 +295,25 @@
         document.addEventListener('DOMContentLoaded', function () {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
-            fetch(`/bannerHome/ver/data?id=${id}`)
+            fetch(`/bannerStreaming/ver/data?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('idBannerHome').value = data.idBannerHome;
-                    document.getElementById('rutaBannerHome').value = data.ruta;
-                    document.getElementById('background').src = `${config.serverUrl}src/assets/${data.ruta}${data.background}`;
-                    document.getElementById('titleBanner').value = data.title;
+                    document.getElementById('idCardStreaming').value = data.idCardStreaming;
+                    document.getElementById('nameCard').value = data.nameCard;
+                    document.getElementById('logoCard').src = `${config.serverUrl}src/assets/images/home/${data.logoCard}`;
+                    document.getElementById('backgroundColor').value = data.backgroundCard;
+                    document.getElementById('logoCardContainer').style.backgroundColor = data.backgroundCard;
+                    document.getElementById('backgroundCard').src = `${config.serverUrl}src/assets/images/home/${data.backgroundImageCard}`;
+                    document.getElementById('textButton').value = data.textButton;
                     document.getElementById('linkButton').value = data.linkButton;
+
                     document.getElementById('textButton').value = data.textButton;
                     document.getElementById('imagenBanner').src = `${config.serverUrl}src/assets/${data.ruta}${data.imagenBanner}`;
                     document.getElementById('imagenMobil').src = `${config.serverUrl}src/assets/${data.ruta}${data.imagenMobile}`;
                     document.getElementById('status').value = data.active ? "1" : "0";
                     document.getElementById('fhInicio').value = `${new Date(data.fhInicio).toISOString().split('T')[0]}`;
                     document.getElementById('fhFin').value = `${new Date(data.fhFin).toISOString().split('T')[0]}`;
-
+    
                     // Obtener la lista de permisos
                     fetch(`/bannerStreaming/permisos?objetoName=BannerHome&idObjeto=${data.idBannerHome}`)
                         .then(response => response.json())
@@ -330,14 +322,14 @@
                             permisos.forEach(permiso => {
                                 permisosMap.set(permiso.idSucursal, true);
                             });
-
+    
                             // Obtener la lista de sucursales
                             fetch('/api/sucursales')
                                 .then(response => response.json())
                                 .then(sucursales => {
                                     const sucursalesList = document.getElementById('sucursales-list');
                                     const allSucursales = sucursales;
-
+    
                                     // Mostrar solo las sucursales activas al cargar la página
                                     sucursales.forEach(sucursal => {
                                         if (permisosMap.has(sucursal.idSucursal)) {
@@ -378,25 +370,25 @@
                                                         .catch(error => console.error('Error al eliminar permiso:', error));
                                                 }
                                             });
-
+    
                                             const label = document.createElement('label');
                                             label.htmlFor = `sucursal-${sucursal.idSucursal}`;
                                             label.textContent = sucursal.sucursalName;
-
+    
                                             const div = document.createElement('div');
                                             div.className = 'col-md-3'; // Para acomodar en 4 columnas
                                             div.appendChild(checkbox);
                                             div.appendChild(label);
-
+    
                                             sucursalesList.appendChild(div);
                                         }
                                     });
-
+    
                                     // Agregar evento al botón para marcar sucursales
                                     document.getElementById('check-sucursales').addEventListener('click', function () {
                                         const input = document.getElementById('sucursales-input').value;
                                         const idsOrNames = input.split('\n').map(item => item.trim().toUpperCase());
-
+    
                                         allSucursales.forEach(sucursal => {
                                             const checkbox = document.getElementById(`sucursal-${sucursal.idSucursal}`);
                                             if (idsOrNames.includes(sucursal.idSucursal.toString()) || idsOrNames.includes(sucursal.sucursalName.toUpperCase())) {
@@ -439,21 +431,21 @@
                                                                 .catch(error => console.error('Error al eliminar permiso:', error));
                                                         }
                                                     });
-
+    
                                                     const label = document.createElement('label');
                                                     label.htmlFor = `sucursal-${sucursal.idSucursal}`;
                                                     label.textContent = sucursal.sucursalName;
-
+    
                                                     const div = document.createElement('div');
                                                     div.className = 'col-md-3'; // Para acomodar en 4 columnas
                                                     div.appendChild(newCheckbox);
                                                     div.appendChild(label);
-
+    
                                                     sucursalesList.appendChild(div);
                                                 } else {
                                                     checkbox.checked = true;
                                                 }
-
+    
                                                 // Insertar en la tabla permisosucursal si no está ya presente
                                                 if (!permisosMap.has(sucursal.idSucursal)) {
                                                     fetch('/api/permisosucursal', {
@@ -477,7 +469,7 @@
                                             }
                                         });
                                     });
-
+    
                                     // Agregar evento al botón para seleccionar todas las sucursales
                                     document.getElementById('select-all-sucursales').addEventListener('click', function () {
                                         allSucursales.forEach(sucursal => {
@@ -521,21 +513,21 @@
                                                             .catch(error => console.error('Error al eliminar permiso:', error));
                                                     }
                                                 });
-
+    
                                                 const label = document.createElement('label');
                                                 label.htmlFor = `sucursal-${sucursal.idSucursal}`;
                                                 label.textContent = sucursal.sucursalName;
-
+    
                                                 const div = document.createElement('div');
                                                 div.className = 'col-md-3'; // Para acomodar en 4 columnas
                                                 div.appendChild(newCheckbox);
                                                 div.appendChild(label);
-
+    
                                                 sucursalesList.appendChild(div);
                                             } else {
                                                 checkbox.checked = true;
                                             }
-
+    
                                             // Insertar en la tabla permisosucursal si no está ya presente
                                             if (!permisosMap.has(sucursal.idSucursal)) {
                                                 fetch('/api/permisosucursal', {
@@ -558,7 +550,7 @@
                                             }
                                         });
                                     });
-
+    
                                     // Agregar evento al botón para deseleccionar todas las sucursales
                                     document.getElementById('deselect-all-sucursales').addEventListener('click', function () {
                                         allSucursales.forEach(sucursal => {
@@ -584,7 +576,7 @@
                         .catch(error => console.error('Error al obtener permisos:', error));
                 })
                 .catch(error => console.error('Error al obtener el banner:', error));
-
+    
             document.getElementById('editar-form').addEventListener('submit', function (event) {
                 event.preventDefault();
                 const formData = new FormData(this);

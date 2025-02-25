@@ -3,7 +3,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="/js/metadata.js"></script>
     <script src="/js/config.js"></script>
 
     <title id="title">CPanel - Mega</title><!--begin::Primary Meta Tags-->
@@ -132,7 +131,6 @@
                                             <th>Color fondo card</th>
                                             <th>Imagen fondo card</th>
                                             <th>Texto del botón</th>
-                                            <th>Link del botón</th>
                                             <th>Fecha Inicio</th>
                                             <th>Fecha Fin</th>
                                             <th>Status</th>
@@ -150,7 +148,6 @@
                                             <th>Color fondo card</th>
                                             <th>Imagen fondo card</th>
                                             <th>Texto del botón</th>
-                                            <th>Link del botón</th>
                                             <th>Fecha Inicio</th>
                                             <th>Fecha Fin</th>
                                             <th>Status</th>
@@ -247,8 +244,8 @@
 
                         const active = item.status ? "Activo" : "Inactivo";
                         const statusButton = item.status ?
-                            `<a onclick="desactivarBannerStreaming(${item.idCardStreaming})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
-                            `<a onclick="activarBannerStreaming(${item.idCardStreaming})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
+                            `<a onclick="desactivarCardStreaming(${item.idCardStreaming})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-clipboard-x"></i></a>` :
+                            `<a onclick="activarCardStreaming(${item.idCardStreaming})" class="btn btn-outline-success" title="Activar"><i class="bi bi-clipboard-check"></i></a>`;
                         // Formatear las fechas
                         const fhInicio = new Date(item.fhInicio).toLocaleDateString();
                         const fhFin = new Date(item.fhFin).toLocaleDateString();
@@ -264,7 +261,6 @@
                                 <td><div style="width: 100px; height: 50px; background-color: ${item.backgroundCard};"> ${item.backgroundCard}</div> </td>
                                 <td>${backgroundImageCard}</td>
                                 <td>${item.textButton}</td>
-                                <td>${item.linkButton}</td>
                                 <td>${fhInicio}</td>
                                 <td>${fhFin}</td>
 
@@ -286,8 +282,8 @@
                 });
         });
 
-        function activarBannerHome(id) {
-            fetch(`/bannerHome/activar/${id}`, {
+        function activarCardStreaming(id) {
+            fetch(`/bannerStreaming/activar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -306,8 +302,8 @@
                 });
         }
 
-        function desactivarBannerHome(id) {
-            fetch(`/bannerHome/desactivar/${id}`, {
+        function desactivarCardStreaming(id) {
+            fetch(`/bannerStreaming/desactivar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

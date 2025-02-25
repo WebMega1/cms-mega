@@ -7,7 +7,7 @@ const db = require('../dbconnection'); // Importa el archivo de conexión a la b
 // Ruta GET para obtener datos de todas las Regiones en formato JSON
 router.get('/api/sucursales', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  db.query('SELECT * FROM `selectsucursal`', (err, result) => {
+  db.query('SELECT * FROM `sucursal`', (err, result) => {
       if (err) {
           return res.status(500).json({ error: 'Error al obtener las sucursales' });
       }
@@ -17,7 +17,7 @@ router.get('/api/sucursales', (req, res) => {
 
 // Ruta GET para obtener datos de todas las Regiones en formato JSON
 router.get('/mega/data', (req, res) => {
-  db.query('SELECT * FROM `selectsucursal`', (err, result) => {
+  db.query('SELECT * FROM `sucursal`', (err, result) => {
       if (err) {
           return res.status(500).json({ error: 'Error al obtener las sucursales' });
       }

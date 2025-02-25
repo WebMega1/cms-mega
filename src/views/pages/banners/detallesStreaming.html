@@ -88,13 +88,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Card de streaming</h3>
+                            <h3 class="mb-0">Banner del card de streaming</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Card de streaming
+                                    Banner del card streaming
                                 </li>
                             </ol>
                         </div>
@@ -113,7 +113,7 @@
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Card de streaming</h3>
+                                <h3 class="card-title">Detalles del card de streaming</h3>
                                 <div class="card-tools">
                                     <!-- Aquí se insertarán los botones dinámicamente -->
                                 </div>
@@ -122,6 +122,10 @@
                                 <div class="row">
                                     <div class="col-md-5 card-body-left">
                                         <!-- Aquí se insertarán los detalles dinámicamente -->
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3>Sucursales con Permiso</h3>
+                                        <div id="sucursales-list" class="row"></div>
                                     </div>
                                 </div>
                             </div>
@@ -216,58 +220,71 @@
                         `<a onclick="desactivarCardStreaming(${data.idCardStreaming})" class="btn btn-outline-danger" title="Desactivar"><i class="bi bi-eye-slash">Desactivar</i></a>` :
                         `<a onclick="activarCardStreaming(${data.idCardStreaming})" class="btn btn-outline-success" title="Activar"><i class="bi bi-eye">Activar</i></a>`;
 
-
                     const cardTools = document.querySelector('.card-tools');
-                    cardTools.innerHTML = `<a href="/bannerHome/editar?id=${data.idCardStreaming}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
+                    cardTools.innerHTML = `<a href="/bannerStreaming/editar?id=${data.idCardStreaming}" class="btn btn-outline-primary" title="Editar"><i class="bi bi-file-earmark-text">Editar</i></a>${statusButton}`;
 
-                    // Verificar si el campo backgroundCard está vacío
                     const backgroundColor = data.backgroundCard ? data.backgroundCard : '#d3d3d3'; // Gris claro por defecto
-                    // Verificar si la imagen existe
-                    const backgroundImageCard = data.backgroundImageCard ? `<img src="${config.serverUrl}src/assets/images/home/${data.backgroundImageCard}" alt="${data.backgroundImageCard}" style="width: 100%; height: 200px;">` : '';
-
+                    const backgroundImageCard = data.backgroundImageCard ? `<img src="${config.serverUrl}src/assets/images/home/${data.backgroundImageCard}" alt="${data.backgroundImageCard}" style="width: 100%; height: 150px;">` : '';
+                    const fhInicio = new Date(data.fhInicio).toLocaleDateString();
+                    const fhFin = new Date(data.fhFin).toLocaleDateString();
 
 
                     const cardBodyLeft = document.querySelector('.card-body-left');
                     cardBodyLeft.innerHTML = `
-                        
-                        <p>Nombre del card: <b>${data.nameCard} </b> </p>
-                        <p>Id:<b> ${data.idCardStreaming} </b> </p>
-                        <p>Ruta de las imagenes:</b> ${config.serverUrl}src/assets/images/home/ </p>
-                        <p>Logo del card: 
-                            <div style="width: auto; height: 150px; background-color: ${backgroundColor};">
-                                <img src="${config.serverUrl}src/assets/images/home/${data.logoCard}" alt="${data.nameCard}" style="width: auto; height: auto;">
-                            </div>
-                        </p>
-                        <p>Color de fondo del card: 
-                            <div style="width: auto; height: 50px; background-color: ${data.backgroundCard};"> ${data.backgroundCard}
-                            </div>
-                        </p>
-                        <p>Imagen de fondo: 
-                            ${backgroundImageCard}
-                        </p>
-                        
+                <p>Nombre del card: <b> ${data.nameCard} </b> </p>
+                <p>Id: <b> ${data.idCardStreaming} </b> </p>
+                <p>Texto en el bontón:<b> ${data.textButton} </b> </p> 
+                <p>Link del bonton de acción: <b> ${data.linkButton} </b> </p>
+                <p>Background Button: <b>Color Global </b></p>
+                <p>Background Color: <b> ${data.backgroundCard} </b>
+                    <div style="width: auto; height: 50px; background-color: ${data.backgroundCard};"> </div>    
+                </p>
+                <p>Background Imagen: <b>  </b>
+                    ${backgroundImageCard}    
+                </p>
+                <p>Logo del card: <b>  </b>
+                    <div style="width: auto; height: 100px; background-color: ${backgroundColor};"><img src="${config.serverUrl}src/assets/images/home/${data.logoCard}" alt="${data.nameCard}" style="width: 200px; height: auto;"></div>    
+                </p>
+                <p>Status:<b> ${active} </b> </p>
+                <p>Fecha de inicio:<b> ${fhInicio} </b> </p>
+                <p>Fecha Fin:<b> ${fhFin} </b></p>
+            `;
 
+                    // Obtener la lista de permisos
+                    fetch(`/bannerStreaming/permisos?objetoName=CardStreamingHome&idObjeto=${data.idCardStreaming}`)
+                        .then(response => response.json())
+                        .then(permisos => {
+                            const permisosMap = new Map();
+                            permisos.forEach(permiso => {
+                                permisosMap.set(permiso.idSucursal, true);
+                            });
 
-                        <p>Logo del card:<b> ${data.linkButton} </p>
-                        <p><strong>Background:</strong></p>
-                        <p> <img src="${config.serverUrl}src/assets/${data.ruta}${data.background}" alt="${data.background}" style="width: 500px; height: auto;"></p>
-                        <p><strong>Imagen Banner:</strong></p>
-                        <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;"> 
-                            <img src="${config.serverUrl}src/assets/${data.ruta}${data.imagenBanner}" alt="${data.imagenBanner}" style="width: 500px; height: auto;"></p>
-                        <p><strong>Imagen Movil:</strong></p>
-                        <p style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;"> 
-                            <img src="${config.serverUrl}src/assets/${data.ruta}${data.imagenMobile}" alt="${data.imagenMobile}" style="width: 300px; height: auto;"></p>
-                        <br />
-                        <p><b>Status:</b> ${active} </p>
-                        <p><b>Fecha de inicio:</b> ${data.fhInicio} </p>
-                        <p><b>Fecha Fin:</b> ${data.fhFin} </p>
-                    `;
+                            // Obtener la lista de sucursales
+                            fetch('/api/sucursales')
+                                .then(response => response.json())
+                                .then(sucursales => {
+                                    const sucursalesList = document.getElementById('sucursales-list');
+
+                                    // Mostrar solo las sucursales activas al cargar la página
+                                    sucursales.forEach(sucursal => {
+                                        if (permisosMap.has(sucursal.idSucursal)) {
+                                            const div = document.createElement('div');
+                                            div.className = 'col-md-3'; // Para acomodar en 4 columnas
+                                            div.textContent = sucursal.sucursalName;
+
+                                            sucursalesList.appendChild(div);
+                                        }
+                                    });
+                                })
+                                .catch(error => console.error('Error al obtener sucursales:', error));
+                        })
+                        .catch(error => console.error('Error al obtener permisos:', error));
                 })
                 .catch(error => console.error('Error al obtener el banner:', error));
         });
 
-        function activarBannerHome(id) {
-            fetch(`/bannerHome/activar/${id}`, {
+        function activarCardStreaming(id) {
+            fetch(`/bannerStreaming/activar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -278,16 +295,16 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al activar el banner home:', data.error);
+                        console.error('Error al activar el card:', data.error);
                     }
                 })
                 .catch(error => {
-                    console.error('Error al activar el banner home:', error);
+                    console.error('Error al activar el card:', error);
                 });
         }
 
-        function desactivarBannerHome(id) {
-            fetch(`/bannerHome/desactivar/${id}`, {
+        function desactivarCardStreaming(id) {
+            fetch(`/bannerStreaming/desactivar/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -298,11 +315,11 @@
                     if (data.success) {
                         location.reload(); // Recargar la página para reflejar los cambios
                     } else {
-                        console.error('Error al desactivar el banner home:', data.error);
+                        console.error('Error al desactivar el card:', data.error);
                     }
                 })
                 .catch(error => {
-                    console.error('Error al desactivar el banner home:', error);
+                    console.error('Error al desactivar el card:', error);
                 });
         }
     </script>

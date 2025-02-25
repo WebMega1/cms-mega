@@ -221,7 +221,7 @@ router.get('/bannerStreaming/data', (req, res) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener Banners streaming' });
         }
-        res.json(result); 
+        res.json(result);
     });
 });
 
@@ -248,11 +248,58 @@ router.get('/bannerStreaming/ver/data', (req, res) => {
 
 // Ruta GET para obtener datos de todas los canales en formato JSON
 router.get('/bannerStreaming/permisos', (req, res) => {
-    db.query(`SELECT * FROM permisosucursal WHERE objetoName = 'BannerHome';`, (err, result) => {
+    const { objetoName, idObjeto } = req.query;
+    const query = 'SELECT * FROM permisosucursal WHERE objetoName = ? AND idObjeto = ?';
+    const values = [objetoName, idObjeto];
+
+    db.query(query, values, (err, result) => {
         if (err) {
-            return res.status(500).json({ error: 'Error al obtener Banners streaming' });
+            return res.status(500).json({ error: 'Error al obtener permisos' });
         }
-        res.json(result); 
+        res.json(result);
+    });
+});
+
+// Ruta GET para servir la página HTML de editar de un canal
+router.get('/bannerStreaming/editar', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannerStreamingEditar.html'));
+});
+
+// Ruta POST para actualizar 
+router.post('/bannerStreaming/editar/:id', upload.single('image'), (req, res) => {
+    const { id } = req.params;
+    const { name, type, status, code, active } = req.body;
+    const image = req.file ? req.file.filename : req.body.existingImage; // Usar la nueva imagen si se sube, de lo contrario usar la existente
+    const query = 'UPDATE bannerhome SET name = ?, image = ?, type = ?, status = ?, code = ?, active = ? WHERE idChannels = ?';
+    const values = [name, image, type, status, code, active, id];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al actualizar el banner' });
+        }
+        res.json({ message: 'Banner actualizado exitosamente' });
+    });
+});
+
+// Ruta POST para activar un canal
+router.post('/bannerStreaming/activar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE cardsstreaming SET status = 1 WHERE idCardStreaming = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al activar el banner' });
+        }
+        res.json({ success: true, message: 'Banner activado correctamente' });
+    });
+});
+
+// Ruta POST para desactivar un canal
+router.post('/bannerStreaming/desactivar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE cardsstreaming SET status = 0 WHERE idCardStreaming = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al activar el banner' });
+        }
+        res.json({ success: true, message: 'Banner desactivado correctamente' });
     });
 });
 
@@ -283,6 +330,48 @@ router.delete('/api/permisosucursal/:idObjeto/:idSucursal', (req, res) => {
         res.json({ message: 'Permiso eliminado correctamente' });
     });
 });
+///////////////////////////////////////////////
+// Crear la carpeta 'uploads/bannerHero' si no existe
+const uploadDirBH = path.join(__dirname, '../views/uploads/bannerHero');
+if (!fs.existsSync(uploadDirBH)) {
+    fs.mkdirSync(uploadDirBH, { recursive: true });
+}
 
+// Configuración de multer para guardar las imágenes en la carpeta 'uploads/bannerHero'
+const storageBH = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDirBH);
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)); // Añadir una marca de tiempo al nombre del archivo
+    }
+});
+
+const uploadBH = multer({ storage: storageBH });
+
+// Ruta GET para crear un nuevo banner
+router.get('/bannerHome/crear', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'crearBannerHome.html'));
+});
+
+// Ruta POST para crear un nuevo bannerHome
+router.post('/bannerHome/crear', uploadBH.fields([{ name: 'background' }, { name: 'imagenBanner' }, { name: 'imagenMobile' }]), (req, res) => {
+    const { title, linkButton, textButton, fhInicio, fhFin, status } = req.body;
+    const background = req.files['background'][0].filename;
+    const imagenBanner = req.files['imagenBanner'][0].filename;
+    const imagenMobile = req.files['imagenMobile'][0].filename;
+    const ruta = 'uploads/bannerHero/';
+
+    const query = 'INSERT INTO bannerhome (ruta, background, title, linkButton, textButton, imagenBanner, imagenMobile, status, fhInicio, fhFin, create_user, create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp())';
+    const values = [ruta, background, title, linkButton, textButton, imagenBanner, imagenMobile, status, fhInicio, fhFin, 1];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al crear el banner:', err);
+            return res.status(500).json({ success: false, error: 'Error al crear el banner' });
+        }
+        res.json({ success: true, message: 'Banner creado correctamente', idBannerHome: result.insertId });
+    });
+});
 
 module.exports = router; // Exporta el router para que pueda ser utilizado por la aplicación principal.
