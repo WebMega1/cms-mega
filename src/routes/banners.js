@@ -373,5 +373,98 @@ router.post('/bannerHome/crear', uploadBH.fields([{ name: 'background' }, { name
         res.json({ success: true, message: 'Banner creado correctamente', idBannerHome: result.insertId });
     });
 });
+//////////banners de Avisos///////////////
+// Ruta GET para renderizar una página HTML con información de los canales
+router.get('/bannerAvisos', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannerAvisos.html'));
+});
+
+// Ruta GET para obtener datos de todas los canales en formato JSON
+router.get('/bannerAvisos/data', (req, res) => {
+    db.query(`SELECT * FROM banners WHERE tipoBanner = 5;`, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener Banners Avisos' });
+        }
+        res.json(result);
+    });
+});
+
+// Ruta GET para rendirizar una página HTML con el detalle del canal
+router.get('/bannerAvisos/ver', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'detallesBannerAvisos.html'));
+});
+
+
+// Ruta GET para obtener datos de un tipo de canal específico en formato JSON
+router.get('/bannerAvisos/ver/data', (req, res) => {
+    const { id } = req.query;
+    db.query(`SELECT * FROM banners WHERE tipoBanner = 5 AND idBanner = ?`, [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener banners' });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Banner no encontrado' });
+        }
+        res.json(result[0]);
+    });
+});
+
+// Ruta GET para obtener datos de todas los permisos en formato JSON
+router.get('/bannerAvisos/permisos', (req, res) => {
+    const { objetoName, idObjeto } = req.query;
+    const query = 'SELECT * FROM permisosucursal WHERE objetoName = ? AND idObjeto = ?';
+    const values = [objetoName, idObjeto];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener permisos' });
+        }
+        res.json(result);
+    });
+});
+
+// Ruta POST para activar un canal
+router.post('/bannerAvisos/activar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE banners SET status = 1 WHERE idBanner = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al activar el banner' });
+        }
+        res.json({ success: true, message: 'Banner activado correctamente' });
+    });
+});
+
+// Ruta POST para desactivar un canal
+router.post('/bannerAvisos/desactivar/:id', (req, res) => {
+    const { id } = req.params;
+    db.query('UPDATE banners SET status = 0 WHERE idBanner = ?', [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al activar el banner' });
+        }
+        res.json({ success: true, message: 'Banner desactivado correctamente' });
+    });
+});
+
+// Ruta GET para servir la página HTML de editar de un canal
+router.get('/bannerAvisos/editar', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/banners', 'bannerAvisosEditar.html'));
+});
+
+// Ruta POST para actualizar 
+router.post('/bannerAvisos/editar/:id', upload.single('image'), (req, res) => {
+    const { id } = req.params;
+    const { name, type, status, code, active } = req.body;
+    const image = req.file ? req.file.filename : req.body.existingImage; // Usar la nueva imagen si se sube, de lo contrario usar la existente
+    const query = 'UPDATE bannerhome SET name = ?, image = ?, type = ?, status = ?, code = ?, active = ? WHERE idChannels = ?';
+    const values = [name, image, type, status, code, active, id];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al actualizar el banner' });
+        }
+        res.json({ message: 'Banner actualizado exitosamente' });
+    });
+});
+
 
 module.exports = router; // Exporta el router para que pueda ser utilizado por la aplicación principal.

@@ -131,19 +131,18 @@ router.get('/api/bannerPromoExtrasCard/', (req, res) => {
 });
 
 
-// Ruta GET para obtener los datos de los canales por sucursal
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
 router.get('/api/configuraciones/home/', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  const { idSucursal } = req.params;
-  const query = `SELECT * FROM configsecciones WHERE seccion = 'HOME';`;
-
-  db.query(query, [idSucursal], (err, results) => {
+  db.query(`SELECT * FROM configsecciones WHERE seccion = 'HOME'`, (err, result) => {
       if (err) {
-          return res.status(500).json({ error: 'Error al obtener los datos del tarifario' });
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
       }
-      res.json(results);
+      res.json(result);
   });
 });
+
+
 
 
 // Ruta GET para obtener datos de todas las Regiones en formato JSON

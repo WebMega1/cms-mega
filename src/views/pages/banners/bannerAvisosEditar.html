@@ -87,13 +87,13 @@
                     <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Banner card streaming</h3>
+                            <h3 class="mb-0">Banner Avisos</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="/index">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Editar Card Streaming
+                                    Editar banner avisos
                                 </li>
                             </ol>
                         </div>
@@ -112,10 +112,10 @@
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Editar card de streaming</h3>
+                                <h3 class="card-title">Editar banner avisos</h3>
                                 <div class="card-tools">
-                                    <a href="/bannerStreaming/crear" class="btn btn-outline-success" title="Nuevo banner">
-                                        <i class="bi bi-plus-circle"></i> Nuevo card streaming
+                                    <a href="/bannerAvisos/crear" class="btn btn-outline-success" title="Nuevo banner">
+                                        <i class="bi bi-plus-circle"></i> Nuevo banner avisos
                                     </a>
                                 </div>
                             </div>
@@ -123,42 +123,33 @@
                                 <form id="editar-form" enctype="multipart/form-data"></form>
                                 <div class="col-md-6">
                                     <p>
-                                        <label for="idCardStreaming"><b>idCardStreaming</b></label>
-                                        <input type="text" id="idCardStreaming" name="idCardStreaming" class="form-control"
+                                        <label for="idBanner"><b>Id banner</b></label>
+                                        <input type="text" id="idBanner" name="idBanner" class="form-control"
                                             disabled>
                                     </p>
                                     <p>
-                                        <label for="nameCard"><b>Nombre del card</b></label>
-                                        <input type="text" id="nameCard" name="nameCard" class="form-control">
+                                        <label for="nameBanner"><b>Nombre del banner</b></label>
+                                        <input type="text" id="nameBanner" name="nameBanner" class="form-control">
                                     </p>
                                     <p>
-                                        <label for="textButton"><b>Texto del botón</b></label>
-                                        <input type="text" id="textButton" name="textButton" class="form-control">
+                                        <label for="link"><b>Link del botón</b></label>
+                                        <input type="text" id="link" name="link" class="form-control">
                                     </p>
                                     <p>
-                                        <label for="linkButton"><b>Link del botón</b></label>
-                                        <input type="text" id="linkButton" name="linkButton" class="form-control">
-                                    </p>
-                                    <p>
-                                        <label for="logoCardFile"><b>Logo</b></label>
-                                        <input type="file" id="logoCardFile" name="logoCardFile"
+                                        <label for="bannerAvisosFile"><b>Banner</b></label>
+                                        <input type="file" id="bannerAvisosFile" name="bannerAvisosFile"
                                             class="form-control">
                                     </p>
-                                    <p id="logoCardContainer" style="background-color: #d3d3d3; padding: 10px; border-radius: 5px;">
-                                        <img src="" alt="" id="logoCard" name="logoCard" style="width: 500px; height: auto;">
+                                    <p style="padding: 10px; border-radius: 5px;">
+                                        <img src="" alt="" id="bannerAvisos" name="bannerAvisos" style="height: auto; width: 100%;">
                                     </p>
                                     <p>
-                                        <label for="backgroundColor"><b>Background color</b></label>
-                                        <input type="color" id="backgroundColor" name="backgroundColor" class="form-control">
-
-                                    </p>
-                                    <p>
-                                        <label for="backgroundCardFile"><b>Background Image</b></label>
-                                        <input type="file" id="backgroundCardFile" name="backgroundCardFile"
+                                        <label for="bannerAvisosMovilFile"><b>Banner Versión Movil</b></label>
+                                        <input type="file" id="bannerAvisosMovilFile" name="bannerAvisosMovilFile"
                                             class="form-control">
                                     </p>
-                                    <p id="backgroundCardContainer" style="padding: 10px; border-radius: 5px;">
-                                        <img src="" alt="" id="backgroundCard" name="backgroundCard" style="width: 200px; height: 100%;">
+                                    <p style="padding: 10px; border-radius: 5px;">
+                                        <img src="" alt="" id="bannerAvisosMovil" name="bannerAvisosMovil" style="height: auto; width: 50%;">
                                     </p>
                                     <p>
                                         <label for="fhInicio"><b>Fecha de inicio</b></label>
@@ -177,7 +168,7 @@
                                     </p>
                                     <br>
                                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                    <a href="/bannerStreaming" class="btn btn-secondary">Cancelar</a>
+                                    <a href="/bannerAvisos" class="btn btn-secondary">Cancelar</a>
                                     
                                     <br>
 
@@ -295,23 +286,20 @@
         document.addEventListener('DOMContentLoaded', function () {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
-            fetch(`/bannerStreaming/ver/data?id=${id}`)
+            fetch(`/bannerAvisos/ver/data?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('idCardStreaming').value = data.idCardStreaming;
-                    document.getElementById('nameCard').value = data.nameCard;
-                    document.getElementById('logoCard').src = `${config.serverUrl}src/assets/images/home/${data.logoCard}`;
-                    document.getElementById('backgroundColor').value = data.backgroundCard;
-                    document.getElementById('logoCardContainer').style.backgroundColor = data.backgroundCard;
-                    document.getElementById('backgroundCard').src = `${config.serverUrl}src/assets/images/home/${data.backgroundImageCard}`;
-                    document.getElementById('textButton').value = data.textButton;
-                    document.getElementById('linkButton').value = data.linkButton;
+                    document.getElementById('idBanner').value = data.idBanner;
+                    document.getElementById('nameBanner').value = data.nameBanner;
+                    document.getElementById('link').value = data.link;
+                    document.getElementById('bannerAvisos').src = `${config.serverUrl}src/assets/uploads/bannerHomeFooter/${data.archivo}`;
+                    document.getElementById('bannerAvisosMovil').src = `${config.serverUrl}src/assets/uploads/bannerHomeFooter/${data.archivoMovil}`;
                     document.getElementById('status').value = data.status ? "1" : "0";
                     document.getElementById('fhInicio').value = `${new Date(data.fhInicio).toISOString().split('T')[0]}`;
                     document.getElementById('fhFin').value = `${new Date(data.fhFin).toISOString().split('T')[0]}`;
     
                     // Obtener la lista de permisos
-                    fetch(`/bannerStreaming/permisos?objetoName=CardStreamingHome&idObjeto=${data.idCardStreaming}`)
+                    fetch(`/bannerAvisos/permisos?objetoName=BannerAvisosHome&idObjeto=${data.idBanner}`)
                         .then(response => response.json())
                         .then(permisos => {
                             const permisosMap = new Map();
@@ -344,8 +332,8 @@
                                                             'Content-Type': 'application/json'
                                                         },
                                                         body: JSON.stringify({
-                                                            objetoName: 'CardStreamingHome',
-                                                            idObjeto: data.idCardStreaming,
+                                                            objetoName: 'BannerAvisosHome',
+                                                            idObjeto: data.idBanner,
                                                             idSucursal: sucursal.idSucursal
                                                         })
                                                     })
@@ -356,7 +344,7 @@
                                                         .catch(error => console.error('Error al agregar permiso:', error));
                                                 } else {
                                                     // Eliminar de la tabla permisosucursal
-                                                    fetch(`/api/permisosucursal/${data.idCardStreaming}/${sucursal.idSucursal}`, {
+                                                    fetch(`/api/permisosucursal/${data.idBanner}/${sucursal.idSucursal}`, {
                                                         method: 'DELETE'
                                                     })
                                                         .then(response => response.json())
@@ -405,8 +393,8 @@
                                                                     'Content-Type': 'application/json'
                                                                 },
                                                                 body: JSON.stringify({
-                                                                    objetoName: 'CardStreamingHome',
-                                                                    idObjeto: data.idCardStreaming,
+                                                                    objetoName: 'BannerAvisosHome',
+                                                                    idObjeto: data.idBanner,
                                                                     idSucursal: sucursal.idSucursal
                                                                 })
                                                             })
@@ -417,7 +405,7 @@
                                                                 .catch(error => console.error('Error al agregar permiso:', error));
                                                         } else {
                                                             // Eliminar de la tabla permisosucursal
-                                                            fetch(`/api/permisosucursal/${data.idCardStreaming}/${sucursal.idSucursal}`, {
+                                                            fetch(`/api/permisosucursal/${data.idBanner}/${sucursal.idSucursal}`, {
                                                                 method: 'DELETE'
                                                             })
                                                                 .then(response => response.json())
@@ -450,8 +438,8 @@
                                                             'Content-Type': 'application/json'
                                                         },
                                                         body: JSON.stringify({
-                                                            objetoName: 'CardStreamingHome',
-                                                            idObjeto: data.idCardStreaming,
+                                                            objetoName: 'BannerAvisosHome',
+                                                            idObjeto: data.idBanner,
                                                             idSucursal: sucursal.idSucursal
                                                         })
                                                     })
@@ -487,8 +475,8 @@
                                                                 'Content-Type': 'application/json'
                                                             },
                                                             body: JSON.stringify({
-                                                                objetoName: 'CardStreamingHome',
-                                                                idObjeto: data.idCardStreaming,
+                                                                objetoName: 'BannerAvisosHome',
+                                                                idObjeto: data.idBanner,
                                                                 idSucursal: sucursal.idSucursal
                                                             })
                                                         })
@@ -499,7 +487,7 @@
                                                             .catch(error => console.error('Error al agregar permiso:', error));
                                                     } else {
                                                         // Eliminar de la tabla permisosucursal
-                                                        fetch(`/api/permisosucursal/${data.idCardStreaming}/${sucursal.idSucursal}`, {
+                                                        fetch(`/api/permisosucursal/${data.idBanner}/${sucursal.idSucursal}`, {
                                                             method: 'DELETE'
                                                         })
                                                             .then(response => response.json())
@@ -532,8 +520,8 @@
                                                         'Content-Type': 'application/json'
                                                     },
                                                     body: JSON.stringify({
-                                                        objetoName: 'CardStreamingHome',
-                                                        idObjeto: data.idCardStreaming,
+                                                        objetoName: 'BannerAvisosHome',
+                                                        idObjeto: data.idBanner,
                                                         idSucursal: sucursal.idSucursal
                                                     })
                                                 })
@@ -554,7 +542,7 @@
                                             if (checkbox) {
                                                 checkbox.checked = false;
                                                 // Eliminar de la tabla permisosucursal
-                                                fetch(`/api/permisosucursal/${data.idCardStreaming}/${sucursal.idSucursal}`, {
+                                                fetch(`/api/permisosucursal/${data.idBanner}/${sucursal.idSucursal}`, {
                                                     method: 'DELETE'
                                                 })
                                                     .then(response => response.json())
@@ -576,14 +564,14 @@
             document.getElementById('editar-form').addEventListener('submit', function (event) {
                 event.preventDefault();
                 const formData = new FormData(this);
-                fetch(`/bannerStreaming/editar/${document.getElementById('idCardStreaming').value}`, {
+                fetch(`/bannerAvisos/editar/${document.getElementById('idBanner').value}`, {
                     method: 'POST',
                     body: formData
                 })
                     .then(response => response.json())
                     .then(data => {
                         alert(data.message);
-                        window.location.href = '/bannerStreaming';
+                        window.location.href = '/bannerAvisos';
                     })
                     .catch(error => console.error('Error al actualizar el banner:', error));
             });
