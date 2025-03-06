@@ -52,16 +52,16 @@ router.get('/api/tarifario/:idSucursal', (req, res) => {
 router.get('/api/doblePack/:idSucursal', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   const { idSucursal } = req.params;
-  const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.fibraOptica, t1.velocidadInternet, 
-                  t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete, t1.simetria, t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional, 
+  const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.idTipoRed, t1.velocidadInternet, 
+                  t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete,  t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional,  
                   t1.status, t1.created_at, t2.sucursalName, t3.nombreTipoPaquete, t3.tipoPaquete,IFNULL(t4.nameServicioCable,0) AS nameServicioCable, 
-                  t4.textoServicioCable, t5.ruta, t5.archivo 
+                  t4.textoServicioCable, t5.ruta, t5.archivo , t1.idContrata
                   FROM tarifario AS t1 
                   LEFT JOIN sucursal AS t2 on t1.idSucursal = t2.idSucursal 
                   LEFT JOIN tipodepaquete AS t3 on t1.idTipoPaquete = t3.idTipoPaquete 
                   LEFT JOIN serviciocable AS t4 on t1.idServicioCable = t4.idServicioCable 
-                  LEFT JOIN banners AS t5 on t4.idBanner = t5.idBanner 
-                  WHERE t1.status = 1 AND t1.idSucursal = ? AND t3.idTipoPaquete = 2;`;
+                  LEFT JOIN banners AS t5 on t4.idBanner = t5.idBanner
+             WHERE t1.status = 1 AND t3.tipoPaquete = 2 AND t1.idSucursal = ? ;`;
 
   db.query(query, [idSucursal], (err, results) => {
       if (err) {
@@ -75,16 +75,15 @@ router.get('/api/doblePack/:idSucursal', (req, res) => {
 router.get('/api/triplePack/:idSucursal', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   const { idSucursal } = req.params;
-  const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.fibraOptica, t1.velocidadInternet, 
-                  t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete, t1.simetria, t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional, 
-                  t1.status, t1.created_at, t2.sucursalName, t3.nombreTipoPaquete, t3.tipoPaquete,IFNULL(t4.nameServicioCable,0) AS nameServicioCable, 
-                  t4.textoServicioCable, t5.ruta, t5.archivo 
+  const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.idTipoRed, t1.velocidadInternet, 
+                  t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete,  t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional,  t1.status, t1.created_at, t2.sucursalName, t3.nombreTipoPaquete, t3.tipoPaquete,IFNULL(t4.nameServicioCable,0) AS nameServicioCable, 
+                  t4.textoServicioCable, t5.ruta, t5.archivo , t1.idContrata
                   FROM tarifario AS t1 
                   LEFT JOIN sucursal AS t2 on t1.idSucursal = t2.idSucursal 
                   LEFT JOIN tipodepaquete AS t3 on t1.idTipoPaquete = t3.idTipoPaquete 
                   LEFT JOIN serviciocable AS t4 on t1.idServicioCable = t4.idServicioCable 
-                  LEFT JOIN banners AS t5 on t4.idBanner = t5.idBanner 
-                  WHERE t1.status = 1 AND t1.idSucursal = ? AND t3.idTipoPaquete = 3;`;
+                  LEFT JOIN banners AS t5 on t4.idBanner = t5.idBanner
+             WHERE t1.status = 1 AND t3.tipoPaquete = 3 AND t1.idSucursal = ? ;`;
 
   db.query(query, [idSucursal], (err, results) => {
       if (err) {
@@ -250,7 +249,7 @@ router.get('/api/fullConnected/', (req, res) => {
   db.query(`SELECT t1.idSucursal, t1.status, t2.sucursalName
                 FROM tarifario  as t1
                 LEFT JOIN sucursal as t2 on t1.idSucursal = t2.idSucursal
-                WHERE idTipoPaquete = 1  and t1.status = 1
+                WHERE idTipoPaquete = 5  and t1.status = 1
                 ORDER BY sucursalName ASC;`, (err, result) => {
       if (err) {
           return res.status(500).json({ error: 'Error al obtener banner de footer' });
@@ -275,6 +274,17 @@ router.get('/api/cardStreaming/', (req, res) => {
 router.get('/api/tv/', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   db.query(`SELECT * FROM xviewsucursal;`, (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/simetricoSucursal/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  db.query(`SELECT idSucursal, 1 AS simetria FROM tarifario WHERE idTipoRed = 3 GROUP BY idSucursal;`, (err, result) => {
       if (err) {
           return res.status(500).json({ error: 'Error al obtener banner de footer' });
       }
