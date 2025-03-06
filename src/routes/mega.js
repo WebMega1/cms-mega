@@ -52,7 +52,16 @@ router.get('/api/tarifario/:idSucursal', (req, res) => {
 router.get('/api/doblePack/:idSucursal', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   const { idSucursal } = req.params;
-  const query = 'SELECT * FROM vistatarifario WHERE idSucursal = ? AND tipoPaquete = 2';
+  const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.fibraOptica, t1.velocidadInternet, 
+                  t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete, t1.simetria, t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional, 
+                  t1.status, t1.created_at, t2.sucursalName, t3.nombreTipoPaquete, t3.tipoPaquete,IFNULL(t4.nameServicioCable,0) AS nameServicioCable, 
+                  t4.textoServicioCable, t5.ruta, t5.archivo 
+                  FROM tarifario AS t1 
+                  LEFT JOIN sucursal AS t2 on t1.idSucursal = t2.idSucursal 
+                  LEFT JOIN tipodepaquete AS t3 on t1.idTipoPaquete = t3.idTipoPaquete 
+                  LEFT JOIN serviciocable AS t4 on t1.idServicioCable = t4.idServicioCable 
+                  LEFT JOIN banners AS t5 on t4.idBanner = t5.idBanner 
+                  WHERE t1.status = 1 AND t1.idSucursal = ? AND t3.idTipoPaquete = 2;`;
 
   db.query(query, [idSucursal], (err, results) => {
       if (err) {
@@ -66,7 +75,16 @@ router.get('/api/doblePack/:idSucursal', (req, res) => {
 router.get('/api/triplePack/:idSucursal', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   const { idSucursal } = req.params;
-  const query = 'SELECT * FROM vistatarifario WHERE idSucursal = ? AND tipoPaquete = 3';
+  const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.fibraOptica, t1.velocidadInternet, 
+                  t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete, t1.simetria, t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional, 
+                  t1.status, t1.created_at, t2.sucursalName, t3.nombreTipoPaquete, t3.tipoPaquete,IFNULL(t4.nameServicioCable,0) AS nameServicioCable, 
+                  t4.textoServicioCable, t5.ruta, t5.archivo 
+                  FROM tarifario AS t1 
+                  LEFT JOIN sucursal AS t2 on t1.idSucursal = t2.idSucursal 
+                  LEFT JOIN tipodepaquete AS t3 on t1.idTipoPaquete = t3.idTipoPaquete 
+                  LEFT JOIN serviciocable AS t4 on t1.idServicioCable = t4.idServicioCable 
+                  LEFT JOIN banners AS t5 on t4.idBanner = t5.idBanner 
+                  WHERE t1.status = 1 AND t1.idSucursal = ? AND t3.idTipoPaquete = 3;`;
 
   db.query(query, [idSucursal], (err, results) => {
       if (err) {
