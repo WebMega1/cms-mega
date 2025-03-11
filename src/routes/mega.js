@@ -55,7 +55,7 @@ router.get('/api/doblePack/:idSucursal', (req, res) => {
   const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.idTipoRed, t1.velocidadInternet, 
                   t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete,  t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional,  
                   t1.status, t1.created_at, t2.sucursalName, t3.nombreTipoPaquete, t3.tipoPaquete,IFNULL(t4.nameServicioCable,0) AS nameServicioCable, 
-                  t4.textoServicioCable, t5.ruta, t5.archivo , t1.idContrata
+                  t4.textoServicioCable, t5.ruta, t5.archivo , t1.idContrata, t1.tarifaPromocionalTemp, t3.logo
                   FROM tarifario AS t1 
                   LEFT JOIN sucursal AS t2 on t1.idSucursal = t2.idSucursal 
                   LEFT JOIN tipodepaquete AS t3 on t1.idTipoPaquete = t3.idTipoPaquete 
@@ -77,7 +77,7 @@ router.get('/api/triplePack/:idSucursal', (req, res) => {
   const { idSucursal } = req.params;
   const query = `SELECT t1.idTarifario, t1.idSucursal, t1.idTipoPaquete, t1.idServicioCable, t1.idTipoRed, t1.velocidadInternet, 
                   t1.telefonia, t1.precioPromoPaquete, t1.precioNormalPaquete,  t1.velocidadPromo, t1.tiempoVelocidaPromo, t1.tarifaPromocional,  t1.status, t1.created_at, t2.sucursalName, t3.nombreTipoPaquete, t3.tipoPaquete,IFNULL(t4.nameServicioCable,0) AS nameServicioCable, 
-                  t4.textoServicioCable, t5.ruta, t5.archivo , t1.idContrata
+                  t4.textoServicioCable, t5.ruta, t5.archivo , t1.idContrata, t1.tarifaPromocionalTemp, t3.logo
                   FROM tarifario AS t1 
                   LEFT JOIN sucursal AS t2 on t1.idSucursal = t2.idSucursal 
                   LEFT JOIN tipodepaquete AS t3 on t1.idTipoPaquete = t3.idTipoPaquete 
@@ -289,6 +289,45 @@ router.get('/api/simetricoSucursal/', (req, res) => {
           return res.status(500).json({ error: 'Error al obtener banner de footer' });
       }
       res.json(result);
+  });
+});
+
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/trivias/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  db.query(`SELECT t1.*, t2.ruta AS rutaPrincipal , t2.archivo AS archivoPrincipal, t3.ruta AS rutaMovil, t3.archivo AS archivoMovil 
+                FROM triviasconfig as t1
+                LEFT JOIN banners as t2 on t1.idBannerPrincipal = t2.idBanner
+                LEFT JOIN banners as t3 on t1.idBannerMovil = t3.idBanner
+                 WHERE t1.status = 1;`, (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+// Ruta GET para obtener datos de todas las Regiones en formato JSON
+router.get('/api/promoEspecialHome/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  db.query(`SELECT * FROM streaming WHERE visibleCardHome = 1; `, (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: 'Error al obtener banner de footer' });
+      }
+      res.json(result);
+  });
+});
+
+// Ruta GET para obtener los datos de configuracion card streaming
+router.get('/api/permisosSucursal', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  const { objetoName, idObjeto, idSucursal } = req.query; // Usar req.query para obtener los parámetros de la cadena de consulta
+  const query = `SELECT * FROM permisosucursal WHERE objetoName = ? AND idObjeto = ? AND idSucursal = ?;`;
+
+  db.query(query, [objetoName, idObjeto, idSucursal], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error al obtener los datos de la API streaming' });
+    }
+    res.json(results);
   });
 });
 
